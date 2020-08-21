@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
     "sourceMap": true,
     "noImplicitAny": true,
-    "baseUrl": "./src",
     "module": "esnext",
     "target": "es6",
     "jsx": "react",
@@ -13,6 +11,5 @@
     "noEmit": true,
     "strict": true,
     "resolveJsonModule": true
-  },
-  "include": ["./src"]
+  }
 }

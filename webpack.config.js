@@ -1,6 +1,8 @@
 const path = require("path");
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const PROD_MODE = process.env.NODE_ENV === "production";
@@ -9,17 +11,17 @@ const DIST_DIR = path.join(__dirname, "dist");
 
 const config = {
   mode: PROD_MODE ? "production" : "development",
-  entry: [path.join(SRC_DIR, "index.tsx"), path.join(SRC_DIR, "index.css")],
+  entry: path.join(SRC_DIR, "index.tsx"),
   target: "web",
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: "babel-loader",
-        exclude: "/node_modules/",
+        exclude: "/node_modules/"
       },
       {
         test: /\.css$/,
@@ -29,8 +31,10 @@ const config = {
             loader: "css-loader",
             options: {
               importLoaders: 1,
-              sourceMap: false,
-              url: false,
+              modules: {
+                mode: "local",
+                localIdentName: "[path]__[name]__[local]",
+              },
             },
           },
           {
@@ -49,6 +53,9 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.join(SRC_DIR, "index.html"),
     }),
+    new webpack.DefinePlugin({
+      API_ORIGIN: JSON.stringify(PROD_MODE ? "https://" : "http://localhost:9000")
+    })
   ],
   devServer: {
     contentBase: DIST_DIR,
@@ -64,6 +71,10 @@ if (PROD_MODE) {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })
   );
+  config.optimization = {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  };
 }
 
 module.exports = config;

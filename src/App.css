@@ -1,0 +1,8 @@
+.header {
+  height: 100px;
+  background: #f3f3f3;
+}
+.wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+}

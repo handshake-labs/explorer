@@ -4,5 +4,15 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
-  "plugins": ["transform-jsx-bemed"]
+  "plugins": [
+    [
+      "react-css-modules",
+      {
+        "handleMissingStyleName": "ignore",
+        "generateScopedName": "[path]__[name]__[local]",
+        "autoResolveMultipleImports": true
+      }
+    ]
+  ],
+  "sourceMaps": true
 }

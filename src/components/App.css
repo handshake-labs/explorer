@@ -1,7 +1,0 @@
-@block App {
-  @element header {
-    display: block;
-    height: 100px;
-    background: #f3f3f3;
-  }
-}
