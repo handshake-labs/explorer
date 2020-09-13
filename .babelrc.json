@@ -6,6 +6,9 @@
   ],
   "plugins": [
     [
+      "@babel/plugin-transform-runtime"
+    ],
+    [
       "react-css-modules",
       {
         "handleMissingStyleName": "ignore",

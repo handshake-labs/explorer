@@ -10,7 +10,7 @@ import "./App.css";
 
 const App: React.FC = () => {
   const pathname = useHistoryPathname();
-  const match = matchPathname(pathname) || { id: undefined }
+  const match = matchPathname(pathname) || { id: undefined };
 
   return (
     <>
@@ -20,9 +20,9 @@ const App: React.FC = () => {
       <main>
         <div styleName="wrapper">
           {
-            match.id === "home" && <Home {...match.params}/> ||
-            match.id === "block" && <Block {...match.params}/> ||
-            <NotFound/>
+            (match.id === "home" && <Home {...match.params} />) ||
+            (match.id === "block" && <Block {...match.params} />) ||
+            ( <NotFound /> )
           }
         </div>
       </main>

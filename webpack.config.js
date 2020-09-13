@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require('webpack');
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -21,7 +21,7 @@ const config = {
       {
         test: /\.tsx?$/,
         use: "babel-loader",
-        exclude: "/node_modules/"
+        exclude: "/node_modules/",
       },
       {
         test: /\.css$/,
@@ -54,8 +54,10 @@ const config = {
       template: path.join(SRC_DIR, "index.html"),
     }),
     new webpack.DefinePlugin({
-      API_ORIGIN: JSON.stringify(PROD_MODE ? "https://" : "http://localhost:9000")
-    })
+      API_ORIGIN: JSON.stringify(
+        PROD_MODE ? "https://" : "http://localhost:8000"
+      ),
+    }),
   ],
   devServer: {
     contentBase: DIST_DIR,

@@ -1,13 +1,12 @@
-import { Requests, Responses } from "../types/api"
-import { useHistoryState } from "./history"
-import { useFetchData } from "./fetch"
+import { Routes } from "../types";
+import { useFetch } from "./fetch";
 
+export const useAPI = <K extends keyof Routes>(
+  k: K,
+  params: Routes[K]["params"]
+): Routes[K]["result"] | null => {
+  const search = new URLSearchParams(<any>params).toString();
+  const path = `${k}${search.length ? `?${search}` : ""}`;
 
-export const useAPI = <K extends keyof (Requests & Responses)>(action: K, params: Requests[K]): Responses[K] => {
-  const search = (new URLSearchParams(<any>params)).toString();
-  const path = `/${action}${search.length ? `?${search}`: ""}`;
-
-  const [state, setState] = useHistoryState<Responses[K]>()
-  useFetchData(path, setState);
-  return state;
+ return  useFetch(path);
 };

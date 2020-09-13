@@ -1,7 +1,5 @@
 const config = {
-  plugins: [
-    require("autoprefixer"),
-  ],
+  plugins: [require("autoprefixer")],
 };
 
 if (process.env.NODE_ENV === "production") {
