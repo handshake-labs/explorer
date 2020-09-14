@@ -3,7 +3,7 @@ import { default as R, Location, StrParam, UintParam } from "./route";
 const routes = {
   home: new R("/", {}, {}),
   block: new R("/block/:height", { height: UintParam }, { page: UintParam }),
-  transaction: new R("/tx/:txid", { txid: StrParam}, {}),
+  transaction: new R("/tx/:txid", { txid: StrParam }, {}),
 } as const;
 
 export type Route = {

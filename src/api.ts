@@ -1,3 +1,57 @@
+export type GetListBidsParams = {
+"page": number
+}
+export type GetListBidsResult = {
+"names": Array<NameVolumeRow>
+"count": number
+"limit": number
+}
+export type NameVolumeRow = {
+"OpenHeight": number
+"CovenantNameHash": Bytes
+"CovenantName": Bytes
+"MaxLockup": number
+"MaxRevealed": number
+"VolumeLockup": number
+"VolumeRevealed": number
+"BidCount": number
+"Count": number
+}
+export type Bytes = string
+export type GetRecordsParams = {
+"name": string
+"page": number
+}
+export type GetRecordsParamsResult = {
+"records": Array<RecordRow>
+"count": number
+"limit": number
+}
+export type RecordRow = {
+"Height": number
+"CovenantRecordData": Bytes
+"Count": number
+}
+export type GetAuctionHistoryParams = {
+"page": number
+"name": string
+}
+export type GetAuctionHistoryParamsResult = {
+"history": Array<AuctionHistoryRow>
+"count": number
+"limit": number
+}
+export type AuctionHistoryRow = {
+"Height": number
+"Txid": Bytes
+"CovenantName": string
+"LockupValue": number | null
+"RevealValue": number | null
+"CovenantAction": string
+"CovenantRecordData": string
+"CovenantNameHash": string
+"Count": number
+}
 export type GetBlockByHeightParams = {
 "height": number
 }
@@ -23,73 +77,14 @@ export type Block = {
 "nonce": number
 "extraNonce": Bytes
 }
-export type Bytes = string
-export type GetListExpensiveParams = {
+export type GetTransactionsByBlockHashParams = {
+"hash": Bytes
 "page": number
 }
-export type GetListExpensiveResult = {
-"names": Array<NameRow>
+export type GetTransactionsByBlockHashResult = {
+"txs": Array<Transaction>
 "count": number
 "limit": number
-}
-export type NameRow = {
-"OpenHeight": number
-"CovenantNameHash": Bytes
-"CovenantName": Bytes
-"MaxLockup": number
-"MaxRevealed": number
-"BidCount": number
-"Count": number
-}
-export type GetListRevealVolumeParams = {
-"page": number
-}
-export type GetListRevealVolumeResult = {
-"names": Array<NameVolumeRow>
-"count": number
-"limit": number
-}
-export type NameVolumeRow = {
-"OpenHeight": number
-"CovenantNameHash": Bytes
-"CovenantName": Bytes
-"MaxLockup": number
-"MaxRevealed": number
-"VolumeLockup": number
-"VolumeRevealed": number
-"BidCount": number
-"Count": number
-}
-export type GetListBidsParams = {
-"page": number
-}
-export type GetListBidsResult = {
-"names": Array<NameVolumeRow>
-"count": number
-"limit": number
-}
-export type GetAuctionHistoryParams = {
-"page": number
-"name": string
-}
-export type GetAuctionHistoryParamsResult = {
-"history": Array<AuctionHistoryRow>
-"count": number
-"limit": number
-}
-export type AuctionHistoryRow = {
-"Height": number
-"Txid": Bytes
-"CovenantName": string
-"LockupValue": number | null
-"RevealValue": number | null
-"CovenantAction": string
-"CovenantRecordData": string
-"CovenantNameHash": string
-"Count": number
-}
-export type GetTransactionByTxidParams = {
-"txid": Bytes
 }
 export type Transaction = {
 "txid": Bytes
@@ -99,6 +94,7 @@ export type Transaction = {
 "version": number
 "locktime": number
 "size": number
+"height": number
 "inputs": Array<TxInput>
 "outputs": Array<TxOutput>
 }
@@ -124,14 +120,22 @@ export type TxOutput = {
 "covenantRenewalCount"?: Bytes
 }
 export type CovenantAction = string
-export type GetTransactionsByBlockHashParams = {
-"hash": Bytes
+export type GetListExpensiveParams = {
 "page": number
 }
-export type GetTransactionsByBlockHashResult = {
-"txs": Array<Transaction>
+export type GetListExpensiveResult = {
+"names": Array<NameRow>
 "count": number
 "limit": number
+}
+export type NameRow = {
+"OpenHeight": number
+"CovenantNameHash": Bytes
+"CovenantName": Bytes
+"MaxLockup": number
+"MaxRevealed": number
+"BidCount": number
+"Count": number
 }
 export type GetListLockupVolumeParams = {
 "page": number
@@ -141,19 +145,13 @@ export type GetListLockupVolumeResult = {
 "count": number
 "limit": number
 }
-export type GetRecordsParams = {
-"name": string
+export type GetListRevealVolumeParams = {
 "page": number
 }
-export type GetRecordsParamsResult = {
-"records": Array<RecordRow>
+export type GetListRevealVolumeResult = {
+"names": Array<NameVolumeRow>
 "count": number
 "limit": number
-}
-export type RecordRow = {
-"Height": number
-"CovenantRecordData": Bytes
-"Count": number
 }
 export type SearchParams = {
 "query": string
@@ -163,45 +161,48 @@ export type SearchResult = {
 "blocks": Array<number>
 "names": Array<string>
 }
+export type GetTransactionByTxidParams = {
+"txid": Bytes
+}
 export type API = {
-"/block": {
-"params": GetBlockByHeightParams
-"result": GetBlockByHeightResult
-}
-"/lists/expensive": {
-"params": GetListExpensiveParams
-"result": GetListExpensiveResult
-}
-"/lists/reveal_volume": {
-"params": GetListRevealVolumeParams
-"result": GetListRevealVolumeResult
-}
 "/lists/bids": {
 "params": GetListBidsParams
 "result": GetListBidsResult
-}
-"/names/auction": {
-"params": GetAuctionHistoryParams
-"result": GetAuctionHistoryParamsResult
-}
-"/tx": {
-"params": GetTransactionByTxidParams
-"result": Transaction
-}
-"/block/txs": {
-"params": GetTransactionsByBlockHashParams
-"result": GetTransactionsByBlockHashResult
-}
-"/lists/lockup_volume": {
-"params": GetListLockupVolumeParams
-"result": GetListLockupVolumeResult
 }
 "/names/records": {
 "params": GetRecordsParams
 "result": GetRecordsParamsResult
 }
+"/names/auction": {
+"params": GetAuctionHistoryParams
+"result": GetAuctionHistoryParamsResult
+}
+"/block": {
+"params": GetBlockByHeightParams
+"result": GetBlockByHeightResult
+}
+"/block/txs": {
+"params": GetTransactionsByBlockHashParams
+"result": GetTransactionsByBlockHashResult
+}
+"/lists/expensive": {
+"params": GetListExpensiveParams
+"result": GetListExpensiveResult
+}
+"/lists/lockup_volume": {
+"params": GetListLockupVolumeParams
+"result": GetListLockupVolumeResult
+}
+"/lists/reveal_volume": {
+"params": GetListRevealVolumeParams
+"result": GetListRevealVolumeResult
+}
 "/search": {
 "params": SearchParams
 "result": SearchResult
+}
+"/tx": {
+"params": GetTransactionByTxidParams
+"result": Transaction
 }
 }

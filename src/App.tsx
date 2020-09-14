@@ -2,6 +2,7 @@ import { getRoute, listen } from "./history";
 
 import Home from "./pages/Home";
 import Block from "./pages/Block";
+import Transaction from "./pages/Transaction";
 import NotFound from "./pages/NotFound";
 
 import "./App.css";
@@ -22,7 +23,8 @@ const App: React.FC = () => {
             <NotFound />
           ) : (
             (route.id === "home" && <Home {...route.params} />) ||
-            (route.id === "block" && <Block {...route.params} />)
+            (route.id === "block" && <Block {...route.params} />) ||
+            (route.id === "transaction" && <Transaction {...route.params} />)
           )}
         </div>
       </main>

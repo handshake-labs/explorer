@@ -1,26 +1,22 @@
 import { useAPI } from "../hooks/api";
 import { useTitle } from "../hooks/title";
+import { RenderTx, RenderTxInput, RenderTxOutput } from "./Transaction/Transaction";
 
 
 interface Props {
   txid: string;
-  page: number;
 }
 
-const Transaction: React.FC<Props> = ({ txid, page }) => {
+const Transaction: React.FC<Props> = ({ txid}) => {
   useTitle(`Transaction ${txid}`);
   
-  const state = useAPI("/tx", { txid });
-  console.log("www");
-  if (state === undefined) {
+  const tx = useAPI("/tx", { txid });
+  if (tx === undefined) {
     return null;
   }
-  if (state === null) {
+  if (tx === null) {
     return <div>Not Found</div>;
   }
-  // const { transaction } = state;
-  return (
-    "test"
-  );
+  return RenderTx(tx)
 };
 export default Transaction;
