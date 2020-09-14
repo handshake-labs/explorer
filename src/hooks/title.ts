@@ -1,4 +1,4 @@
-export const useDocumentTitle = (title: string): void => {
+export const useTitle = (title: string): void => {
   React.useEffect(() => {
     const prevTitle = document.title;
     document.title = title;

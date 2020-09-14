@@ -1,4 +1,5 @@
 import { useAPI } from "../hooks/api";
+import { useTitle } from "../hooks/title";
 
 import Info from "./Block/Info";
 import Transactions from "./Block/Transactions";
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Block: React.FC<Props> = ({ height, page }) => {
+  useTitle(`Block ${height}`);
+
   const state = useAPI("/block", { height });
   if (state === undefined) {
     return null;
@@ -24,7 +27,7 @@ const Block: React.FC<Props> = ({ height, page }) => {
         isFirst={height === 0}
         isLast={height === maxHeight}
       />
-      <Transactions hash={block.hash} page={page} />
+      <Transactions height={block.height} hash={block.hash} page={page} />
     </>
   );
 };

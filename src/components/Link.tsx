@@ -1,9 +1,9 @@
-import { push } from "../history";
+import { setPath } from "../history";
 import { buildPath, Route } from "../routes";
 
 const onClick = (e: React.MouseEvent) => {
   if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey) {
-    push((e.target as HTMLAnchorElement).href);
+    setPath((e.target as HTMLAnchorElement).href);
     e.preventDefault();
   }
 };
