@@ -1,12 +1,36 @@
-import { Routes } from "../types";
-import { useFetch } from "./fetch";
+import { API } from "../api";
+import { useEffect, useState } from "react";
 
-export const useAPI = <K extends keyof Routes>(
-  k: K,
-  params: Routes[K]["params"]
-): Routes[K]["result"] | null => {
-  const search = new URLSearchParams(<any>params).toString();
-  const path = `${k}${search.length ? `?${search}` : ""}`;
+type Actions = keyof API;
+type Params<A extends Actions> = API[A]["params"];
+type Result<A extends Actions> = API[A]["result"] | null;
 
- return  useFetch(path);
+export const useAPI = <A extends Actions>(
+  action: A,
+  params: Params<A>
+): Result<A> | undefined => {
+  const search: string[] = [];
+  for (const k in params) {
+    const v = (<any>params[k]).toString();
+    search.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
+  }
+  const path = `${action}?${search.join("&")}`;
+
+  const [state, setState] = useState<Result<A> | undefined>();
+
+  useEffect(() => {
+    let aborted = false;
+    const url = API_ORIGIN + path;
+    const fetchState = async () => {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!aborted) setState(data);
+    };
+    fetchState();
+    return () => {
+      aborted = true;
+    };
+  }, [path]);
+
+  return state;
 };
