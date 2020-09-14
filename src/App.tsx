@@ -1,7 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Route, parseLocation } from "./routes";
-import { location, listen } from "./history";
+import { getRoute, listen } from "./history";
 
 import Home from "./pages/Home";
 import Block from "./pages/Block";
@@ -10,11 +7,9 @@ import NotFound from "./pages/NotFound";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [route, setRoute] = useState<Route | undefined>(
-    parseLocation(location())
-  );
+  const [route, setRoute] = React.useState(getRoute());
 
-  useEffect(() => listen(() => setRoute(parseLocation(location()))), []);
+  React.useEffect(() => listen(() => setRoute(getRoute())), []);
 
   return (
     <>

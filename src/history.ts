@@ -1,4 +1,4 @@
-import { Location } from "./route";
+import { Route, parseLocation, buildPath } from "./routes";
 
 const listeners: ((() => void) | null)[] = [];
 
@@ -9,24 +9,21 @@ const notify = () => {
     }
 };
 
-export const location = (): Location => ({
-  pathname: document.location.pathname,
-  search: document.location.search,
-});
-
-export const listen = (listener: () => void): (() => void) => {
-  const n = listeners.push(listener) - 1;
-  return () => (listeners[n] = null);
-};
-
-export const push = (path: string) => {
+export const setPath = (path: string) => {
   history.pushState(null, "", path);
   notify();
 };
 
-export const replace = (path: string) => {
-  history.replaceState(null, "", path);
+export const replaceRoute = (route: Route) => {
+  history.replaceState(null, "", buildPath(route));
   notify();
+};
+
+export const getRoute = () => parseLocation(document.location);
+
+export const listen = (listener: () => void): (() => void) => {
+  const n = listeners.push(listener) - 1;
+  return () => (listeners[n] = null);
 };
 
 window.addEventListener("popstate", notify);
