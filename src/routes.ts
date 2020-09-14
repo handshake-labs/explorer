@@ -1,28 +1,29 @@
-import { default as createRoute, Route, IntParam, StrParam } from "typed-routes";
+import { default as R, Location, StrParam, UintParam } from "./route";
 
-const home = createRoute().extend("");
-const blocks = createRoute().extend("blocks");
-const block = blocks.param("height", IntParam);
-const transaction = block.extend("txs").param("txhash", StrParam);
+const routes = {
+  home: new R("/", {}, {}),
+  block: new R("/blocks/:height", { height: UintParam }, { page: UintParam }),
+} as const;
 
-const routes = { home, blocks, block, transaction } as const;
-type IRouteMatch = {
-  [K in keyof typeof routes]: {
-    id: K;
-    params: typeof routes[K] extends Route<infer U> ? U : never;
-  };
-};
-type RouteMatch = IRouteMatch[keyof IRouteMatch];
+export type Route = {
+  [ID in keyof typeof routes]: typeof routes[ID] extends R<
+    infer K,
+    infer P,
+    infer Q,
+    infer R
+  >
+    ? { id: ID; params: R }
+    : never;
+}[keyof typeof routes];
 
-export function matchPathname(pathname: string): RouteMatch | undefined {
-  let id: keyof typeof routes;
-  for (id in routes) {
-    const params: any = routes[id].match(pathname);
+export function parseLocation(location: Location): Route | undefined {
+  for (const id in routes) {
+    const params: any = (<any>routes)[id].parseLocation(location);
     if (params !== undefined) {
-      return { id, params };
+      return <any>{ id, params };
     }
   }
 }
-export function buildPathname({ id, params }: RouteMatch): string {
-  return routes[id].from(<any>params);
+export function buildPath({ id, params }: Route): string {
+  return routes[id].buildPath(<any>params);
 }

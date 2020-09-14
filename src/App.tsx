@@ -1,6 +1,7 @@
 import React from "react";
-import { useHistoryPathname } from "./hooks/history";
-import { matchPathname } from "./routes";
+import { useState, useEffect } from "react";
+import { Route, parseLocation } from "./routes";
+import { location, listen } from "./history";
 
 import Home from "./pages/Home";
 import Block from "./pages/Block";
@@ -9,8 +10,11 @@ import NotFound from "./pages/NotFound";
 import "./App.css";
 
 const App: React.FC = () => {
-  const pathname = useHistoryPathname();
-  const match = matchPathname(pathname) || { id: undefined };
+  const [route, setRoute] = useState<Route | undefined>(
+    parseLocation(location())
+  );
+
+  useEffect(() => listen(() => setRoute(parseLocation(location()))), []);
 
   return (
     <>
@@ -19,11 +23,12 @@ const App: React.FC = () => {
       </header>
       <main>
         <div styleName="wrapper">
-          {
-            (match.id === "home" && <Home {...match.params} />) ||
-            (match.id === "block" && <Block {...match.params} />) ||
-            ( <NotFound /> )
-          }
+          {route === undefined ? (
+            <NotFound />
+          ) : (
+            (route.id === "home" && <Home {...route.params} />) ||
+            (route.id === "block" && <Block {...route.params} />)
+          )}
         </div>
       </main>
       <footer>
