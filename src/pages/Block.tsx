@@ -14,7 +14,6 @@ const Block: React.FC<Props> = ({ height, page }) => {
 
   const state = useAPI("/block", { height });
   console.log(state);
-  console.log("xxx");
   if (state === undefined) {
     return null;
   }
