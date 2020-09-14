@@ -58,6 +58,9 @@ const config = {
         PROD_MODE ? "https://" : "http://localhost:8000"
       ),
     }),
+    new webpack.ProvidePlugin({
+      React: "react",
+    }),
   ],
   devServer: {
     contentBase: DIST_DIR,

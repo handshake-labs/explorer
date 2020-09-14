@@ -1,5 +1,3 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import { Route, parseLocation } from "./routes";
 import { location, listen } from "./history";
 
@@ -10,11 +8,11 @@ import NotFound from "./pages/NotFound";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [route, setRoute] = useState<Route | undefined>(
+  const [route, setRoute] = React.useState<Route | undefined>(
     parseLocation(location())
   );
 
-  useEffect(() => listen(() => setRoute(parseLocation(location()))), []);
+  React.useEffect(() => listen(() => setRoute(parseLocation(location()))), []);
 
   return (
     <>

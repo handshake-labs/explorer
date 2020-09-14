@@ -1,5 +1,3 @@
-import React from "react";
-
 import useClipboard from "react-use-clipboard";
 
 interface Props {

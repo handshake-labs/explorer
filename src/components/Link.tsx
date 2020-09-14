@@ -1,5 +1,3 @@
-import React from "react";
-
 import { push } from "../history";
 import { buildPath, Route } from "../routes";
 

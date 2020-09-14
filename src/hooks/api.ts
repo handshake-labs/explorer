@@ -1,5 +1,4 @@
 import { API } from "../api";
-import { useEffect, useState } from "react";
 
 type Actions = keyof API;
 type Params<A extends Actions> = API[A]["params"];
@@ -16,9 +15,9 @@ export const useAPI = <A extends Actions>(
   }
   const path = `${action}?${search.join("&")}`;
 
-  const [state, setState] = useState<Result<A> | undefined>();
+  const [state, setState] = React.useState<Result<A> | undefined>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     let aborted = false;
     const url = API_ORIGIN + path;
     const fetchState = async () => {

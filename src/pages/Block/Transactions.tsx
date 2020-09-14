@@ -1,4 +1,3 @@
-import React from "react";
 import { useAPI } from "../../hooks/api";
 
 interface Props {
