@@ -21,14 +21,29 @@ const Transactions: React.FC<Props> = ({ height, hash, page }) => {
   }
   const { txs, count, limit } = state;
   // return <div>{txs && txs.map((tx) => <div>{tx.rate}</div>)}</div>;
-  return <> <div>{txs && txs.length} transactions {txs && txs.map((tx) => 
-    <p>
-      <Link route={{ id: "transaction", params: {txid: tx.txid}}}>
-        {tx.txid}
-      </Link>
-    </p>)}
-    </div>
-      <Pagination page={page} count={count} limit={limit} route={(page: number) => ({ id: "block", params: { height, page } })} > </Pagination>
+  return (
+    <>
+      {" "}
+      <div>
+        {txs && txs.length} transactions{" "}
+        {txs &&
+          txs.map((tx) => (
+            <p>
+              <Link route={{ id: "transaction", params: { txid: tx.txid } }}>
+                {tx.txid}
+              </Link>
+            </p>
+          ))}
+      </div>
+      <Pagination
+        page={page}
+        count={count}
+        limit={limit}
+        route={(page: number) => ({ id: "block", params: { height, page } })}
+      >
+        {" "}
+      </Pagination>
     </>
+  );
 };
 export default Transactions;

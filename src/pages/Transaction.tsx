@@ -1,15 +1,18 @@
 import { useAPI } from "../hooks/api";
 import { useTitle } from "../hooks/title";
-import { RenderTx, RenderTxInput, RenderTxOutput } from "./Transaction/Transaction";
-
+import {
+  RenderTx,
+  RenderTxInput,
+  RenderTxOutput,
+} from "./Transaction/Transaction";
 
 interface Props {
   txid: string;
 }
 
-const Transaction: React.FC<Props> = ({ txid}) => {
+const Transaction: React.FC<Props> = ({ txid }) => {
   useTitle(`Transaction ${txid}`);
-  
+
   const tx = useAPI("/tx", { txid });
   if (tx === undefined) {
     return null;
@@ -17,6 +20,6 @@ const Transaction: React.FC<Props> = ({ txid}) => {
   if (tx === null) {
     return <div>Not Found</div>;
   }
-  return RenderTx(tx)
+  return RenderTx(tx);
 };
 export default Transaction;

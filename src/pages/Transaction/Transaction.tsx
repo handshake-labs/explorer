@@ -1,72 +1,66 @@
 import Link from "../../components/Link";
+import { TxInput, TxOutput, Transaction } from "../../api";
 
-function RenderTxInput(txInput) {
-  return <>
-    Transaction input:
-    <li><b>hashPrevout:</b>{txInput.hashPrevout}</li>
-    <li><b>indexPrevout:</b>{txInput.indexPrevout}</li>
-    <li><b>sequence:</b>{txInput.sequence}</li>
-  </>
-}
+const RenderTxInput = (txInput: TxInput) => <>
+  Transaction input:
+  <li><b>hashPrevout:</b>{txInput.hashPrevout}</li>
+  <li><b>indexPrevout:</b>{txInput.indexPrevout}</li>
+  <li><b>sequence:</b>{txInput.sequence}</li>
+</>
 
-function RenderTxOutput(txOutput) {
-  return <>
-    Transaction output:
-    <li><b>value:</b>{txOutput.value}</li>
-    <li><b>address:</b>{txOutput.address}</li>
-    
-    <li><b>covenantAction :</b>{txOutput.covenantAction }</li>
-    { txOutput.covenantNameHash &&
-    <li><b>covenantNameHash:</b>{txOutput.covenantNameHash}</li>
-    }
-    { txOutput.covenantHeight &&
+const RenderTxOutput = (txOutput: TxOutput) => <>
+  Transaction output:
+  <li><b>value:</b>{txOutput.value}</li>
+  <li><b>address:</b>{txOutput.address}</li>
+
+  <li><b>covenantAction :</b>{txOutput.covenantAction }</li>
+  { txOutput.covenantNameHash &&
+  <li><b>covenantNameHash:</b>{txOutput.covenantNameHash}</li>
+  }
+  { txOutput.covenantHeight &&
     <li><b>covenantHeight:</b>{txOutput.covenantHeight}</li>
-    }
-    { txOutput.covenantName &&
+  }
+  { txOutput.covenantName &&
     <li><b>covenantName:</b>{txOutput.covenantName}</li>
-    }
-    { txOutput.covenantBidHash &&
+  }
+  { txOutput.covenantBidHash &&
     <li><b>covenantBidHash:</b>{txOutput.covenantBidHash}</li>
-    }
-    { txOutput.covenantNonce &&
+  }
+  { txOutput.covenantNonce &&
     <li><b>covenantNonce:</b>{txOutput.covenantNonce}</li>
-    }
-    { txOutput.covenantRecordData &&
+  }
+  { txOutput.covenantRecordData &&
     <li><b>covenantRecordData:</b>{txOutput.covenantRecordData}</li>
-    }
-    { txOutput.covenantBlockHash &&
+  }
+  { txOutput.covenantBlockHash &&
     <li><b>covenantBlockHash:</b>{txOutput.covenantBlockHash}</li>
-    }
-    { txOutput.covenantVersion &&
+  }
+  { txOutput.covenantVersion &&
     <li><b>covenantVersion:</b>{txOutput.covenantVersion}</li>
-    }
-    { txOutput.covenantAddress &&
+  }
+  { txOutput.covenantAddress &&
     <li><b>covenantAddress:</b>{txOutput.covenantAddress}</li>
-    }
-    { txOutput.covenantClaimHeight &&
+  }
+  { txOutput.covenantClaimHeight &&
     <li><b>covenantClaimHeight:</b>{txOutput.covenantClaimHeight}</li>
-    }
-    { txOutput.covenantRenewalCount &&
+  }
+  { txOutput.covenantRenewalCount &&
     <li><b>covenantRenewalCount:</b>{txOutput.covenantRenewalCount}</li>
-    }
+  }
+</>
 
-  </>
-}
-
-function RenderTx(tx) {
-  return <>
-    Transaction:
-    <div><b>txid:</b> {tx.txid} </div>
-    <li><b>witnessTx:</b> {tx.witnessTx} </li>
-    <li><b>fee:</b> {tx.fee}</li>
-    <li><b>rate:</b> {tx.rate}</li>
-    <li><b>version:</b> {tx.version}</li>
-    <li><b>locktime:</b> {tx.locktime}</li>
-    <li><b>size:</b> {tx.size}</li>
-    <li><b>block height:</b><Link route={{ id: "block", params: { height: tx.height, page: 0 }, }} > {tx.height} </Link> </li>
-    <div>{tx.inputs && tx.inputs.length} Tx inputs <p></p>{tx.inputs && tx.inputs.map((txInput) => RenderTxInput(txInput))}</div>;
-    <div>{tx.outputs && tx.outputs.length} Tx outputs <p></p>{tx.outputs && tx.outputs.map((txInput) => RenderTxOutput(txInput))}</div>;
-  </>
-}
+const RenderTx = (tx: Transaction) => <>
+  Transaction:
+  <div><b>txid:</b> {tx.txid} </div>
+  <li><b>witnessTx:</b> {tx.witnessTx} </li>
+  <li><b>fee:</b> {tx.fee}</li>
+  <li><b>rate:</b> {tx.rate}</li>
+  <li><b>version:</b> {tx.version}</li>
+  <li><b>locktime:</b> {tx.locktime}</li>
+  <li><b>size:</b> {tx.size}</li>
+  <li><b>block height:</b><Link route={{ id: "block", params: { height: tx.height, page: 0 }, }} > {tx.height} </Link> </li>
+  <div>{tx.inputs && tx.inputs.length} Tx inputs <p></p>{tx.inputs && tx.inputs.map((txInput) => RenderTxInput(txInput))}</div>;
+  <div>{tx.outputs && tx.outputs.length} Tx outputs <p></p>{tx.outputs && tx.outputs.map((txInput) => RenderTxOutput(txInput))}</div>;
+</>
 
 export {RenderTx, RenderTxOutput, RenderTxInput};
