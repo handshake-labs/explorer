@@ -4,6 +4,7 @@ const routes = {
   home: new R("/", {}, {}),
   block: new R("/block/:height", { height: UintParam }, { page: UintParam }),
   transaction: new R("/tx/:txid", { txid: StrParam }, {}),
+  name: new R("/name/:name", { name: StrParam }, { page: UintParam }),
 } as const;
 
 export type Route = {
