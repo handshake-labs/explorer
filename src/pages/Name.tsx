@@ -2,7 +2,6 @@ import { useAPI } from "../hooks/api";
 import { useTitle } from "../hooks/title";
 import Link from "../components/Link";
 import { AuctionHistoryRow } from "../api";
-// import { RenderTx, RenderTxInput, RenderTxOutput, } from "./Transaction/Transaction";
 
 interface Props {
   name: string;
@@ -21,9 +20,6 @@ const RenderAuctionHistoryRow = (historyRow: AuctionHistoryRow) => (
     </li>
     <li>
       <b>Action: </b>{historyRow.CovenantAction}
-    </li>
-    <li>
-      <b>Covenant name: </b>{historyRow.CovenantName}
     </li>
     <li>
       <b>Lockup: </b>{historyRow.LockupValue/10**6} HNS
