@@ -13,7 +13,6 @@ const Block: React.FC<Props> = ({ height, page }) => {
   useTitle(`Block ${height}`);
 
   const state = useAPI("/block", { height });
-  console.log(state);
   if (state === undefined) {
     return null;
   }

@@ -1,5 +1,6 @@
 import Link from "../../components/Link";
 import { TxInput, TxOutput, Transaction } from "../../api";
+import { hex2ascii } from "../../helpers";
 
 const RenderTxInput = (txInput: TxInput) => (
     <>
@@ -30,6 +31,14 @@ const RenderTxOutput = (txOutput: TxOutput) => (
         <li>
             <b>address: </b> {txOutput.address}
         </li>
+        {txOutput.name && (
+            <li>
+                    <Link route={{ id: "name", params: { name: hex2ascii(txOutput.name), page: 0} }}>
+                {hex2ascii(txOutput.name)}
+            </Link>
+            </li>
+        )}
+
         <li>
             <b>covenantAction: </b>
             {txOutput.covenantAction}
