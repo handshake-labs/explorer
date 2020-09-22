@@ -13,8 +13,8 @@ interface Props {
 const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
   var blockDateTime = new Date(block.time * 1000);
   return (
-    <div styleName="info">
-      <div styleName="header">
+    <div className="card">
+      <div className="header">
         {!isFirst ? (
           <Link
             route={{
@@ -22,10 +22,12 @@ const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
               params: { height: block.height - 1, page: 0 },
             }}
           >
-            {block.height - 1}
+            <div styleName="prev">
+              <span className="badge">BLOCK #{block.height - 1}</span>
+            </div>
           </Link>
         ) : null}
-        <span>Block {block.height}</span>
+        <div styleName="block">Block #{block.height}</div>
         {!isLast ? (
           <Link
             route={{
@@ -33,7 +35,9 @@ const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
               params: { height: block.height + 1, page: 0 },
             }}
           >
-            {block.height + 1}
+            <div styleName="next">
+              <span className="badge">BLOCK #{block.height + 1}</span>
+            </div>
           </Link>
         ) : null}
       </div>

@@ -1,7 +1,7 @@
 import { useAPI } from "../../hooks/api";
 import Link from "../../components/Link";
 import Pagination from "../../components/Pagination";
-import {hex2ascii} from "../../helpers";
+import { hex2ascii } from "../../helpers";
 import { MempoolTxOutput, MempoolTx } from "../../api";
 
 interface Props {
@@ -17,7 +17,9 @@ const RenderTxInput = (txInput: TxInput) => (
     Transaction input:
     <li>
       <b>hashPrevout:</b>
-      <Link route={{ id: "transaction", params: { txid: txInput.hashPrevout } }}>
+      <Link
+        route={{ id: "transaction", params: { txid: txInput.hashPrevout } }}
+      >
         {txInput.hashPrevout}
       </Link>
     </li>
@@ -36,19 +38,18 @@ const RenderTxOutput = (txOutput: MempoolTxOutput) => (
   <>
     Transaction output:
     <li>
-      <b>value: </b> {txOutput.value/10**6} HNS
+      <b>value: </b> {txOutput.value / 10 ** 6} HNS
     </li>
     <li>
       <b>address: </b> {txOutput.address}
     </li>
     {txOutput.name && (
       <li>
-        <Link route={{ id: "name", params: { name: txOutput.name, page: 0} }}>
+        <Link route={{ id: "name", params: { name: txOutput.name, page: 0 } }}>
           {txOutput.name}
         </Link>
       </li>
     )}
-
     <li>
       <b>covenantAction: </b>
       {txOutput.covenantAction}
@@ -147,7 +148,6 @@ const RenderTx = (tx: MempoolTx) => (
     </div>
   </>
 );
-
 
 // const Transactions: React.FC<Props> = ({ hash, page }) => {
 const Transactions: React.FC<Props> = ({ page }) => {

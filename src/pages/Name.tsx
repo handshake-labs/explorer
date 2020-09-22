@@ -11,25 +11,39 @@ interface Props {
 const RenderAuctionHistoryRow = (historyRow: AuctionHistoryRow) => (
   <>
     <div>
-    <li>
-      <b>Block:</b> <Link route={{ id: "block", params: { height: historyRow.Height, page: 0 } }}>{historyRow.Height}</Link>
-    </li>
-    <li>
-      <b>Transaction: </b>
-      <Link route={{ id: "transaction", params: { txid: historyRow.Txid } }}> {historyRow.Txid} </Link>
-    </li>
-    <li>
-      <b>Action: </b>{historyRow.CovenantAction}
-    </li>
-    <li>
-      <b>Lockup: </b>{historyRow.LockupValue/10**6} HNS
-    </li>
-    <li>
-      <b>Reveal: </b>{historyRow.RevealValue/10**6} HNS
-    </li>
+      <li>
+        <b>Block:</b>{" "}
+        <Link
+          route={{
+            id: "block",
+            params: { height: historyRow.Height, page: 0 },
+          }}
+        >
+          {historyRow.Height}
+        </Link>
+      </li>
+      <li>
+        <b>Transaction: </b>
+        <Link route={{ id: "transaction", params: { txid: historyRow.Txid } }}>
+          {" "}
+          {historyRow.Txid}{" "}
+        </Link>
+      </li>
+      <li>
+        <b>Action: </b>
+        {historyRow.CovenantAction}
+      </li>
+      <li>
+        <b>Lockup: </b>
+        {historyRow.LockupValue / 10 ** 6} HNS
+      </li>
+      <li>
+        <b>Reveal: </b>
+        {historyRow.RevealValue / 10 ** 6} HNS
+      </li>
     </div>
   </>
-)
+);
 
 const Name: React.FC<Props> = ({ name, page }) => {
   useTitle(`Name ${name}`);
@@ -41,9 +55,12 @@ const Name: React.FC<Props> = ({ name, page }) => {
   if (domain === null) {
     return <div>Not Found</div>;
   }
-  return <>
-    <div>Name {name} </div>
-    {domain.history && domain.history.map((historyRow) => RenderAuctionHistoryRow(historyRow))}
-  </>
+  return (
+    <>
+      <div>Name {name} </div>
+      {domain.history &&
+        domain.history.map((historyRow) => RenderAuctionHistoryRow(historyRow))}
+    </>
+  );
 };
 export default Name;

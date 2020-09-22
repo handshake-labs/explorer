@@ -1,4 +1,35 @@
-.info {
-  border: 1px solid #d6d6d6;
-  border-radius: 5px;
+.block {
+  flex: 1;
+  text-align: center;
+}
+.block::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  background: svg-load("../../icons/block.svg", fill= "#fff") no-repeat center
+    center;
+  margin: -3px 5px 0 0;
+}
+
+.prev,
+.next {
+  margin: 0 10px;
+}
+.prev span,
+.next span {
+  vertical-align: middle;
+  margin: 0 5px;
+}
+.prev::before,
+.next::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-top: -3px;
+  background: svg-load("../../icons/block.svg", fill= "#fff") no-repeat center
+    center;
 }

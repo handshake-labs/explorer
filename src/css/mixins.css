@@ -1,0 +1,24 @@
+:global(.card) {
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+:global(.card > .header) {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  line-height: 45px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #4ca6c3;
+  color: #fff;
+}
+
+:global(.badge) {
+  padding: 0.3em 0.6em;
+  font-size: 0.7em;
+  border-radius: 5px;
+  color: #4ca6c3;
+  background: #fff;
+}

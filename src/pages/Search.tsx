@@ -20,21 +20,27 @@ const Search: React.FC<Props> = ({ query }) => {
     <>
       {transactions && (
         <li>
-          <b> Transactions: </b>{transactions}
-            <Link route={{ id: "transaction", params: { txid: transactions } }}>
-                {txInput.hashPrevout}
-            </Link>
-
+          <b> Transactions: </b>
+          {transactions}
+          <Link route={{ id: "transaction", params: { txid: transactions } }}>
+            {txInput.hashPrevout}
+          </Link>
         </li>
       )}
-{blocks && (
+      {blocks && (
         <li>
-          <b> Blocks: </b><Link route={{ id: "block", params: { height: blocks, page: 0 } }}>{blocks}</Link>
+          <b> Blocks: </b>
+          <Link route={{ id: "block", params: { height: blocks, page: 0 } }}>
+            {blocks}
+          </Link>
         </li>
       )}
-{names && (
+      {names && (
         <li>
-          <b> Names: </b><Link route={{ id: "name", params: { name: names, page: 0 } }}>{names}</Link> 
+          <b> Names: </b>
+          <Link route={{ id: "name", params: { name: names, page: 0 } }}>
+            {names}
+          </Link>
         </li>
       )}
     </>

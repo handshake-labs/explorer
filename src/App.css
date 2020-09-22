@@ -1,8 +1,67 @@
-.header {
-  height: 100px;
-  background: #f3f3f3;
-}
 .wrapper {
   margin: 0 auto;
   max-width: 1200px;
+}
+
+.header {
+  background: #f3f3f3;
+  border-bottom: 1px solid #d6d6d6;
+}
+.header > .wrapper {
+  display: flex;
+  align-items: center;
+}
+.header a {
+  display: block;
+  height: 80px;
+  line-height: 80px;
+}
+
+.home::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  background: svg-load("icons/logo.svg") no-repeat center center;
+}
+.home span {
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 20px;
+  white-space: pre-line;
+}
+
+.menu {
+  flex: 1;
+}
+.menu ul {
+  display: flex;
+  justify-content: space-around;
+}
+.menu a {
+  font-size: 16px;
+  color: #666666;
+}
+
+.main {
+  margin: 60px 0;
+}
+
+.footer {
+  background: #f3f3f3;
+  border-top: 1px solid #d6d6d6;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.copyright::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  background: svg-load("icons/logo.svg") no-repeat center center;
 }

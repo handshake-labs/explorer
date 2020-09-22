@@ -1,5 +1,5 @@
 const config = {
-  plugins: [require("autoprefixer")],
+  plugins: [require("postcss-inline-svg"), require("autoprefixer")],
 };
 
 if (process.env.NODE_ENV === "production") {
