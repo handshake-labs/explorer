@@ -24,7 +24,7 @@ const Transactions: React.FC<Props> = ({ height, hash, page }) => {
     <>
       {" "}
       <div>
-        {txs && txs.length} transactions{" "}
+        {txs && count} transactions{" "}
         {txs &&
           txs.map((tx) => (
             <p>
