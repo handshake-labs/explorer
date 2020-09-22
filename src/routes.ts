@@ -7,6 +7,7 @@ const routes = {
   name: new R("/name/:name", { name: StrParam }, { page: UintParam }),
   listExpensive: new R("/lists/expensive", { },{ page: UintParam }),
   search: new R("/search", { },{ query: StrParam }),
+  mempool: new R("/mempool", { },{ page: UintParam }),
 } as const;
 
 export type Route = {

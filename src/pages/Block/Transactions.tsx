@@ -8,7 +8,6 @@ interface Props {
   page: number;
 }
 
-// const Transactions: React.FC<Props> = ({ hash, page }) => {
 const Transactions: React.FC<Props> = ({ height, hash, page }) => {
   const state = useAPI("/block/txs", { hash, page });
 

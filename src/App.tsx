@@ -7,6 +7,7 @@ import Name from "./pages/Name";
 import ListExpensive from "./pages/ListExpensive";
 import NotFound from "./pages/NotFound";
 import Search from "./pages/Search";
+import Mempool from "./pages/Mempool";
 
 import "./App.css";
 
@@ -30,7 +31,8 @@ const App: React.FC = () => {
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||
             (route.id === "listExpensive" && <ListExpensive {...route.params} />) ||
-            (route.id === "search" && <Search {...route.params} />)
+            (route.id === "search" && <Search {...route.params} />) ||
+            (route.id === "mempool" && <Mempool {...route.params} />)
           )}
         </div>
       </main>
