@@ -25,6 +25,7 @@ const config = {
       },
       {
         test: /\.css$/,
+        exclude: path.join(SRC_DIR, "css"),
         use: [
           PROD_MODE ? MiniCssExtractPlugin.loader : "style-loader",
           {
@@ -39,6 +40,16 @@ const config = {
           },
           {
             loader: "postcss-loader",
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        include: path.join(SRC_DIR, "css"),
+        use: [
+          PROD_MODE ? MiniCssExtractPlugin.loader : "style-loader",
+          {
+            loader: "css-loader",
           },
         ],
       },

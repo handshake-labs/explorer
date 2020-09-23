@@ -14,7 +14,7 @@ const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
   var blockDateTime = new Date(block.time * 1000);
   return (
     <div className="card">
-      <div className="header">
+      <div styleName="header" className="header">
         {!isFirst ? (
           <Link
             route={{
@@ -22,8 +22,8 @@ const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
               params: { height: block.height - 1, page: 0 },
             }}
           >
-            <div styleName="prev">
-              <span className="badge">BLOCK #{block.height - 1}</span>
+            <div styleName="prev" className="badge">
+              {block.height - 1}{" "}
             </div>
           </Link>
         ) : null}
@@ -35,8 +35,8 @@ const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
               params: { height: block.height + 1, page: 0 },
             }}
           >
-            <div styleName="next">
-              <span className="badge">BLOCK #{block.height + 1}</span>
+            <div styleName="next" className="badge">
+              {block.height + 1}{" "}
             </div>
           </Link>
         ) : null}

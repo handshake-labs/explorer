@@ -46,8 +46,8 @@
   color: #666666;
 }
 
-.main {
-  margin: 60px 0;
+.main > .wrapper > * {
+  margin: 20px 0;
 }
 
 .footer {

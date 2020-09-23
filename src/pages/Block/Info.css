@@ -1,3 +1,8 @@
+.header {
+  background: #4ca6c3;
+  color: #fff;
+}
+
 .block {
   flex: 1;
   text-align: center;
@@ -15,21 +20,23 @@
 
 .prev,
 .next {
+  color: #4ca6c3;
   margin: 0 10px;
-}
-.prev span,
-.next span {
-  vertical-align: middle;
-  margin: 0 5px;
 }
 .prev::before,
 .next::after {
   content: "";
   display: inline-block;
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   margin-top: -3px;
-  background: svg-load("../../icons/block.svg", fill= "#fff") no-repeat center
-    center;
+  background: svg-load("../../icons/block.svg", fill= "#4ca6c3") no-repeat
+    center center;
+}
+.prev::before {
+  margin-right: 3px;
+}
+.next::after {
+  margin-left: 3px;
 }
