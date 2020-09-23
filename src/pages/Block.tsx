@@ -1,6 +1,7 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
+import Hash from "components/Hash";
 import Pagination from "components/Pagination";
 
 import Card from "components/Blocks/Card";
@@ -24,6 +25,7 @@ const Block: React.FC<Props> = ({ hash, page }) => {
   });
   return (
     <>
+      <h2 className="separator"><span className="icon block"><Hash hash={hash}/></span></h2>
       {block ? <Card block={block.block} /> : null}
       {transactions ? <Transactions transactions={transactions.txs} /> : null}
       {block ? (

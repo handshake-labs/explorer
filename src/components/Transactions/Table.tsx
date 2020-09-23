@@ -10,11 +10,13 @@ const Table: React.FC<Props> = ({ transactions }: Props) => (
   <div className="table">
   <div>
   <div><span>TXID</span></div>
+  <div><span></span></div>
   </div>
     {
       transactions.map((tx) => (
     <div key={tx.txid}>
       <div><Link txid={tx.txid}/></div>
+      <div></div>
     </div>
   ))}
   </div>

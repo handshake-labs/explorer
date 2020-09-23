@@ -1,4 +1,5 @@
 import  BaseLink from "components/Link";
+import  Hash from "components/Hash";
 
 interface Props {
   hash: string;
@@ -7,7 +8,7 @@ interface Props {
 
 const Link: React.FC<Props> = ({ hash,children }:Props) => (
 <BaseLink route={{ id: "block", params: { hash, page:0 } }}>
-  { children ? children : <span className="icon block">{hash.substr(0, 4)}&hellip;{hash.substr(hash.length - 4)}</span>}
+  { children ? children : <span className="icon block"><Hash hash={hash}/></span>}
 </BaseLink>
 )
 export default Link

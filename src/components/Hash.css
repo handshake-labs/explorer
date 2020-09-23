@@ -1,0 +1,10 @@
+.hash {
+  display: flex;
+  width: 7em;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.ellipsis::before {
+  content: "…";
+}

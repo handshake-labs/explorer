@@ -10,15 +10,15 @@ const onClick = (path: string) => (e: React.MouseEvent) => {
 
 interface Props {
   route: Route;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const Link: React.FC<Props> = (props: Props) => {
-  const path = buildPath(props.route);
+const Link: React.FC<Props> = ({route,children}: Props) => {
+  const path = buildPath(route);
 
   return (
     <a href={path} onClick={onClick(path)}>
-      {props.children || null}
+      {children}
     </a>
   );
 };
