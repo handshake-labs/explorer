@@ -1,10 +1,8 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
+import Table from "components/Blocks/Table";
 import Pagination from "components/Pagination";
-
-import Info from "./Block/Info";
-import Transactions from "./Block/Transactions";
 
 interface Props {
   page: number;
@@ -18,7 +16,8 @@ const Block: React.FC<Props> = ({ page }) => {
   const blocks = useAPI("/blocks", { limit, offset: page * limit });
   return blocks ? (
     <>
-      { blocks.blocks.map((block) => block.hash)}
+      <h2 className="separator"><span className="icon block">Blocks List</span></h2>
+      <Table blocks={blocks.blocks}/>
       <Pagination
           count={blocks.count}
           limit={limit}

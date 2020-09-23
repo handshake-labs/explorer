@@ -1,23 +1,5 @@
-.pages {
-  display: flex;
-  align-items: center;
-}
-
-.pages::before,
-.pages::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #d6d6d6;
-}
-.pages::before {
-  margin-right: 10px;
-}
-.pages::after {
-  margin-left: 10px;
-}
-
-.pages span {
+.root {
+& span {
   display: block;
   width: 40px;
   height: 40px;
@@ -26,7 +8,8 @@
   text-align: center;
   margin: 0 5px;
 }
-.pages a span {
+& a span {
   border: 1px solid #d6d6d6;
   border-radius: 7px;
+}
 }

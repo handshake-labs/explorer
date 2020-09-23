@@ -3,8 +3,8 @@ import { useTitle } from "hooks/title";
 
 import Pagination from "components/Pagination";
 
-import Info from "./Block/Info";
-import Transactions from "./Block/Transactions";
+import Card from "components/Blocks/Card";
+import Transactions from "components/Transactions/Table";
 
 interface Props {
   hash: string;
@@ -24,8 +24,8 @@ const Block: React.FC<Props> = ({ hash, page }) => {
   });
   return (
     <>
-      {block ? <Info block={block.block} /> : null}
-      {transactions ? <Transactions txs={transactions.txs} /> : null}
+      {block ? <Card block={block.block} /> : null}
+      {transactions ? <Transactions transactions={transactions.txs} /> : null}
       {block ? (
         <Pagination
           count={block.block.txsCount}

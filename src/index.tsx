@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 
 import "./css/reset.css";
 import "./css/defaults.css";
+import "./css/icons.css";
 import "./css/mixins.css";
 
 import App from "App";

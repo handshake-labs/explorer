@@ -17,32 +17,32 @@ const Pagination: React.FC<Props> = ({ count, page, limit, route }: Props) => {
   const start = Math.max(page - 2, 0);
   const end = Math.min(page + 2, max);
 
-  const pages: Array<number | null> = [];
+  const pages: number[] = [];
   for (let i = start; i <= end; i++) {
     pages.push(i);
   }
   if (start !== 0) {
     if (start !== 1) {
-      pages.unshift(null);
+      pages.unshift(-1);
     }
     pages.unshift(0);
   }
   if (end !== max) {
     if (end !== max - 1) {
-      pages.push(null);
+      pages.push(-2);
     }
     pages.push(max);
   }
 
   return (
-    <div styleName="pages">
+    <div styleName="root" className="separator">
       {pages.map((p) =>
-        p === null ? (
-          <span>&hellip;</span>
+        p < 0 ? (
+          <span key={p}>&hellip;</span>
         ) : p === page ? (
-          <span>{p + 1}</span>
+          <span key={p}>{p + 1}</span>
         ) : (
-          <Link route={route(p)}>
+          <Link route={route(p)} key={p}>
             <span>{p + 1}</span>
           </Link>
         )

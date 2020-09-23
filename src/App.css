@@ -12,6 +12,7 @@
   align-items: center;
 }
 .header a {
+  color: #000;
   display: block;
   height: 80px;
   line-height: 80px;
@@ -23,7 +24,7 @@
   vertical-align: middle;
   width: 60px;
   height: 60px;
-  background: svg-load("icons/logo.svg") no-repeat center center;
+  background: svg-load("logo.svg") no-repeat center center;
 }
 .home span {
   line-height: 1;
@@ -63,5 +64,5 @@
   vertical-align: middle;
   width: 25px;
   height: 25px;
-  background: svg-load("icons/logo.svg") no-repeat center center;
+  background: svg-load("logo.svg") no-repeat center center;
 }

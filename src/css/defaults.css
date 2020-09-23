@@ -9,9 +9,12 @@ a:visited,
 a:active,
 a:focus {
   text-decoration: none;
-  color: inherit;
+  color: #0080a9;
   outline: none;
   border: none;
+}
+a:hover{
+color: #004070;  
 }
 
 #root {
@@ -22,4 +25,8 @@ a:focus {
 
 #root > main {
   flex: 1;
+}
+
+h2 {
+  font-size: 30px;
 }
