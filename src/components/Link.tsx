@@ -13,7 +13,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Link: React.FC<Props> = ({route,children}: Props) => {
+const Link: React.FC<Props> = ({ route, children }: Props) => {
   const path = buildPath(route);
 
   return (

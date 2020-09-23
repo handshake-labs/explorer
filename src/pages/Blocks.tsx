@@ -11,19 +11,21 @@ interface Props {
 const limit = 50;
 
 const Block: React.FC<Props> = ({ page }) => {
-  useTitle(`Blocks list`);
+  useTitle(`Blocks List`);
 
   const blocks = useAPI("/blocks", { limit, offset: page * limit });
   return blocks ? (
     <>
-      <h2 className="separator"><span className="icon block">Blocks List</span></h2>
-      <Table blocks={blocks.blocks}/>
+      <h2 className="separator">
+        <span className="icon block">&nbsp;</span>
+      </h2>
+      <Table blocks={blocks.blocks} />
       <Pagination
-          count={blocks.count}
-          limit={limit}
-          page={page}
-          route={(page: number) => ({ id: "blocks", params: { page } })}
-        />
+        count={blocks.count}
+        limit={limit}
+        page={page}
+        route={(page: number) => ({ id: "blocks", params: { page } })}
+      />
     </>
   ) : null;
 };

@@ -1,15 +1,15 @@
 .root {
-& span {
-  display: block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px;
-  text-align: center;
-  margin: 0 5px;
-}
-& a span {
-  border: 1px solid #d6d6d6;
-  border-radius: 7px;
-}
+  & span {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 5px;
+  }
+  & a span {
+    border: 1px solid #d6d6d6;
+    border-radius: 7px;
+  }
 }

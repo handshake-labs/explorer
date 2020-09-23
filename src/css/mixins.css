@@ -27,8 +27,7 @@
   }
   & > div {
     width: 100%;
-    display:table-row;
-    justify-content: space-between;
+    display: table-row;
     & > div {
       display: table-cell;
       border-bottom: 1px solid #d6d6d6;
@@ -42,6 +41,32 @@
       & > * {
         display: inline-block;
         padding: 10px 0;
+      }
+    }
+  }
+}
+
+.card {
+  display: table;
+  width: 100%;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  overflow: hidden;
+  & > div {
+    width: 100%;
+    display: table-row;
+    & > span {
+      padding: 10px;
+      display: table-cell;
+      border-bottom: 1px solid #d6d6d6;
+      &:first-child {
+        font-weight: bold;
+        background: #0080a9;
+        color: #fff;
+        text-align: right;
+      }
+      &:last-child {
+        text-transform: uppercase;
       }
     }
   }

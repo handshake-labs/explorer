@@ -25,7 +25,11 @@ const Block: React.FC<Props> = ({ hash, page }) => {
   });
   return (
     <>
-      <h2 className="separator"><span className="icon block"><Hash hash={hash}/></span></h2>
+      <h2 className="separator">
+        <span className="icon block">
+          <Hash hash={hash} />
+        </span>
+      </h2>
       {block ? <Card block={block.block} /> : null}
       {transactions ? <Transactions transactions={transactions.txs} /> : null}
       {block ? (
