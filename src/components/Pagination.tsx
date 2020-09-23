@@ -1,6 +1,7 @@
-import { replaceRoute } from "../history";
-import { Route } from "../routes";
-import Link from "./Link";
+import { replaceRoute } from "history";
+import { Route } from "routes";
+
+import Link from "components/Link";
 
 import "./Pagination.css";
 

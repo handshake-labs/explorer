@@ -1,6 +1,6 @@
-import { useAPI } from "../hooks/api";
-import Link from "../components/Link";
-import Pagination from "../components/Pagination";
+import { useAPI } from "hooks/api";
+import Link from "components/Link";
+import Pagination from "components/Pagination";
 
 interface Props {
   query: string;

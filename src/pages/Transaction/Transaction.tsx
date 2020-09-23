@@ -1,6 +1,6 @@
-import Link from "../../components/Link";
-import { TxInput, TxOutput, Transaction } from "../../api";
-import { hex2ascii } from "../../helpers";
+import Link from "components/Link";
+import { TxInput, TxOutput, Transaction } from "api";
+import { hex2ascii } from "helpers";
 
 const RenderTxInput = (txInput: TxInput) => (
   <>

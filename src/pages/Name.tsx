@@ -1,7 +1,7 @@
-import { useAPI } from "../hooks/api";
-import { useTitle } from "../hooks/title";
-import Link from "../components/Link";
-import { AuctionHistoryRow } from "../api";
+import { useAPI } from "hooks/api";
+import { useTitle } from "hooks/title";
+import Link from "components/Link";
+import { AuctionHistoryRow } from "api";
 
 interface Props {
   name: string;

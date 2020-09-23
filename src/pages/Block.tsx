@@ -1,5 +1,5 @@
-import { useAPI } from "../hooks/api";
-import { useTitle } from "../hooks/title";
+import { useAPI } from "hooks/api";
+import { useTitle } from "hooks/title";
 
 import Info from "./Block/Info";
 import Transactions from "./Block/Transactions";

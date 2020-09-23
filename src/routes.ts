@@ -1,4 +1,4 @@
-import { default as R, Location, StrParam, UintParam } from "./route";
+import { default as R, Location, StrParam, UintParam } from "route";
 
 const routes = {
   home: new R("/", {}, {}),

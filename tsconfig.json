@@ -10,6 +10,13 @@
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+         "*",
+         "src/*"
+      ]
+    }
   }
 }

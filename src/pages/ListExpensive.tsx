@@ -1,8 +1,8 @@
-import { useAPI } from "../hooks/api";
-import { useTitle } from "../hooks/title";
-import Link from "../components/Link";
-import { NameRow } from "../api";
-import { hex2ascii } from "../helpers";
+import { useAPI } from "hooks/api";
+import { useTitle } from "hooks/title";
+import Link from "components/Link";
+import { NameRow } from "api";
+import { hex2ascii } from "helpers";
 
 interface Props {
   page: number;

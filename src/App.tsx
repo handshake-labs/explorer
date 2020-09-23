@@ -1,15 +1,15 @@
-import { getRoute, listen } from "./history";
+import { getRoute, listen } from "history";
 
-import Home from "./pages/Home";
-import Block from "./pages/Block";
-import Transaction from "./pages/Transaction";
-import Name from "./pages/Name";
-import ListExpensive from "./pages/ListExpensive";
-import NotFound from "./pages/NotFound";
-import Search from "./pages/Search";
-import Mempool from "./pages/Mempool";
+import Home from "pages/Home";
+import Block from "pages/Block";
+import Transaction from "pages/Transaction";
+import Name from "pages/Name";
+import ListExpensive from "pages/ListExpensive";
+import NotFound from "pages/NotFound";
+import Search from "pages/Search";
+import Mempool from "pages/Mempool";
 
-import Link from "./components/Link";
+import Link from "components/Link";
 
 import "./App.css";
 

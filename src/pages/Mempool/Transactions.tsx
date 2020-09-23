@@ -1,8 +1,8 @@
-import { useAPI } from "../../hooks/api";
-import Link from "../../components/Link";
-import Pagination from "../../components/Pagination";
-import { hex2ascii } from "../../helpers";
-import { MempoolTxOutput, MempoolTx } from "../../api";
+import { useAPI } from "hooks/api";
+import Link from "components/Link";
+import Pagination from "components/Pagination";
+import { hex2ascii } from "helpers";
+import { MempoolTxOutput, MempoolTx } from "api";
 
 interface Props {
   page: number;

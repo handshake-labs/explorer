@@ -1,4 +1,4 @@
-import { Route, parseLocation, buildPath } from "./routes";
+import { Route, parseLocation, buildPath } from "routes";
 
 const listeners: ((() => void) | null)[] = [];
 

@@ -1,5 +1,5 @@
-import { setPath } from "../history";
-import { buildPath, Route } from "../routes";
+import { setPath } from "history";
+import { buildPath, Route } from "routes";
 
 const onClick = (path: string) => (e: React.MouseEvent) => {
   if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey) {

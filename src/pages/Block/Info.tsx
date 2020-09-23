@@ -1,6 +1,6 @@
 import { Block } from "../../api";
 
-import Link from "../../components/Link";
+import Link from "components/Link";
 
 import "./Info.css";
 
