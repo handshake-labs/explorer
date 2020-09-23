@@ -8,6 +8,11 @@ export const StrParam: ParamType<string> = {
   stringify: (t) => t,
 };
 
+export const HexParam: ParamType<string> = {
+  parse: (s) => (/^([0-9a-f]{2})+$/.test(s) ? s : undefined),
+  stringify: (t) => t,
+};
+
 export const UintParam: ParamType<number> = {
   parse: (s) => {
     const t = parseInt(s, 10);

@@ -15,10 +15,7 @@ const config = {
   target: "web",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
-    modules: [
-      path.join(__dirname, "node_modules"),
-      SRC_DIR
-    ]
+    modules: [path.join(__dirname, "node_modules"), SRC_DIR],
   },
   module: {
     rules: [

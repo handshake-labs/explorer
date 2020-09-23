@@ -6,40 +6,14 @@ import "./Info.css";
 
 interface Props {
   block: Block;
-  isFirst: boolean;
-  isLast: boolean;
 }
 
-const Info: React.FC<Props> = ({ block, isFirst, isLast }) => {
+const Info: React.FC<Props> = ({ block }) => {
   var blockDateTime = new Date(block.time * 1000);
   return (
     <div className="card">
       <div styleName="header" className="header">
-        {!isFirst ? (
-          <Link
-            route={{
-              id: "block",
-              params: { height: block.height - 1, page: 0 },
-            }}
-          >
-            <div styleName="prev" className="badge">
-              {block.height - 1}{" "}
-            </div>
-          </Link>
-        ) : null}
         <div styleName="block">Block #{block.height}</div>
-        {!isLast ? (
-          <Link
-            route={{
-              id: "block",
-              params: { height: block.height + 1, page: 0 },
-            }}
-          >
-            <div styleName="next" className="badge">
-              {block.height + 1}{" "}
-            </div>
-          </Link>
-        ) : null}
       </div>
       <div>
         <b>Hash:</b> {block.hash}

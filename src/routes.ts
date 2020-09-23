@@ -1,9 +1,9 @@
-import { default as R, Location, StrParam, UintParam } from "route";
+import { default as R, Location, HexParam, StrParam, UintParam } from "route";
 
 const routes = {
   home: new R("/", {}, {}),
-  block: new R("/block/:height", { height: UintParam }, { page: UintParam }),
-  transaction: new R("/tx/:txid", { txid: StrParam }, {}),
+  block: new R("/block/:hash", { hash: HexParam }, { page: UintParam }),
+  transaction: new R("/tx/:txid", { txid: HexParam }, {}),
   name: new R("/name/:name", { name: StrParam }, { page: UintParam }),
   listExpensive: new R("/lists/expensive", {}, { page: UintParam }),
   search: new R("/search", {}, { query: StrParam }),

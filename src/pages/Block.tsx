@@ -1,33 +1,39 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
+import Pagination from "components/Pagination";
+
 import Info from "./Block/Info";
 import Transactions from "./Block/Transactions";
 
 interface Props {
-  height: number;
+  hash: string;
   page: number;
 }
 
-const Block: React.FC<Props> = ({ height, page }) => {
-  useTitle(`Block ${height}`);
+const limit = 50;
 
-  const state = useAPI("/block", { height });
-  if (state === undefined) {
-    return null;
-  }
-  if (state === null) {
-    return <div>Not Found</div>;
-  }
-  const { block, maxHeight } = state;
+const Block: React.FC<Props> = ({ hash, page }) => {
+  useTitle(`Block ${hash}`);
+
+  const block = useAPI("/block", { hash });
+  const transactions = useAPI("/block/txs", {
+    hash,
+    limit,
+    offset: page * limit,
+  });
   return (
     <>
-      <Info
-        block={block}
-        isFirst={height === 0}
-        isLast={height === maxHeight}
-      />
-      <Transactions height={block.height} hash={block.hash} page={page} />
+      {block ? <Info block={block.block} /> : null}
+      {transactions ? <Transactions txs={transactions.txs} /> : null}
+      {block ? (
+        <Pagination
+          count={block.txs_count}
+          limit={limit}
+          page={page}
+          route={(page: number) => ({ id: "block", params: { hash, page } })}
+        />
+      ) : null}
     </>
   );
 };

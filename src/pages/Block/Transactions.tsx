@@ -1,47 +1,20 @@
-import { useAPI } from "hooks/api";
 import Link from "components/Link";
-import Pagination from "components/Pagination";
+
+import { Transaction } from "api";
 
 interface Props {
-  height: number;
-  hash: string;
-  page: number;
+  txs: Transaction[];
 }
 
-const Transactions: React.FC<Props> = ({ height, hash, page }) => {
-  const state = useAPI("/block/txs", { hash, page });
-
-  if (state === undefined) {
-    return <div>Loading</div>;
-  }
-  if (state === null) {
-    return <div>Not Found</div>;
-  }
-  const { txs, count, limit } = state;
-  // return <div>{txs && txs.map((tx) => <div>{tx.rate}</div>)}</div>;
-  return (
-    <>
-      {" "}
-      <div>
-        {txs && count} transactions{" "}
-        {txs &&
-          txs.map((tx) => (
-            <p>
-              <Link route={{ id: "transaction", params: { txid: tx.txid } }}>
-                {tx.txid}
-              </Link>
-            </p>
-          ))}
-      </div>
-      <Pagination
-        page={page}
-        count={count}
-        limit={limit}
-        route={(page: number) => ({ id: "block", params: { height, page } })}
-      >
-        {" "}
-      </Pagination>
-    </>
-  );
-};
+const Transactions: React.FC<Props> = ({ txs }) => (
+  <div>
+    {txs.map((tx) => (
+      <p>
+        <Link route={{ id: "transaction", params: { txid: tx.txid } }}>
+          {tx.txid}
+        </Link>
+      </p>
+    ))}
+  </div>
+);
 export default Transactions;
