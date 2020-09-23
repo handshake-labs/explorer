@@ -1,6 +1,4 @@
-import { Block } from "../../api";
-
-import Link from "components/Link";
+import { Block } from "api";
 
 import "./Info.css";
 

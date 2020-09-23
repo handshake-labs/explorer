@@ -1,6 +1,7 @@
 import { getRoute, listen } from "history";
 
 import Home from "pages/Home";
+import Blocks from "pages/Blocks";
 import Block from "pages/Block";
 import Transaction from "pages/Transaction";
 import Name from "pages/Name";
@@ -30,8 +31,8 @@ const App: React.FC = () => {
           <nav styleName="menu">
             <ul>
               <li>
-                <Link route={{ id: "mempool", params: { page: 0 } }}>
-                  Mempool
+                <Link route={{ id: "blocks", params: { page: 0 } }}>
+                  Blocks
                 </Link>
               </li>
             </ul>
@@ -44,6 +45,7 @@ const App: React.FC = () => {
             <NotFound />
           ) : (
             (route.id === "home" && <Home {...route.params} />) ||
+            (route.id === "blocks" && <Blocks {...route.params} />) ||
             (route.id === "block" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||

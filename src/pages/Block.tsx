@@ -28,7 +28,7 @@ const Block: React.FC<Props> = ({ hash, page }) => {
       {transactions ? <Transactions txs={transactions.txs} /> : null}
       {block ? (
         <Pagination
-          count={block.txs_count}
+          count={block.block.txsCount}
           limit={limit}
           page={page}
           route={(page: number) => ({ id: "block", params: { hash, page } })}
