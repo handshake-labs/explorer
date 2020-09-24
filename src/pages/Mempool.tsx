@@ -1,25 +1,34 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
-import Transactions from "./Mempool/Transactions";
+import Hash from "components/Hash";
+import Pagination from "components/Pagination";
+
+import Card from "components/Blocks/Card";
+import Transactions from "components/Transactions/Table";
+
+
 
 interface Props {
   page: number;
 }
 
-const Mempool: React.FC<Props> = ({ page }) => {
-  useTitle(`Mempool transactions`);
+const limit = 50;
+const page=0
 
-  // const state = useAPI("/mempool", { page });
-  // if (state === undefined) {
-  //   return null;
-  // }
-  // if (state === null) {
-  //   return <div>Not Found</div>;
-  // }
+const Mempool: React.FC<Props> = ({ limit, offset }) => {
+  useTitle(`Mempool`);
+
+  const transactions = useAPI("/mempool", {
+    limit: 50,
+    offset: 0,
+  });
   return (
     <>
-      <Transactions page={page}></Transactions>
+      <h2 className="separator">
+        Mempool
+      </h2>
+      {transactions ? <Transactions transactions={transactions.txs} /> : null}
     </>
   );
 };

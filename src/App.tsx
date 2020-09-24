@@ -31,6 +31,11 @@ const App: React.FC = () => {
           <nav styleName="menu">
             <ul>
               <li>
+                <Link route={{ id: "mempool", params: { limit: 0, offset: 0} }}>
+                  Mempool
+                </Link>
+              </li>
+              <li>
                 <Link route={{ id: "blocks", params: { page: 0 } }}>
                   Blocks
                 </Link>
