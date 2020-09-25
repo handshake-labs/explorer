@@ -7,10 +7,11 @@ import Transaction from "pages/Transaction";
 import Name from "pages/Name";
 import ListExpensive from "pages/ListExpensive";
 import NotFound from "pages/NotFound";
-import Search from "pages/Search";
 import Mempool from "pages/Mempool";
 
 import Link from "components/Link";
+import Search from "components/Search";
+import SearchResult from "pages/SearchResult";
 
 import "./App.css";
 
@@ -30,6 +31,14 @@ const App: React.FC = () => {
           </Link>
           <nav styleName="menu">
             <ul>
+              <li>
+                <Search route={{ id: "names", params: { limit: 0, offset: 0} }}></Search>
+              </li>
+              <li>
+                <Link route={{ id: "names", params: { limit: 0, offset: 0} }}>
+                  Names
+                </Link>
+              </li>
               <li>
                 <Link route={{ id: "mempool", params: { limit: 0, offset: 0} }}>
                   Mempool
@@ -52,12 +61,13 @@ const App: React.FC = () => {
             (route.id === "home" && <Home {...route.params} />) ||
             (route.id === "blocks" && <Blocks {...route.params} />) ||
             (route.id === "block" && <Block {...route.params} />) ||
+            (route.id === "blockByHeight" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||
             (route.id === "listExpensive" && (
               <ListExpensive {...route.params} />
             )) ||
-            (route.id === "search" && <Search {...route.params} />) ||
+            (route.id === "search" && <SearchResult {...route.params} />) ||
             (route.id === "mempool" && <Mempool {...route.params} />)
           )}
         </div>

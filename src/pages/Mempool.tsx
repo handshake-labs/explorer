@@ -4,10 +4,7 @@ import { useTitle } from "hooks/title";
 import Hash from "components/Hash";
 import Pagination from "components/Pagination";
 
-import Card from "components/Blocks/Card";
-import Transactions from "components/Transactions/Table";
-
-
+import Transactions from "components/Transaction/Table";
 
 interface Props {
   page: number;

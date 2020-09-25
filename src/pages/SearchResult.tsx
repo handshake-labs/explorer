@@ -6,7 +6,7 @@ interface Props {
   query: string;
 }
 
-const Search: React.FC<Props> = ({ query }) => {
+const SearchResult: React.FC<Props> = ({ query }) => {
   const search = useAPI("/search", { query });
 
   if (search === undefined) {
@@ -30,7 +30,7 @@ const Search: React.FC<Props> = ({ query }) => {
       {blocks && (
         <li>
           <b> Blocks: </b>
-          <Link route={{ id: "block", params: { height: blocks, page: 0 } }}>
+          <Link route={{ id: "blockByHeight", params: { height: blocks, page: 0 } }}>
             {blocks}
           </Link>
         </li>
@@ -46,4 +46,4 @@ const Search: React.FC<Props> = ({ query }) => {
     </>
   );
 };
-export default Search;
+export default SearchResult;
