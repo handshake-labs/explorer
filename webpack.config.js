@@ -70,7 +70,7 @@ const config = {
     }),
     new webpack.DefinePlugin({
       API_ORIGIN: JSON.stringify(
-        PROD_MODE ? "https://" : "http://localhost:8000"
+        PROD_MODE ? "https://api.hnsnetwork.com" : "http://localhost:8000"
       ),
     }),
     new webpack.ProvidePlugin({
