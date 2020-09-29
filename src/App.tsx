@@ -31,12 +31,14 @@ const App: React.FC<void> = () => {
           <nav styleName="menu">
             <ul>
               <li>
-                <Link route={{ id: "names", params: { limit: 0, offset: 0} }}>
+                <Link route={{ id: "names", params: { limit: 0, offset: 0 } }}>
                   Names
                 </Link>
               </li>
               <li>
-                <Link route={{ id: "mempool", params: { limit: 0, offset: 0} }}>
+                <Link
+                  route={{ id: "mempool", params: { limit: 0, offset: 0 } }}
+                >
                   Mempool
                 </Link>
               </li>
@@ -47,11 +49,19 @@ const App: React.FC<void> = () => {
               </li>
             </ul>
           </nav>
-          <form styleName="search" onSubmit={(e) => {
-            replaceRoute({id: "search", params: { query: (e.target as any).search.value.replace(/\s/g, "") } });
-            e.preventDefault()
-          }}>
-            <input name="search"/>
+          <form
+            styleName="search"
+            onSubmit={(e) => {
+              replaceRoute({
+                id: "search",
+                params: {
+                  query: (e.target as any).search.value.replace(/\s/g, ""),
+                },
+              });
+              e.preventDefault();
+            }}
+          >
+            <input name="search" />
             <button role="submit">Search</button>
           </form>
         </div>

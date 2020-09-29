@@ -30,7 +30,9 @@ const SearchResult: React.FC<Props> = ({ query }) => {
       {blocks && (
         <li>
           <b> Blocks: </b>
-          <Link route={{ id: "blockByHeight", params: { height: blocks, page: 0 } }}>
+          <Link
+            route={{ id: "blockByHeight", params: { height: blocks, page: 0 } }}
+          >
             {blocks}
           </Link>
         </li>

@@ -1,6 +1,7 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
+import Spinner from "components/Spinner";
 import Hash from "components/Hash";
 import Pagination from "components/Pagination";
 
@@ -23,6 +24,9 @@ const Block: React.FC<Props> = ({ hash, page }) => {
     limit,
     offset: page * limit,
   });
+
+  if (!block) return <Spinner />;
+
   return (
     <>
       <h2 className="separator">
@@ -30,16 +34,18 @@ const Block: React.FC<Props> = ({ hash, page }) => {
           <Hash hash={hash} />
         </span>
       </h2>
-      {block ? <Card block={block.block} /> : null}
-      {transactions ? <Transactions transactions={transactions.txs} /> : null}
-      {block ? (
-        <Pagination
-          count={block.block.txsCount}
-          limit={limit}
-          page={page}
-          route={(page: number) => ({ id: "block", params: { hash, page } })}
-        />
-      ) : null}
+      <Card block={block.block} />
+      {transactions ? (
+        <Transactions transactions={transactions.txs} />
+      ) : (
+        <Spinner />
+      )}
+      <Pagination
+        count={block.block.txsCount}
+        limit={limit}
+        page={page}
+        route={(page: number) => ({ id: "block", params: { hash, page } })}
+      />
     </>
   );
 };

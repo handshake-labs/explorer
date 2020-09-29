@@ -4,7 +4,11 @@ const routes = {
   home: new R("/", {}, {}),
   blocks: new R("/blocks", {}, { page: UintParam }),
   block: new R("/block/:hash", { hash: HexParam }, { page: UintParam }),
-  blockByHeight: new R("/block/height/:height", { height: UintParam }, { page: UintParam }),
+  blockByHeight: new R(
+    "/block/height/:height",
+    { height: UintParam },
+    { page: UintParam }
+  ),
   transaction: new R("/tx/:txid", { txid: HexParam }, {}),
   name: new R("/name/:name", { name: StrParam }, { page: UintParam }),
   listExpensive: new R("/lists/expensive", {}, { page: UintParam }),

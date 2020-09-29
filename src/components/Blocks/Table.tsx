@@ -34,7 +34,9 @@ const Table: React.FC<Props> = ({ blocks }: Props) => (
         <div>
           <Link hash={block.hash} />
         </div>
-        <div><Time time={block.time}/></div>
+        <div>
+          <Time time={block.time} />
+        </div>
         <div>{block.size}</div>
         <div>{block.txsCount}</div>
       </div>

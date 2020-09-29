@@ -16,7 +16,12 @@ const Card: React.FC<Props> = ({ transaction }: Props) => (
     <div>
       <span>block</span>
       <span>
-        <Link route={{ id: "blockByHeight", params: { height: transaction.height, page: 0} }}>
+        <Link
+          route={{
+            id: "blockByHeight",
+            params: { height: transaction.height, page: 0 },
+          }}
+        >
           {transaction.height}
         </Link>
       </span>

@@ -14,11 +14,22 @@ const RenderAuctionHistoryRow = (historyRow: AuctionHistoryRow) => (
     <div>
       <li>
         <b>Block:</b>
-        <Link route={{ id: "block", params: { height: historyRow.Height, page: 0 }, }} > {historyRow.Height} </Link>
+        <Link
+          route={{
+            id: "block",
+            params: { height: historyRow.Height, page: 0 },
+          }}
+        >
+          {" "}
+          {historyRow.Height}{" "}
+        </Link>
       </li>
       <li>
         <b>Transaction: </b>
-        <Link route={{ id: "transaction", params: { txid: historyRow.Txid } }}> {historyRow.Txid} </Link>
+        <Link route={{ id: "transaction", params: { txid: historyRow.Txid } }}>
+          {" "}
+          {historyRow.Txid}{" "}
+        </Link>
       </li>
       <li>
         <b>Action: </b>
@@ -41,7 +52,15 @@ const RenderRecordHistoryRow = (recordRow: RecordHistoryRow) => (
     <div>
       <li>
         <b>Block:</b>{" "}
-        <Link route={{ id: "blockByHeight", params: { height: recordRow.Height, page: 0 }, }} > {recordRow.Height} </Link>
+        <Link
+          route={{
+            id: "blockByHeight",
+            params: { height: recordRow.Height, page: 0 },
+          }}
+        >
+          {" "}
+          {recordRow.Height}{" "}
+        </Link>
       </li>
       <li>
         <b>Record: </b>
@@ -51,9 +70,7 @@ const RenderRecordHistoryRow = (recordRow: RecordHistoryRow) => (
   </>
 );
 
-
-
-const Reservation = ({reservation}) => {
+const Reservation = ({ reservation }) => {
   return (
     <>
       This name is reserved.
@@ -67,13 +84,11 @@ const Reservation = ({reservation}) => {
       </li>
     </>
   );
-}
+};
 
-const RecordHistory = ({history}) => {
-  return
-
-}
-
+const RecordHistory = ({ history }) => {
+  return;
+};
 
 const Name: React.FC<Props> = ({ name, page }) => {
   useTitle(`Name ${name}`);
@@ -85,28 +100,34 @@ const Name: React.FC<Props> = ({ name, page }) => {
   if (domain === null) {
     return <div>Not Found</div>;
   }
-  console.log(domain)
+  console.log(domain);
   return (
     <>
       <div>Name {name} </div>
-      {domain.reserved && <Reservation reservation={domain.reservation}></Reservation>}
-      {(domain.records && domain.records.length > 0) ?
+      {domain.reserved && (
+        <Reservation reservation={domain.reservation}></Reservation>
+      )}
+      {domain.records && domain.records.length > 0 ? (
         <>
-        <b>Record history:</b>
-          {domain.records.map((historyRow) => RenderRecordHistoryRow(historyRow))}
+          <b>Record history:</b>
+          {domain.records.map((historyRow) =>
+            RenderRecordHistoryRow(historyRow)
+          )}
         </>
-        :
-          <b>No record history.</b>
-        }
-  
-      {(domain.auction && domain.auction.length > 0) ? 
+      ) : (
+        <b>No record history.</b>
+      )}
+
+      {domain.auction && domain.auction.length > 0 ? (
         <>
-        <b>Auction history:</b>
-          {domain.auction.map((historyRow) => RenderAuctionHistoryRow(historyRow))}
+          <b>Auction history:</b>
+          {domain.auction.map((historyRow) =>
+            RenderAuctionHistoryRow(historyRow)
+          )}
         </>
-          :
-          <b>No auction history</b>
-      }
+      ) : (
+        <b>No auction history</b>
+      )}
     </>
   );
 };

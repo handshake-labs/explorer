@@ -1,6 +1,7 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
+import Spinner from "components/Spinner";
 import Table from "components/Blocks/Table";
 import Pagination from "components/Pagination";
 
@@ -14,7 +15,10 @@ const Block: React.FC<Props> = ({ page }) => {
   useTitle(`Blocks List`);
 
   const blocks = useAPI("/blocks", { limit, offset: page * limit });
-  return blocks ? (
+
+  if (!blocks) return <Spinner />;
+
+  return (
     <>
       <h2 className="separator">
         <span className="icon block">&nbsp;</span>
@@ -27,6 +31,6 @@ const Block: React.FC<Props> = ({ page }) => {
         route={(page: number) => ({ id: "blocks", params: { page } })}
       />
     </>
-  ) : null;
+  );
 };
 export default Block;

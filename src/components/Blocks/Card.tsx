@@ -18,7 +18,9 @@ const Card: React.FC<Props> = ({ block }: Props) => (
     </div>
     <div>
       <span>Time</span>
-      <span><Time time={block.time}/></span>
+      <span>
+        <Time time={block.time} />
+      </span>
     </div>
     <div>
       <span>Transactions Count</span>

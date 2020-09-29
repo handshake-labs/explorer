@@ -1,10 +1,7 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
-import {
-  RenderTxInput,
-  RenderTxOutput,
-} from "./Transaction/Transaction";
-import  Card  from "components/Transaction/Card";
+import { RenderTxInput, RenderTxOutput } from "./Transaction/Transaction";
+import Card from "components/Transaction/Card";
 
 interface Props {
   txid: string;

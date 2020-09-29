@@ -11,7 +11,7 @@ interface Props {
 }
 
 const limit = 50;
-const page=0
+const page = 0;
 
 const Mempool: React.FC<Props> = ({ limit, offset }) => {
   useTitle(`Mempool`);
@@ -22,9 +22,7 @@ const Mempool: React.FC<Props> = ({ limit, offset }) => {
   });
   return (
     <>
-      <h2 className="separator">
-        Mempool
-      </h2>
+      <h2 className="separator">Mempool</h2>
       {transactions ? <Transactions transactions={transactions.txs} /> : null}
     </>
   );

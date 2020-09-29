@@ -18,12 +18,15 @@ export const useAPI = <A extends Actions>(
   const [state, setState] = React.useState<Result<A> | undefined>();
 
   React.useEffect(() => {
+    setState(undefined);
     let aborted = false;
     const url = API_ORIGIN + path;
-    const fetchState = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (!aborted) setState(data);
+    const fetchState = () => {
+      if (!aborted)
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => aborted || setState(data))
+          .catch(() => aborted || setTimeout(fetchState, 3000));
     };
     fetchState();
     return () => {
