@@ -13,10 +13,6 @@ const Card: React.FC<Props> = ({ block }: Props) => (
       <span>{block.hash}</span>
     </div>
     <div>
-      <span>Height</span>
-      <span>#{block.height}</span>
-    </div>
-    <div>
       <span>Time</span>
       <span>
         <Time time={block.time} />

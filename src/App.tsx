@@ -52,12 +52,16 @@ const App: React.FC = () => {
           <form
             styleName="search"
             onSubmit={(e) => {
-              replaceRoute({
-                id: "search",
-                params: {
-                  query: (e.target as any).search.value.replace(/\s/g, ""),
-                },
-              });
+              const query = (e.target as any).search.value.replace(/\s/g, "");
+              if (query) {
+                (e.target as any).search.value = "";
+                replaceRoute({
+                  id: "search",
+                  params: {
+                    query,
+                  },
+                });
+              }
               e.preventDefault();
             }}
           >

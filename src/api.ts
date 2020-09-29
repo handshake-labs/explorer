@@ -1,8 +1,30 @@
-export type GetBlockByHashParams = {
-  hash: Bytes;
+export type GetNameInfoParams = {
+  name: string;
+  page: number;
+};
+export type GetNameInfoResult = {
+  reserved: boolean;
+  reservation: ReservedName;
+  records: Array<RecordRow>;
+  count: number;
+  limit: number;
+};
+export type ReservedName = {
+  Name: Bytes;
+  OriginName: Bytes;
+  NameHash: Bytes;
+  ClaimAmount: number;
 };
 export type Bytes = string;
-export type GetBlockByHashResult = {
+export type RecordRow = {
+  Height: number;
+  CovenantRecordData: Bytes;
+  Count: number;
+};
+export type GetBlockByHeightParams = {
+  height: number;
+};
+export type GetBlockByHeightResult = {
   block: Block;
 };
 export type Block = {
@@ -24,38 +46,17 @@ export type Block = {
   extraNonce: Bytes;
   txsCount: number;
 };
-export type GetRecordsParams = {
-  name: string;
-  page: number;
-};
-export type GetRecordsParamsResult = {
-  records: Array<RecordRow>;
-  count: number;
-  limit: number;
-};
-export type RecordRow = {
-  Height: number;
-  CovenantRecordData: Bytes;
-  Count: number;
-};
-export type GetBlocksParams = {
+export type GetTransactionsByBlockHeightParams = {
+  height: number;
   limit: number;
   offset: number;
 };
-export type GetBlocksResult = {
-  blocks: Array<Block>;
-  count: number;
-};
-export type GetTransactionsByBlockHashParams = {
-  hash: Bytes;
-  limit: number;
-  offset: number;
-};
-export type GetTransactionsByBlockHashResult = {
+export type GetTransactionsByBlockHeightResult = {
   txs: Array<Transaction>;
 };
 export type Transaction = {
   txid: Bytes;
+  block_height: number;
   witnessTx: Bytes;
   fee: number;
   rate: number;
@@ -89,27 +90,10 @@ export type TxOutput = {
   name?: string;
 };
 export type CovenantAction = string;
-export type GetListExpensiveParams = {
+export type GetListLockupVolumeParams = {
   page: number;
 };
-export type GetListExpensiveResult = {
-  names: Array<NameRow>;
-  count: number;
-  limit: number;
-};
-export type NameRow = {
-  OpenHeight: number;
-  CovenantNameHash: Bytes;
-  CovenantName: Bytes;
-  MaxLockup: number;
-  MaxRevealed: number;
-  BidCount: number;
-  Count: number;
-};
-export type GetListRevealVolumeParams = {
-  page: number;
-};
-export type GetListRevealVolumeResult = {
+export type GetListLockupVolumeResult = {
   names: Array<NameVolumeRow>;
   count: number;
   limit: number;
@@ -124,6 +108,22 @@ export type NameVolumeRow = {
   VolumeRevealed: number;
   BidCount: number;
   Count: number;
+};
+export type GetListRevealVolumeParams = {
+  page: number;
+};
+export type GetListRevealVolumeResult = {
+  names: Array<NameVolumeRow>;
+  count: number;
+  limit: number;
+};
+export type GetListBidsParams = {
+  page: number;
+};
+export type GetListBidsResult = {
+  names: Array<NameVolumeRow>;
+  count: number;
+  limit: number;
 };
 export type GetAuctionHistoryParams = {
   page: number;
@@ -145,40 +145,44 @@ export type AuctionHistoryRow = {
   CovenantNameHash: string;
   Count: number;
 };
-export type GetTransactionByTxidParams = {
-  txid: Bytes;
+export type GetMempoolTxsParams = {
+  limit: number;
+  offset: number;
 };
-export type GetNameInfoParams = {
+export type GetMempoolTxsResult = {
+  txs: Array<Transaction>;
+};
+export type GetBlocksParams = {
+  limit: number;
+  offset: number;
+};
+export type GetBlocksResult = {
+  blocks: Array<Block>;
+  count: number;
+};
+export type GetListExpensiveParams = {
+  page: number;
+};
+export type GetListExpensiveResult = {
+  names: Array<NameRow>;
+  count: number;
+  limit: number;
+};
+export type NameRow = {
+  OpenHeight: number;
+  CovenantNameHash: Bytes;
+  CovenantName: Bytes;
+  MaxLockup: number;
+  MaxRevealed: number;
+  BidCount: number;
+  Count: number;
+};
+export type GetRecordsParams = {
   name: string;
   page: number;
 };
-export type GetNameInfoResult = {
-  reserved: bool;
-  reservation: ReservedName;
+export type GetRecordsParamsResult = {
   records: Array<RecordRow>;
-  auction: Array<AuctionHistoryRow>;
-  count: number;
-  limit: number;
-};
-export type ReservedName = {
-  Name: Bytes;
-  OriginName: Bytes;
-  NameHash: Bytes;
-  ClaimAmount: number;
-};
-export type GetListLockupVolumeParams = {
-  page: number;
-};
-export type GetListLockupVolumeResult = {
-  names: Array<NameVolumeRow>;
-  count: number;
-  limit: number;
-};
-export type GetListBidsParams = {
-  page: number;
-};
-export type GetListBidsResult = {
-  names: Array<NameVolumeRow>;
   count: number;
   limit: number;
 };
@@ -190,75 +194,73 @@ export type SearchResult = {
   blocks: Array<number>;
   names: Array<string>;
 };
-export type GetMempoolTxsParams = {
-  limit: number;
-  offset: number;
+export type GetTransactionByTxidParams = {
+  txid: Bytes;
 };
-export type GetMempoolTxsResult = {
-  txs: Array<Transaction>;
-};
-export type GetBlockByHeightParams = {
+export type GetTransactionByTxidResult = {
+  txid: Bytes;
+  block_height: number;
+  witnessTx: Bytes;
+  fee: number;
+  rate: number;
+  version: number;
+  locktime: number;
+  size: number;
   height: number;
-};
-export type GetBlockByHeightResult = {
-  block: Block;
-  maxHeight: number;
+  inputs: Array<TxInput>;
+  outputs: Array<TxOutput>;
 };
 export type API = {
-  "/block": {
-    params: GetBlockByHashParams;
-    result: GetBlockByHashResult;
-  };
-  "/names/records": {
-    params: GetRecordsParams;
-    result: GetRecordsParamsResult;
-  };
-  "/blocks": {
-    params: GetBlocksParams;
-    result: GetBlocksResult;
-  };
-  "/block/txs": {
-    params: GetTransactionsByBlockHashParams;
-    result: GetTransactionsByBlockHashResult;
-  };
-  "/lists/expensive": {
-    params: GetListExpensiveParams;
-    result: GetListExpensiveResult;
-  };
-  "/lists/reveal_volume": {
-    params: GetListRevealVolumeParams;
-    result: GetListRevealVolumeResult;
-  };
-  "/names/auction": {
-    params: GetAuctionHistoryParams;
-    result: GetAuctionHistoryParamsResult;
-  };
-  "/tx": {
-    params: GetTransactionByTxidParams;
-    result: Transaction;
-  };
   "/name": {
     params: GetNameInfoParams;
     result: GetNameInfoResult;
+  };
+  "/block": {
+    params: GetBlockByHeightParams;
+    result: GetBlockByHeightResult;
+  };
+  "/block/txs": {
+    params: GetTransactionsByBlockHeightParams;
+    result: GetTransactionsByBlockHeightResult;
   };
   "/lists/lockup_volume": {
     params: GetListLockupVolumeParams;
     result: GetListLockupVolumeResult;
   };
+  "/lists/reveal_volume": {
+    params: GetListRevealVolumeParams;
+    result: GetListRevealVolumeResult;
+  };
   "/lists/bids": {
     params: GetListBidsParams;
     result: GetListBidsResult;
   };
-  "/search": {
-    params: SearchParams;
-    result: SearchResult;
+  "/names/auction": {
+    params: GetAuctionHistoryParams;
+    result: GetAuctionHistoryParamsResult;
   };
   "/mempool": {
     params: GetMempoolTxsParams;
     result: GetMempoolTxsResult;
   };
-  "/block/height/": {
-    params: GetBlockByHeightParams;
-    result: GetBlockByHeightResult;
+  "/blocks": {
+    params: GetBlocksParams;
+    result: GetBlocksResult;
+  };
+  "/lists/expensive": {
+    params: GetListExpensiveParams;
+    result: GetListExpensiveResult;
+  };
+  "/names/records": {
+    params: GetRecordsParams;
+    result: GetRecordsParamsResult;
+  };
+  "/search": {
+    params: SearchParams;
+    result: SearchResult;
+  };
+  "/tx": {
+    params: GetTransactionByTxidParams;
+    result: GetTransactionByTxidResult;
   };
 };

@@ -1,7 +1,6 @@
 import { Transaction } from "api";
-import Link from "components/Link";
 
-import Time from "components/Time";
+import BlockLink from "components/Blocks/Link";
 
 interface Props {
   transaction: Transaction;
@@ -16,14 +15,11 @@ const Card: React.FC<Props> = ({ transaction }: Props) => (
     <div>
       <span>block</span>
       <span>
-        <Link
-          route={{
-            id: "blockByHeight",
-            params: { height: transaction.height, page: 0 },
-          }}
-        >
-          {transaction.height}
-        </Link>
+        {transaction.block_height === -1 ? (
+          "Mempool"
+        ) : (
+          <BlockLink height={transaction.block_height} />
+        )}
       </span>
     </div>
     <div>
@@ -51,7 +47,5 @@ const Card: React.FC<Props> = ({ transaction }: Props) => (
       <span>{transaction.witnessTx}</span>
     </div>
   </div>
-  // inputs: [{…}]
-  // outputs: [{…}]
 );
 export default Card;

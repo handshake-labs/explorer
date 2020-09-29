@@ -2,37 +2,35 @@ import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
 import Spinner from "components/Spinner";
-import Hash from "components/Hash";
 import Pagination from "components/Pagination";
 
 import Card from "components/Blocks/Card";
 import Transactions from "components/Transaction/Table";
 
 interface Props {
-  hash: string;
+  height: number;
   page: number;
 }
 
 const limit = 50;
 
-const Block: React.FC<Props> = ({ hash, page }) => {
-  useTitle(`Block ${hash}`);
+const Block: React.FC<Props> = ({ height, page }) => {
+  useTitle(`Block ${height}`);
 
-  const block = useAPI("/block", { hash });
+  const block = useAPI("/block", { height });
   const transactions = useAPI("/block/txs", {
-    hash,
+    height,
     limit,
     offset: page * limit,
   });
 
-  if (!block) return <Spinner />;
+  if (block === undefined) return <Spinner />;
+  if (block === null) return <div>Not Found</div>;
 
   return (
     <>
       <h2 className="separator">
-        <span className="icon block">
-          <Hash hash={hash} />
-        </span>
+        <span className="icon block">{height} </span>
       </h2>
       <Card block={block.block} />
       {transactions ? (
@@ -44,7 +42,7 @@ const Block: React.FC<Props> = ({ hash, page }) => {
         count={block.block.txsCount}
         limit={limit}
         page={page}
-        route={(page: number) => ({ id: "block", params: { hash, page } })}
+        route={(page: number) => ({ id: "block", params: { height, page } })}
       />
     </>
   );

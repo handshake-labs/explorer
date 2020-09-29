@@ -77,7 +77,7 @@ export default class Route<
     }
     for (const key in this.query) {
       const paramType = this.query[key];
-      if (paramType.default !== undefined) params[key]=paramType.default;
+      if (paramType.default !== undefined) params[key] = paramType.default;
     }
     const ss = search.substr(1).split("&");
     for (let i = 0; i < ss.length; i++) {
@@ -108,7 +108,7 @@ export default class Route<
     const search = [];
     for (const key in this.query) {
       const paramType = this.query[key];
-      const value = (params as any)[key]
+      const value = (params as any)[key];
       if (value === paramType.default) continue;
       search.push(
         encodeURIComponent(key) +
