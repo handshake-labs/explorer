@@ -22,7 +22,7 @@ const Table: React.FC<Props> = ({ transactions }: Props) => (
           <Link txid={tx.txid} />
         </div>
         <div>Inputs: {tx.inputs.length}</div>
-        <div>Outputs: {tx.inputs.length}</div>
+        <div>Outputs: {tx.outputs.length}</div>
       </div>
     ))}
   </div>

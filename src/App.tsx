@@ -31,8 +31,6 @@ const App: React.FC<void> = () => {
           <nav styleName="menu">
             <ul>
               <li>
-              </li>
-              <li>
                 <Link route={{ id: "names", params: { limit: 0, offset: 0} }}>
                   Names
                 </Link>
