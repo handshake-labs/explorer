@@ -6,27 +6,20 @@
 .header {
   background: #f3f3f3;
   border-bottom: 1px solid #d6d6d6;
-}
-.header > .wrapper {
+& .wrapper {
   display: flex;
   align-items: center;
 }
-.header a {
+& a {
   color: #000;
   display: block;
   height: 80px;
   line-height: 80px;
 }
-
-.home::before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  width: 60px;
-  height: 60px;
-  background: svg-load("logo.svg") no-repeat center center;
 }
-.home span {
+
+.home {
+& span {
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
@@ -34,21 +27,38 @@
   font-size: 20px;
   white-space: pre-line;
 }
+&::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  background: svg-load("logo.svg") no-repeat center center;
+}
+}
 
 .menu {
   flex: 1;
-}
-.menu ul {
-  display: flex;
-  justify-content: space-around;
-}
-.menu a {
-  font-size: 16px;
-  color: #666666;
+  & ul {
+    display: flex;
+    justify-content: space-around;
+  }
+  & a {
+    font-size: 16px;
+    color: #666666;
+  }
 }
 
-.main > .wrapper > * {
-  margin: 20px 0;
+.search {
+  max-width: 300px;
+  input {
+    border: 1px solid #d6d6d6;
+    background: #fff;
+  }
+  button {
+    border: 1px solid #d6d6d6;
+    background: #fff;    
+  }
 }
 
 .footer {

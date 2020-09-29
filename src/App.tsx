@@ -1,4 +1,4 @@
-import { getRoute, listen } from "history";
+import { listen, getRoute, replaceRoute } from "history";
 
 import Home from "pages/Home";
 import Blocks from "pages/Blocks";
@@ -10,12 +10,11 @@ import NotFound from "pages/NotFound";
 import Mempool from "pages/Mempool";
 
 import Link from "components/Link";
-import Search from "components/Search";
 import SearchResult from "pages/SearchResult";
 
 import "./App.css";
 
-const App: React.FC = () => {
+const App: React.FC<void> = () => {
   const [route, setRoute] = React.useState(getRoute());
 
   React.useEffect(() => listen(() => setRoute(getRoute())), []);
@@ -26,13 +25,12 @@ const App: React.FC = () => {
         <div styleName="wrapper">
           <Link route={{ id: "home", params: {} }}>
             <h1 styleName="home">
-              <span>{"handshake\nexplorer"}</span>
+              <span>{"handshake\nnetwork"}</span>
             </h1>
           </Link>
           <nav styleName="menu">
             <ul>
               <li>
-                <Search route={{ id: "names", params: { limit: 0, offset: 0} }}></Search>
               </li>
               <li>
                 <Link route={{ id: "names", params: { limit: 0, offset: 0} }}>
@@ -51,6 +49,13 @@ const App: React.FC = () => {
               </li>
             </ul>
           </nav>
+          <form styleName="search" onSubmit={(e) => {
+            replaceRoute({id: "search", params: { query: (e.target as any).search.value.replace(/\s/g, "") } });
+            e.preventDefault()
+          }}>
+            <input name="search"/>
+            <button role="submit">Search</button>
+          </form>
         </div>
       </header>
       <main styleName="main">
@@ -74,7 +79,7 @@ const App: React.FC = () => {
       </main>
       <footer styleName="footer">
         <div styleName="wrapper">
-          <div styleName="copyright">handshake explorer &copy; 2020</div>
+          <div styleName="copyright"> &copy; 2020</div>
         </div>
       </footer>
     </>
