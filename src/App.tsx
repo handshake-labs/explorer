@@ -32,9 +32,6 @@ const App: React.FC = () => {
           <nav styleName="menu">
             <ul>
               <li>
-                <Search route={{ id: "names", params: { limit: 0, offset: 0} }}></Search>
-              </li>
-              <li>
                 <Link route={{ id: "names", params: { limit: 0, offset: 0} }}>
                   Names
                 </Link>
