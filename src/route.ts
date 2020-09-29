@@ -1,9 +1,11 @@
 export interface ParamType<T> {
+  default?: T;
   parse(s: string): T | undefined;
   stringify(t: T): string;
 }
 
 export const StrParam: ParamType<string> = {
+  default: "",
   parse: (s) => s,
   stringify: (t) => t,
 };
@@ -14,6 +16,7 @@ export const HexParam: ParamType<string> = {
 };
 
 export const UintParam: ParamType<number> = {
+  default: 0,
   parse: (s) => {
     const t = parseInt(s, 10);
     return t >= 0 ? t : undefined;
@@ -72,12 +75,15 @@ export default class Route<
       if (value === undefined) return;
       params[key] = value;
     }
+    for (const key in this.query) {
+      const paramType = this.query[key];
+      if (paramType.default !== undefined) params[key]=paramType.default;
+    }
     const ss = search.substr(1).split("&");
     for (let i = 0; i < ss.length; i++) {
       const [k, v] = ss[i].split("=");
       if (v === undefined) continue;
       const key = decodeURIComponent(k);
-      if (!(key in this.query) || key in params) return;
       const value = this.query[key].parse(decodeURIComponent(v));
       if (value === undefined) return;
       params[key] = value;
@@ -101,10 +107,13 @@ export default class Route<
     }
     const search = [];
     for (const key in this.query) {
+      const paramType = this.query[key];
+      const value = (params as any)[key]
+      if (value === paramType.default) continue;
       search.push(
         encodeURIComponent(key) +
           "=" +
-          encodeURIComponent(this.query[key].stringify((<any>params)[key]))
+          encodeURIComponent(paramType.stringify(value))
       );
     }
     if (search.length) {

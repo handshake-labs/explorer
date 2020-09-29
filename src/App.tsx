@@ -14,7 +14,7 @@ import SearchResult from "pages/SearchResult";
 
 import "./App.css";
 
-const App: React.FC<void> = () => {
+const App: React.FC = () => {
   const [route, setRoute] = React.useState(getRoute());
 
   React.useEffect(() => listen(() => setRoute(getRoute())), []);
