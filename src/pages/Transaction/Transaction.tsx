@@ -10,9 +10,7 @@ const RenderTxInput = (txInput: TxInput) => (
       <>
         <li>
           <b>hashPrevout:</b>
-          <Link
-            route={{ id: "transaction", params: { txid: txInput.hashPrevout } }}
-          >
+          <Link route={{ id: "transaction", params: { txid: txInput.hashPrevout } }} >
             {txInput.hashPrevout}
           </Link>
         </li>

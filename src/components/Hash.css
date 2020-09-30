@@ -2,7 +2,7 @@
   display: flex;
   width: 7em;
   justify-content: space-between;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 
 .ellipsis::before {

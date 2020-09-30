@@ -51,15 +51,9 @@ const RenderRecordHistoryRow = (recordRow: RecordHistoryRow) => (
   <>
     <div>
       <li>
-        <b>Block:</b>{" "}
-        <Link
-          route={{
-            id: "blockByHeight",
-            params: { height: recordRow.Height, page: 0 },
-          }}
-        >
-          {" "}
-          {recordRow.Height}{" "}
+        <b>Block:</b>
+        <Link route={{ id: "block", params: { height: recordRow.Height, page: 0 }, }} >
+          {recordRow.Height}
         </Link>
       </li>
       <li>
