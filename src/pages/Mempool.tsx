@@ -3,6 +3,7 @@ import { useTitle } from "hooks/title";
 
 import Hash from "components/Hash";
 import Pagination from "components/Pagination";
+import Spinner from "components/Spinner";
 
 import Transactions from "components/Transaction/Table";
 
@@ -20,6 +21,8 @@ const Mempool: React.FC<Props> = ({ limit, offset }) => {
     limit: 50,
     offset: 0,
   });
+
+  if (!transactions) return <Spinner />;
   return (
     <>
       <h2 className="separator">Mempool</h2>

@@ -75,7 +75,7 @@ const App: React.FC = () => {
           {route === undefined ? (
             <NotFound />
           ) : (
-            (route.id === "home" && <Home {...route.params} />) ||
+          (route.id === "home" && <Blocks {...{page:0}} />) ||
             (route.id === "blocks" && <Blocks {...route.params} />) ||
             (route.id === "block" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||
