@@ -64,9 +64,6 @@
         color: #fff;
         text-align: right;
       }
-      &:last-child {
-        text-transform: uppercase;
-      }
     }
     @media (max-width: 840px) {
       display: block;
