@@ -16,8 +16,7 @@ const TxInput: React.FC<Props> = ({ input, detailed }: Props) => (
         "Coinbase input"
       ) : (
         <>
-          <TransactionLink txid={input.hashPrevout} />
-          &nbsp;:&nbsp;{input.indexPrevout}
+          <TransactionLink txid={input.hashPrevout} />#{input.indexPrevout}
         </>
       )}
     </div>

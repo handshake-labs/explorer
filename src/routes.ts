@@ -5,11 +5,9 @@ const routes = {
   blocks: new R("/blocks", {}, { page: UintParam }),
   block: new R("/blocks/:height", { height: UintParam }, { page: UintParam }),
   transaction: new R("/txs/:txid", { txid: HexParam }, {}),
-  name: new R("/names/:name", { name: StrParam }, { page: UintParam }),
-  listExpensive: new R("/lists/expensive", {}, { page: UintParam }),
+  name: new R("/names/:name", { name: StrParam }, { bids_page: UintParam, records_page: UintParam }),
   search: new R("/search", {}, { query: StrParam }),
-  mempool: new R("/mempool", {}, { limit: UintParam, offset: UintParam }),
-  names: new R("/mempool", {}, { limit: UintParam, offset: UintParam }),
+  mempool: new R("/mempool", {}, { page: UintParam }),
 } as const;
 
 export type Route = {

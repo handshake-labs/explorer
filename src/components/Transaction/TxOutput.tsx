@@ -20,32 +20,38 @@ const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
           <b>Action</b>
           <span>{output.covenantAction}</span>
         </div>
-        {output.covenantName && (
-          <div>
+        {output.name && (<div>
             <b>Name</b>
             <span>
-              <NameLink name={output.covenantName} />
+              <NameLink name={output.name} />
+            </span>
+          </div>)}
+        {output.covenantName && (
+          <div>
+            <b>Covenant Name</b>
+            <span>
+              {output.covenantName}
             </span>
           </div>
         )}
         {output.covenantNameHash && (
           <div>
-            <b>Name Hash</b>
+            <b>Covenant Name Hash</b>
             <span> {output.covenantNameHash}</span>
           </div>
         )}
         {output.covenantHeight && (
           <div>
-            <b>Height</b> <span>{output.covenantHeight}</span>
+            <b>Covenant Height</b> <span>{output.covenantHeight}</span>
           </div>
         )}
       </div>
     ) : (
-      output.covenantName && (
+      output.name && (
         <div>
           <b>{output.covenantAction}</b>
           <span>
-            <NameLink name={output.covenantName} />
+            <NameLink name={output.name} />
           </span>
         </div>
       )

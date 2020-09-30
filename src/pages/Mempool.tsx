@@ -12,14 +12,13 @@ interface Props {
 }
 
 const limit = 50;
-const page = 0;
 
-const Mempool: React.FC<Props> = ({ limit, offset }) => {
+const Mempool: React.FC<Props> = ({  page }: Props) => {
   useTitle(`Mempool`);
 
   const transactions = useAPI("/mempool", {
-    limit: 50,
-    offset: 0,
+    limit,
+    offset: page * limit,
   });
 
   if (!transactions) return <Spinner />;

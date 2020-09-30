@@ -30,21 +30,16 @@ const App: React.FC = () => {
           </Link>
           <nav styleName="menu">
             <ul>
-              <li>
-                <Link route={{ id: "names", params: { limit: 0, offset: 0 } }}>
-                  Names
-                </Link>
-              </li>
+            <li>
+              <Link route={{ id: "blocks", params: { page: 0 } }}>
+                Blocks
+              </Link>
+            </li>
               <li>
                 <Link
-                  route={{ id: "mempool", params: { limit: 0, offset: 0 } }}
+                  route={{ id: "mempool", params: { page: 0 } }}
                 >
                   Mempool
-                </Link>
-              </li>
-              <li>
-                <Link route={{ id: "blocks", params: { page: 0 } }}>
-                  Blocks
                 </Link>
               </li>
             </ul>
@@ -80,9 +75,6 @@ const App: React.FC = () => {
             (route.id === "block" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||
-            (route.id === "listExpensive" && (
-              <ListExpensive {...route.params} />
-            )) ||
             (route.id === "search" && <SearchResult {...route.params} />) ||
             (route.id === "mempool" && <Mempool {...route.params} />)
           )}

@@ -1,129 +1,56 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
-import Link from "components/Link";
-import { AuctionHistoryRow } from "api";
-import { hex2ascii } from "helpers";
+
+import Spinner from "components/Spinner";
+import Pagination from "components/Pagination";
+
+import BidsTable from "components/Name/BidsTable";
+import RecordsTable from "components/Name/RecordsTable";
 
 interface Props {
   name: string;
-  page: number;
+  bids_page: number;
+  records_page: number;
 }
 
-const RenderAuctionHistoryRow = (historyRow: AuctionHistoryRow) => (
-  <>
-    <div>
-      <li>
-        <b>Block:</b>
-        <Link
-          route={{
-            id: "block",
-            params: { height: historyRow.Height, page: 0 },
-          }}
-        >
-          {" "}
-          {historyRow.Height}{" "}
-        </Link>
-      </li>
-      <li>
-        <b>Transaction: </b>
-        <Link route={{ id: "transaction", params: { txid: historyRow.Txid } }}>
-          {" "}
-          {historyRow.Txid}{" "}
-        </Link>
-      </li>
-      <li>
-        <b>Action: </b>
-        {historyRow.CovenantAction}
-      </li>
-      <li>
-        <b>Lockup: </b>
-        {historyRow.LockupValue / 10 ** 6} HNS
-      </li>
-      <li>
-        <b>Reveal: </b>
-        {historyRow.RevealValue / 10 ** 6} HNS
-      </li>
-    </div>
-  </>
-);
+const limit = 50;
 
-const RenderRecordHistoryRow = (recordRow: RecordHistoryRow) => (
-  <>
-    <div>
-      <li>
-        <b>Block:</b>
-        <Link
-          route={{ id: "block", params: { height: recordRow.Height, page: 0 } }}
-        >
-          {recordRow.Height}
-        </Link>
-      </li>
-      <li>
-        <b>Record: </b>
-        {recordRow.CovenantRecordData}
-      </li>
-    </div>
-  </>
-);
-
-const Reservation = ({ reservation }) => {
-  return (
-    <>
-      This name is reserved.
-      <li>
-        <b>Origin name: </b>
-        {hex2ascii(reservation.OriginName)}
-      </li>
-      <li>
-        <b>Claim amount: </b>
-        {reservation.ClaimAmount / 10 ** 6} HNS
-      </li>
-    </>
-  );
-};
-
-const RecordHistory = ({ history }) => {
-  return;
-};
-
-const Name: React.FC<Props> = ({ name, page }) => {
+const Name: React.FC<Props> = ({name,bids_page,records_page}: Props) => {
   useTitle(`Name ${name}`);
 
-  const domain = useAPI("/name", { name, page });
-  if (domain === undefined) {
-    return null;
-  }
-  if (domain === null) {
-    return <div>Not Found</div>;
-  }
-  console.log(domain);
+  const info = useAPI("/name", { name });
+  const bids = useAPI("/name/bids", {
+    name,
+    limit,
+    offset: bids_page * limit,
+  });
+  const records = useAPI("/name/records", {
+    name,
+    limit,
+    offset: records_page * limit,
+  });
+
+  if (!info) return <Spinner />;
+
   return (
     <>
-      <div>Name {name} </div>
-      {domain.reserved && (
-        <Reservation reservation={domain.reservation}></Reservation>
-      )}
-      {domain.records && domain.records.length > 0 ? (
-        <>
-          <b>Record history:</b>
-          {domain.records.map((historyRow) =>
-            RenderRecordHistoryRow(historyRow)
-          )}
-        </>
-      ) : (
-        <b>No record history.</b>
-      )}
-
-      {domain.auction && domain.auction.length > 0 ? (
-        <>
-          <b>Auction history:</b>
-          {domain.auction.map((historyRow) =>
-            RenderAuctionHistoryRow(historyRow)
-          )}
-        </>
-      ) : (
-        <b>No auction history</b>
-      )}
+      <h2 className="separator">
+        <span className="icon name">{ name }</span>
+      </h2>
+      { bids ? <BidsTable bids={bids.bids} /> : <Spinner/> }
+      <Pagination
+        count={info.bids_count}
+        limit={limit}
+        page={bids_page}
+        route={(bids_page: number) => ({ id: "name", params: { name,  bids_page, records_page } })}
+      />
+      { records ? <RecordsTable records={records.records} /> : <Spinner/> }
+      <Pagination
+        count={info.records_count}
+        limit={limit}
+        page={records_page}
+        route={(records_page: number) => ({ id: "name", params: { name,  bids_page, records_page } })}
+      />
     </>
   );
 };
