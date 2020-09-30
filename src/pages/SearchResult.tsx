@@ -21,7 +21,6 @@ const SearchResult: React.FC<Props> = ({ query }) => {
       {transactions && (
         <li>
           <b> Transactions: </b>
-          {transactions}
           <Link route={{ id: "transaction", params: { txid: transactions } }}>
             {transactions}
           </Link>
