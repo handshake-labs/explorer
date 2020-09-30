@@ -64,7 +64,6 @@
         color: #fff;
         text-align: right;
       }
-      &:last-child {
     }
     @media (max-width: 840px) {
       display: block;
