@@ -26,7 +26,7 @@ const Mempool: React.FC<Props> = ({ limit, offset }) => {
   return (
     <>
       <h2 className="separator">Mempool</h2>
-      {transactions ? <Transactions transactions={transactions.txs} /> : null}
+      {transactions.txs ? <Transactions transactions={transactions.txs} /> : 'Mempool is empty.'}
     </>
   );
 };

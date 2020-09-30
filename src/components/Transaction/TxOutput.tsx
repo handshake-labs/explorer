@@ -8,7 +8,10 @@ interface Props {
   detailed?: boolean;
 }
 
-const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
+const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => {
+  var name
+  name = output.covenantName || output.name
+  return (
   <div>
     <div>
       <Money value={output.value} />
@@ -17,20 +20,20 @@ const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
     {detailed ? (
       <div>
         <div>
-          <b>Action</b>
+          <b>Action </b>
           <span>{output.covenantAction}</span>
         </div>
-        {output.covenantName && (
+        {name!=undefined && (
           <div>
-            <b>Name</b>
+            <b>Name </b>
             <span>
-              <NameLink name={output.covenantName} />
+              <NameLink name={name} />
             </span>
           </div>
         )}
         {output.covenantNameHash && (
           <div>
-            <b>Name Hash</b>
+            <b>Name hash </b>
             <span> {output.covenantNameHash}</span>
           </div>
         )}
@@ -41,15 +44,16 @@ const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
         )}
       </div>
     ) : (
-      output.covenantName && (
+      (
         <div>
           <b>{output.covenantAction}</b>
+          {name!=undefined &&
           <span>
-            <NameLink name={output.covenantName} />
-          </span>
+            <NameLink name={name} />
+          </span>}
         </div>
       )
     )}
   </div>
-);
+  )};
 export default TxOutput;

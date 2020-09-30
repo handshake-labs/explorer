@@ -3,6 +3,7 @@ import { useTitle } from "hooks/title";
 import Link from "components/Link";
 import { AuctionHistoryRow } from "api";
 import { hex2ascii } from "helpers";
+import Spinner from "components/Spinner";
 
 interface Props {
   name: string;
@@ -91,7 +92,7 @@ const Name: React.FC<Props> = ({ name, page }) => {
 
   const domain = useAPI("/name", { name, page });
   if (domain === undefined) {
-    return null;
+    return <Spinner />;
   }
   if (domain === null) {
     return <div>Not Found</div>;

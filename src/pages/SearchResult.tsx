@@ -23,7 +23,7 @@ const SearchResult: React.FC<Props> = ({ query }) => {
           <b> Transactions: </b>
           {transactions}
           <Link route={{ id: "transaction", params: { txid: transactions } }}>
-            {txInput.hashPrevout}
+            {transactions}
           </Link>
         </li>
       )}
