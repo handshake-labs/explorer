@@ -1,28 +1,43 @@
 import { Transaction } from "api";
 
-import Link from "./Link";
+import TransactionLink from "components/Transaction/Link";
+import TxInput from "components/Transaction/TxInput";
+import TxOutput from "components/Transaction/TxOutput";
 
 interface Props {
   transactions: Array<Transaction>;
 }
 
+import "./Table.css";
+
 const Table: React.FC<Props> = ({ transactions }: Props) => (
   <div className="table">
     <div>
       <div>
-        <span>TXID</span>
+        <span>TxID</span>
       </div>
       <div>
-        <span></span>
+        <span>Inputs</span>
+      </div>
+      <div>
+        <span>Outputs</span>
       </div>
     </div>
     {transactions.map((tx) => (
       <div key={tx.txid}>
         <div>
-          <Link txid={tx.txid} />
+          <TransactionLink txid={tx.txid} />
         </div>
-        <div>Inputs: {tx.inputs.length}</div>
-        <div>Outputs: {tx.outputs.length}</div>
+        <div styleName="inputs">
+          {tx.inputs.map((input) => (
+            <TxInput input={input} />
+          ))}
+        </div>
+        <div styleName="outputs">
+          {tx.outputs.map((output) => (
+            <TxOutput output={output} />
+          ))}
+        </div>
       </div>
     ))}
   </div>

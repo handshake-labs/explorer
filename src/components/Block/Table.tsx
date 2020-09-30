@@ -2,7 +2,7 @@ import { Block } from "api";
 
 import Hash from "components/Hash";
 import Time from "components/Time";
-import Link from "./Link";
+import BlockLink from "components/Block/Link";
 
 interface Props {
   blocks: Array<Block>;
@@ -30,12 +30,12 @@ const Table: React.FC<Props> = ({ blocks }: Props) => (
     {blocks.map((block) => (
       <div key={block.hash}>
         <div>
-          <Link height={block.height} />
+          <BlockLink height={block.height} />
         </div>
         <div>
-          <Link height={block.height}>
+          <BlockLink height={block.height}>
             <Hash hash={block.hash} />
-          </Link>
+          </BlockLink>
         </div>
         <div>
           <Time time={block.time} />

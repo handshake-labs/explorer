@@ -1,6 +1,6 @@
 import { Transaction } from "api";
 
-import BlockLink from "components/Blocks/Link";
+import BlockLink from "components/Block/Link";
 
 interface Props {
   transaction: Transaction;

@@ -2,7 +2,7 @@ import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
 
 import Spinner from "components/Spinner";
-import Table from "components/Blocks/Table";
+import Table from "components/Block/Table";
 import Pagination from "components/Pagination";
 
 interface Props {
