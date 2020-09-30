@@ -25,13 +25,13 @@ const Transaction: React.FC<Props> = ({ txid }) => {
       <div>
         <div>{tx.inputs.length} Inputs</div>
         {tx.inputs.map((input, i) => (
-          <TxInput input={input} key={i} />
+          <TxInput input={input} key={i} detailed={true} />
         ))}
       </div>
       <div>
         <div>{tx.outputs.length} Outputs</div>
         {tx.outputs.map((output, i) => (
-          <TxOutput output={output} key={i} />
+          <TxOutput output={output} key={i} detailed={true} />
         ))}
       </div>
     </>

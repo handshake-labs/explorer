@@ -5,33 +5,38 @@ import Money from "components/Money";
 
 interface Props {
   output: TxOutputModel;
-  covenant?: boolean;
+  detailed?: boolean;
 }
 
-const TxOutput: React.FC<Props> = ({ output, covenant }: Props) => (
+const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
   <div>
     <div>
       <Money value={output.value} />
     </div>
     <div>{output.address}</div>
-    {covenant ? (
+    {detailed ? (
       <div>
         <div>
-          <b>Action</b> {output.covenantAction}
+          <b>Action</b>
+          <span>{output.covenantAction}</span>
         </div>
         {output.covenantName && (
           <div>
-            <b>Name</b> {output.covenantName}
+            <b>Name</b>
+            <span>
+              <NameLink name={output.covenantName} />
+            </span>
           </div>
         )}
         {output.covenantNameHash && (
           <div>
-            <b>Name Hash</b> {output.covenantNameHash}
+            <b>Name Hash</b>
+            <span> {output.covenantNameHash}</span>
           </div>
         )}
         {output.covenantHeight && (
           <div>
-            <b>Height</b> {output.covenantHeight}
+            <b>Height</b> <span>{output.covenantHeight}</span>
           </div>
         )}
       </div>
@@ -39,7 +44,9 @@ const TxOutput: React.FC<Props> = ({ output, covenant }: Props) => (
       output.covenantName && (
         <div>
           <b>{output.covenantAction}</b>
-          <NameLink name={output.covenantName} />
+          <span>
+            <NameLink name={output.covenantName} />
+          </span>
         </div>
       )
     )}

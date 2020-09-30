@@ -29,25 +29,11 @@ const Table: React.FC<Props> = ({ transactions }: Props) => (
           <TransactionLink txid={tx.txid} />
         </div>
         <div styleName="inputs">
-          <div>
-            <b>Count</b>
-            <span>{tx.inputs.length}</span>
-            <b>Sequence</b>
-            <span>{tx.inputs[0].sequence}</span>
-          </div>
           {tx.inputs.map((input) => (
             <TxInput input={input} />
           ))}
         </div>
         <div styleName="outputs">
-          <div>
-            <b>Count</b>
-            <span>{tx.inputs.length}</span>
-            <b>Amount</b>{" "}
-            <span>
-              {tx.outputs.reduce((value, output) => value + output.value, 0)}
-            </span>
-          </div>
           {tx.outputs.map((output) => (
             <TxOutput output={output} />
           ))}

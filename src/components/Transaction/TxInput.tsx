@@ -4,16 +4,27 @@ import TransactionLink from "components/Transaction/Link";
 
 interface Props {
   input: TxInputModel;
+  detailed?: boolean;
 }
 
-const TxInput: React.FC<Props> = ({ input }: Props) => (
+const TxInput: React.FC<Props> = ({ input, detailed }: Props) => (
   <div>
-    {input.hashPrevout ===
-    "0000000000000000000000000000000000000000000000000000000000000000" ? (
-      "Coinbase input"
-    ) : (
+    {" "}
+    <div>
+      {input.hashPrevout ===
+      "0000000000000000000000000000000000000000000000000000000000000000" ? (
+        "Coinbase input"
+      ) : (
+        <>
+          <TransactionLink txid={input.hashPrevout} />
+          &nbsp;:&nbsp;{input.indexPrevout}
+        </>
+      )}
+    </div>
+    {detailed && (
       <div>
-        <TransactionLink txid={input.hashPrevout} /> #{input.indexPrevout}
+        <b>Sequence</b>
+        <span>{input.sequence}</span>
       </div>
     )}
   </div>

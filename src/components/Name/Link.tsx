@@ -12,9 +12,12 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Link: React.FC<Props> = ({ name, children }: Props) => (
-  <BaseLink route={{ id: "name", params: { name, page: 0 } }}>
-    {children ? children : <span className="icon name">{hex2ascii(name)}</span>}
-  </BaseLink>
-);
+const Link: React.FC<Props> = ({ name, children }: Props) => {
+  const ascii = hex2ascii(name);
+  return (
+    <BaseLink route={{ id: "name", params: { name: ascii, page: 0 } }}>
+      {children ? children : <span className="icon name">{ascii}</span>}
+    </BaseLink>
+  );
+};
 export default Link;
