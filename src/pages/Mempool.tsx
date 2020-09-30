@@ -13,7 +13,7 @@ interface Props {
 
 const limit = 50;
 
-const Mempool: React.FC<Props> = ({  page }: Props) => {
+const Mempool: React.FC<Props> = ({ page }: Props) => {
   useTitle(`Mempool`);
 
   const transactions = useAPI("/mempool", {
@@ -25,7 +25,11 @@ const Mempool: React.FC<Props> = ({  page }: Props) => {
   return (
     <>
       <h2 className="separator">Mempool</h2>
-      {transactions ? <Transactions transactions={transactions.txs} /> : null}
+      {transactions.txs ? (
+        <Transactions transactions={transactions.txs} />
+      ) : (
+        "Mempool is empty."
+      )}
     </>
   );
 };

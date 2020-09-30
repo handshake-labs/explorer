@@ -15,7 +15,7 @@ interface Props {
 
 const limit = 50;
 
-const Name: React.FC<Props> = ({name,bids_page,records_page}: Props) => {
+const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
   useTitle(`Name ${name}`);
 
   const info = useAPI("/name", { name });
@@ -35,21 +35,27 @@ const Name: React.FC<Props> = ({name,bids_page,records_page}: Props) => {
   return (
     <>
       <h2 className="separator">
-        <span className="icon name">{ name }</span>
+        <span className="icon name">{name}</span>
       </h2>
-      { bids ? <BidsTable bids={bids.bids} /> : <Spinner/> }
+      {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
       <Pagination
         count={info.bids_count}
         limit={limit}
         page={bids_page}
-        route={(bids_page: number) => ({ id: "name", params: { name,  bids_page, records_page } })}
+        route={(bids_page: number) => ({
+          id: "name",
+          params: { name, bids_page, records_page },
+        })}
       />
-      { records ? <RecordsTable records={records.records} /> : <Spinner/> }
+      {records ? <RecordsTable records={records.records} /> : <Spinner />}
       <Pagination
         count={info.records_count}
         limit={limit}
         page={records_page}
-        route={(records_page: number) => ({ id: "name", params: { name,  bids_page, records_page } })}
+        route={(records_page: number) => ({
+          id: "name",
+          params: { name, bids_page, records_page },
+        })}
       />
     </>
   );

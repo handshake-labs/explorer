@@ -14,7 +14,7 @@ const Table: React.FC<Props> = ({ transactions }: Props) => (
   <div className="table">
     <div>
       <div>
-        <span>TxID</span>
+        <span>Txid</span>
       </div>
       <div>
         <span>Inputs</span>

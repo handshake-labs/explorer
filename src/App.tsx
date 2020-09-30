@@ -30,15 +30,13 @@ const App: React.FC = () => {
           </Link>
           <nav styleName="menu">
             <ul>
-            <li>
-              <Link route={{ id: "blocks", params: { page: 0 } }}>
-                Blocks
-              </Link>
-            </li>
               <li>
-                <Link
-                  route={{ id: "mempool", params: { page: 0 } }}
-                >
+                <Link route={{ id: "blocks", params: { page: 0 } }}>
+                  Blocks
+                </Link>
+              </li>
+              <li>
+                <Link route={{ id: "mempool", params: { page: 0 } }}>
                   Mempool
                 </Link>
               </li>
@@ -70,7 +68,7 @@ const App: React.FC = () => {
           {route === undefined ? (
             <NotFound />
           ) : (
-          (route.id === "home" && <Blocks {...{page:0}} />) ||
+            (route.id === "home" && <Blocks {...{ page: 0 }} />) ||
             (route.id === "blocks" && <Blocks {...route.params} />) ||
             (route.id === "block" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||

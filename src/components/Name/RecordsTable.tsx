@@ -25,10 +25,10 @@ const Table: React.FC<Props> = ({ records }: Props) => (
         <div>
           <BlockLink height={record.height} />
         </div>
-          <div>
-            <TransactionLink txid={record.txid} />
-          </div>
-          <div>{record.data}</div>
+        <div>
+          <TransactionLink txid={record.txid} />
+        </div>
+        <div>{record.data}</div>
       </div>
     ))}
   </div>

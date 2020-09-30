@@ -8,54 +8,58 @@ interface Props {
   detailed?: boolean;
 }
 
-const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => (
-  <div>
+const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => {
+  var name;
+  name = output.covenantName || output.name;
+  return (
     <div>
-      <Money value={output.value} />
-    </div>
-    <div>{output.address}</div>
-    {detailed ? (
       <div>
+        <Money value={output.value} />
+      </div>
+      <div>{output.address}</div>
+      {detailed ? (
         <div>
-          <b>Action</b>
-          <span>{output.covenantAction}</span>
+          <div>
+            <b>Action </b>
+            <span>{output.covenantAction}</span>
+          </div>
+          {output.name && (
+            <div>
+              <b>Name</b>
+              <span>
+                <NameLink name={output.name} />
+              </span>
+            </div>
+          )}
+          {output.covenantName && (
+            <div>
+              <b>Covenant Name</b>
+              <span>{output.covenantName}</span>
+            </div>
+          )}
+          {output.covenantNameHash && (
+            <div>
+              <b>Name Hash</b>
+              <span> {output.covenantNameHash}</span>
+            </div>
+          )}
+          {output.covenantHeight && (
+            <div>
+              <b>Covenant Height</b> <span>{output.covenantHeight}</span>
+            </div>
+          )}
         </div>
-        {output.name && (<div>
-            <b>Name</b>
+      ) : (
+        <div>
+          <b>{output.covenantAction}</b>
+          {output.name && (
             <span>
               <NameLink name={output.name} />
             </span>
-          </div>)}
-        {output.covenantName && (
-          <div>
-            <b>Covenant Name</b>
-            <span>
-              {output.covenantName}
-            </span>
-          </div>
-        )}
-        {output.covenantNameHash && (
-          <div>
-            <b>Covenant Name Hash</b>
-            <span> {output.covenantNameHash}</span>
-          </div>
-        )}
-        {output.covenantHeight && (
-          <div>
-            <b>Covenant Height</b> <span>{output.covenantHeight}</span>
-          </div>
-        )}
-      </div>
-    ) : (
-      output.name && (
-        <div>
-          <b>{output.covenantAction}</b>
-          <span>
-            <NameLink name={output.name} />
-          </span>
+          )}
         </div>
-      )
-    )}
-  </div>
-);
+      )}
+    </div>
+  );
+};
 export default TxOutput;

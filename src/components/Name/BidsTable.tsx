@@ -28,11 +28,11 @@ const Table: React.FC<Props> = ({ bids }: Props) => (
         <div>
           <BlockLink height={bid.height} />
         </div>
-          <div>
-            <TransactionLink txid={bid.txid} />
-          </div>
-          <div>{bid.lockup}</div>
-          <div>{bid.reveal}</div>
+        <div>
+          <TransactionLink txid={bid.txid} />
+        </div>
+        <div>{bid.lockup}</div>
+        <div>{bid.reveal}</div>
       </div>
     ))}
   </div>
