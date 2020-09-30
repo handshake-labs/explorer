@@ -6,10 +6,9 @@ interface Props {
 
 const Hash: React.FC<Props> = ({ hash }: Props) => (
   <span styleName="hash">
-    hash :
-    {hash.substr(0, 6)}
+    {hash.substr(0, 12)}
     <span styleName="ellipsis" />
-    {hash.substr(hash.length - 6)}
+    {hash.substr(hash.length - 12)}
   </span>
 );
 export default Hash;
