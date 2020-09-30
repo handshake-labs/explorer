@@ -66,6 +66,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: path.join(SRC_DIR, "icons", "logo.svg"),
       template: path.join(SRC_DIR, "index.html"),
     }),
     new webpack.DefinePlugin({

@@ -22,4 +22,13 @@
       background-image: svg-load("tx.svg", fill= "#004070");
     }
   }
+  &.name {
+    background-image: svg-load("tx.svg", fill= "#000");
+    a & {
+      background-image: svg-load("tx.svg", fill= "#0080a9");
+    }
+    a:hover & {
+      background-image: svg-load("tx.svg", fill= "#004070");
+    }
+  }
 }

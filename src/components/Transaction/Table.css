@@ -1,0 +1,6 @@
+.inputs,
+.outputs {
+  & > div {
+    display: block !important;
+  }
+}

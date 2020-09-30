@@ -6,11 +6,11 @@ import Block from "pages/Block";
 import Transaction from "pages/Transaction";
 import Name from "pages/Name";
 import ListExpensive from "pages/ListExpensive";
-import NotFound from "pages/NotFound";
 import Mempool from "pages/Mempool";
-
-import Link from "components/Link";
 import SearchResult from "pages/SearchResult";
+
+import NotFound from "components/NotFound";
+import Link from "components/Link";
 
 import "./App.css";
 
@@ -78,7 +78,6 @@ const App: React.FC = () => {
             (route.id === "home" && <Home {...route.params} />) ||
             (route.id === "blocks" && <Blocks {...route.params} />) ||
             (route.id === "block" && <Block {...route.params} />) ||
-            (route.id === "blockByHeight" && <Block {...route.params} />) ||
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||
             (route.id === "listExpensive" && (

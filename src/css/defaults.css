@@ -30,3 +30,7 @@ a:hover {
 h2 {
   font-size: 30px;
 }
+
+b {
+  font-weight: bold;
+}
