@@ -9,8 +9,6 @@ interface Props {
 }
 
 const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => {
-  var name;
-  name = output.covenantName || output.name;
   return (
     <div>
       <div>

@@ -1,6 +1,10 @@
 import { useAPI } from "hooks/api";
 import Link from "components/Link";
+import NameLink from "components/Name/Link";
 import Pagination from "components/Pagination";
+import Spinner from "components/Spinner";
+import TransactionLink from "components/Transaction/Link";
+import BlockLink from "components/Block/Link";
 
 interface Props {
   query: string;
@@ -10,38 +14,32 @@ const SearchResult: React.FC<Props> = ({ query }) => {
   const search = useAPI("/search", { query });
 
   if (search === undefined) {
-    return <div>Loading</div>;
+    return <Spinner />
   }
   if (search === null) {
     return <div>Not Found</div>;
   }
-  const { transactions, blocks, names } = search;
+  const { transaction, block, name } = search;
   return (
     <>
-      {transactions && (
+      {transaction && (
         <li>
-          <b> Transactions: </b>
-          <Link route={{ id: "transaction", params: { txid: transactions } }}>
-            {transactions}
-          </Link>
+          <b> Transaction: </b>
+          <TransactionLink txid={transaction} />
         </li>
       )}
-      {blocks && (
+      {block && (
         <li>
-          <b> Blocks: </b>
-          <Link
-            route={{ id: "blockByHeight", params: { height: blocks, page: 0 } }}
-          >
-            {blocks}
-          </Link>
+          <b> Block: </b>
+          <div>
+            <BlockLink height={block} />
+          </div>
         </li>
       )}
-      {names && (
+      {name && (
         <li>
           <b> Names: </b>
-          <Link route={{ id: "name", params: { name: names, page: 0 } }}>
-            {names}
-          </Link>
+          <NameLink name={name} />
         </li>
       )}
     </>

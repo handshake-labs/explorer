@@ -1,13 +1,16 @@
 import { NameRecord } from "api";
-
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
+import  RecordItem  from "components/Name/RecordItem";
+
 
 interface Props {
   records: Array<NameRecord>;
 }
 
-const Table: React.FC<Props> = ({ records }: Props) => (
+
+const Table: React.FC<Props> = ({ records }: Props) => {
+  return (
   <div className="table">
     <div>
       <div>
@@ -28,9 +31,11 @@ const Table: React.FC<Props> = ({ records }: Props) => (
         <div>
           <TransactionLink txid={record.txid} />
         </div>
-        <div>{record.data}</div>
+        <div>
+          <RecordItem data={record.data} />
+        </div>
       </div>
     ))}
   </div>
-);
+)};
 export default Table;
