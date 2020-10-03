@@ -31,12 +31,30 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
   });
 
   if (!info) return <Spinner />;
+  // console.log(info)
+  // console.log(info.release_block)
 
   return (
     <>
       <h2 className="separator">
         <span className="icon name">{name}</span>
       </h2>
+
+      {info.release_block && 
+      <div>
+        Release block: {info.release_block}
+      </div>
+      }
+      {info.state.open_height &&
+        <div>
+          Last auction open block: {info.state.open_height}
+        </div>
+      }
+      {info.state.current_state &&
+        <div>
+          Auction state: {info.state.current_state}
+        </div>
+      }
       {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
       <Pagination
         count={info.bids_count}

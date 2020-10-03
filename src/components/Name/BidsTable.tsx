@@ -1,4 +1,5 @@
 import { NameBid } from "api";
+import Money from "components/Money";
 
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
@@ -31,8 +32,12 @@ const Table: React.FC<Props> = ({ bids }: Props) => (
         <div>
           <TransactionLink txid={bid.txid} />
         </div>
-        <div>{bid.lockup}</div>
-        <div>{bid.reveal}</div>
+        <div>
+          <Money value={bid.lockup} />
+        </div>
+        <div>
+          <Money value={bid.reveal} />
+        </div>
       </div>
     ))}
   </div>
