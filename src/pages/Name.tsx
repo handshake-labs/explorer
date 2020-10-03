@@ -31,8 +31,6 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
   });
 
   if (!info) return <Spinner />;
-  // console.log(info)
-  // console.log(info.release_block)
 
   return (
     <>
@@ -46,9 +44,20 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
       </div>
       }
       {info.state.open_height &&
+          <>
         <div>
           Last auction open block: {info.state.open_height}
         </div>
+        <div>
+          Bid period start: {info.state.open_height+36}
+        </div>
+        <div>
+          Reveal period start: {info.state.open_height+36+144*5}
+        </div>
+        <div>
+          Reveal period end: {info.state.open_height+36+144*15}
+        </div>
+          </>
       }
       {info.state.current_state &&
         <div>
