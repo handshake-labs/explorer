@@ -38,6 +38,7 @@
     "@types/react-dom": "^16.9.8",
     "bns": "^0.13.0",
     "bsert": "0.0.10",
+    "punycode": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-use-clipboard": "^1.0.0"

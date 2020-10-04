@@ -1,10 +1,13 @@
 import { useAPI } from "hooks/api";
-import Link from "components/Link";
-import NameLink from "components/Name/Link";
-import Pagination from "components/Pagination";
+
 import Spinner from "components/Spinner";
+import NotFound from "components/NotFound";
+
+import NameLink from "components/Name/Link";
 import TransactionLink from "components/Transaction/Link";
 import BlockLink from "components/Block/Link";
+
+import "./SearchResult.css";
 
 interface Props {
   query: string;
@@ -13,35 +16,29 @@ interface Props {
 const SearchResult: React.FC<Props> = ({ query }) => {
   const search = useAPI("/search", { query });
 
-  if (search === undefined) {
-    return <Spinner />
-  }
-  if (search === null) {
-    return <div>Not Found</div>;
-  }
+  if (!search) return <Spinner />;
   const { transaction, block, name } = search;
+
+  if (!transaction && !block && !name) return <NotFound />;
+
   return (
     <>
-      {transaction && (
-        <li>
-          <b> Transaction: </b>
+      <h2 className="separator">Search</h2>
+      {transaction ? (
+        <div styleName="result">
           <TransactionLink txid={transaction} />
-        </li>
-      )}
-      {block && (
-        <li>
-          <b> Block: </b>
-          <div>
-            <BlockLink height={block} />
-          </div>
-        </li>
-      )}
-      {name && (
-        <li>
-          <b> Names: </b>
+        </div>
+      ) : null}
+      {block ? (
+        <div styleName="result">
+          <BlockLink height={block} />
+        </div>
+      ) : null}
+      {name ? (
+        <div styleName="result">
           <NameLink name={name} />
-        </li>
-      )}
+        </div>
+      ) : null}
     </>
   );
 };

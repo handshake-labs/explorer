@@ -1,10 +1,10 @@
 .icon {
   display: inline-block;
+  padding-left: 1.2em;
+  background-position: left center;
   background-repeat: no-repeat;
 
   &.block {
-    padding-left: 1.2em;
-    background-position: left center;
     background-image: svg-load("block.svg", fill= "#000");
     a & {
       background-image: svg-load("block.svg", fill= "#0080a9");
@@ -14,8 +14,6 @@
     }
   }
   &.tx {
-    padding-left: 1.2em;
-    background-position: left center;
     background-image: svg-load("tx.svg", fill= "#000");
     a & {
       background-image: svg-load("tx.svg", fill= "#0080a9");
@@ -25,8 +23,6 @@
     }
   }
   &.name {
-    padding-left: 1em;
-    background-position: left center;
     background-image: svg-load("name.svg", fill= "#000");
     a & {
       background-image: svg-load("name.svg", fill= "#0080a9");
@@ -34,10 +30,5 @@
     a:hover & {
       background-image: svg-load("name.svg", fill= "#004070");
     }
-  }
-  &.currency {
-    padding-right: 1em;
-    background-position: right center;
-    background-image: svg-load("currency.svg");
   }
 }

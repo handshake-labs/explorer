@@ -20,9 +20,7 @@ const Block: React.FC<Props> = ({ page }) => {
 
   return (
     <>
-      <h2 className="separator">
-        <span className="icon block">&nbsp;</span>
-      </h2>
+      <h2 className="separator">Blocks</h2>
       <Table blocks={blocks.blocks} />
       <Pagination
         count={blocks.count}

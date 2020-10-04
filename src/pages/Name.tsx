@@ -4,6 +4,7 @@ import { useTitle } from "hooks/title";
 import Spinner from "components/Spinner";
 import Pagination from "components/Pagination";
 
+import BlockLink from "components/Block/Link";
 import BidsTable from "components/Name/BidsTable";
 import RecordsTable from "components/Name/RecordsTable";
 
@@ -37,33 +38,50 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
       <h2 className="separator">
         <span className="icon name">{name}</span>
       </h2>
-
-      {info.release_block && 
-      <div>
-        Release block: {info.release_block}
-      </div>
-      }
-      {info.state.open_height &&
+      <div className="card">
+        {info.release_block && (
+          <div>
+            <span>Release block</span>
+            <span>
+              <BlockLink height={info.release_block} />
+            </span>
+          </div>
+        )}
+        {info.state.open_height && (
           <>
-        <div>
-          Last auction open block: {info.state.open_height}
-        </div>
-        <div>
-          Bid period start: {info.state.open_height+36}
-        </div>
-        <div>
-          Reveal period start: {info.state.open_height+36+144*5}
-        </div>
-        <div>
-          Reveal period end: {info.state.open_height+36+144*15}
-        </div>
+            <div>
+              <span>Last auction open block</span>
+              <span>
+                <BlockLink height={info.state.open_height} />
+              </span>
+            </div>
+            <div>
+              <span>Bid period start</span>
+              <span>
+                <BlockLink height={info.state.open_height + 36} />
+              </span>
+            </div>
+            <div>
+              <span>Reveal period start</span>
+              <span>
+                <BlockLink height={info.state.open_height + 36 + 144 * 5} />
+              </span>
+            </div>
+            <div>
+              <span>Reveal period end</span>
+              <span>
+                <BlockLink height={info.state.open_height + 36 + 144 * 15} />
+              </span>
+            </div>
           </>
-      }
-      {info.state.current_state &&
-        <div>
-          Auction state: {info.state.current_state}
-        </div>
-      }
+        )}
+        {info.state.current_state && (
+          <div>
+            <span>Auction state</span>
+            <span>{info.state.current_state}</span>
+          </div>
+        )}
+      </div>
       {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
       <Pagination
         count={info.bids_count}

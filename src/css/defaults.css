@@ -21,14 +21,17 @@ a:hover {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
-
-#root > main {
-  flex: 1;
+  & > main {
+    flex: 1;
+  }
 }
 
 h2 {
   font-size: 30px;
+}
+
+h3 {
+  font-size: 25px;
 }
 
 b {

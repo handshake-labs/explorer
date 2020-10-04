@@ -30,6 +30,7 @@
     display: table-row;
     & > div {
       display: table-cell;
+      vertical-align: top;
       border-bottom: 1px solid #d6d6d6;
       &:first-child {
         padding-left: 10px;
@@ -59,6 +60,7 @@
       display: table-cell;
       border-bottom: 1px solid #d6d6d6;
       &:first-child {
+        width: 200px;
         font-weight: bold;
         background: #0080a9;
         color: #fff;

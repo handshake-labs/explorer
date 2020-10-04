@@ -42,11 +42,14 @@
   flex: 1;
   & ul {
     display: flex;
-    justify-content: space-around;
-  }
-  & a {
-    font-size: 16px;
-    color: #666666;
+    & > li {
+      margin-left: 30px;
+      & > a {
+        margin-left: 30px;
+        font-size: 16px;
+        color: #666666;
+      }
+    }
   }
 }
 
@@ -67,6 +70,9 @@
   & .wrapper {
     flex: 1;
     flex-direction: column;
+    & > * {
+      margin: 20px 0;
+    }
   }
 }
 

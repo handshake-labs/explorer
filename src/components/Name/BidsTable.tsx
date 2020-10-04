@@ -36,7 +36,7 @@ const Table: React.FC<Props> = ({ bids }: Props) => (
           <Money value={bid.lockup} />
         </div>
         <div>
-          <Money value={bid.reveal} />
+          {bid.reveal === -1 ? <b>NONE</b> : <Money value={bid.reveal} />}
         </div>
       </div>
     ))}

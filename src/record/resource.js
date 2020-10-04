@@ -4,15 +4,15 @@
  * https://github.com/handshake-org/hsd
  */
 
-'use strict';
+"use strict";
 
-const assert = require('bsert');
-const {encoding, wire, util} = require('bns');
-const base32 = require('bcrypto/lib/encoding/base32');
-const {IP} = require('binet');
-const bio = require('bufio');
-const key = require('./key');
-const {Struct} = bio;
+const assert = require("bsert");
+const { encoding, wire, util } = require("bns");
+const base32 = require("bcrypto/lib/encoding/base32");
+const { IP } = require("binet");
+const bio = require("bufio");
+const key = require("./key");
+const { Struct } = bio;
 
 const {
   sizeName,
@@ -23,7 +23,7 @@ const {
   readStringBR,
   isName,
   readIP,
-  writeIP
+  writeIP,
 } = encoding;
 
 const {
@@ -34,7 +34,7 @@ const {
   NSRecord,
   TXTRecord,
   DSRecord,
-  types
+  types,
 } = wire;
 
 /*
@@ -52,17 +52,17 @@ const hsTypes = {
   GLUE6: 3,
   SYNTH4: 4,
   SYNTH6: 5,
-  TXT: 6
+  TXT: 6,
 };
 
 const hsTypesByVal = {
-  [hsTypes.DS]: 'DS',
-  [hsTypes.NS]: 'NS',
-  [hsTypes.GLUE4]: 'GLUE4',
-  [hsTypes.GLUE6]: 'GLUE6',
-  [hsTypes.SYNTH4]: 'SYNTH4',
-  [hsTypes.SYNTH6]: 'SYNTH6',
-  [hsTypes.TXT]: 'TXT'
+  [hsTypes.DS]: "DS",
+  [hsTypes.NS]: "NS",
+  [hsTypes.GLUE4]: "GLUE4",
+  [hsTypes.GLUE6]: "GLUE6",
+  [hsTypes.SYNTH4]: "SYNTH4",
+  [hsTypes.SYNTH6]: "SYNTH6",
+  [hsTypes.TXT]: "TXT",
 };
 
 /**
@@ -81,17 +81,15 @@ class Resource extends Struct {
     assert((type & 0xff) === type);
 
     for (const record of this.records) {
-      if (record.type === type)
-        return true;
+      if (record.type === type) return true;
     }
 
     return false;
   }
 
   hasNS() {
-    for (const {type} of this.records) {
-      if (type < hsTypes.NS || type > hsTypes.SYNTH6)
-        continue;
+    for (const { type } of this.records) {
+      if (type < hsTypes.NS || type > hsTypes.SYNTH6) continue;
 
       return true;
     }
@@ -112,8 +110,7 @@ class Resource extends Struct {
   getSize(map) {
     let size = 1;
 
-    for (const rr of this.records)
-      size += 1 + rr.getSize(map);
+    for (const rr of this.records) size += 1 + rr.getSize(map);
 
     return size;
   }
@@ -139,8 +136,7 @@ class Resource extends Struct {
       const RD = typeToClass(br.readU8());
 
       // Break at unknown records.
-      if (!RD)
-        break;
+      if (!RD) break;
 
       this.records.push(RD.read(br));
     }
@@ -166,8 +162,7 @@ class Resource extends Struct {
 
       const rr = record.toDNS(name, this.ttl);
 
-      if (set.has(rr.data.ns))
-        continue;
+      if (set.has(rr.data.ns)) continue;
 
       set.add(rr.data.ns);
       authority.push(rr);
@@ -183,8 +178,7 @@ class Resource extends Struct {
       switch (record.type) {
         case hsTypes.GLUE4:
         case hsTypes.GLUE6:
-          if (!util.isSubdomain(name, record.ns))
-            continue;
+          if (!util.isSubdomain(name, record.ns)) continue;
           break;
         case hsTypes.SYNTH4:
         case hsTypes.SYNTH6:
@@ -203,8 +197,7 @@ class Resource extends Struct {
     const answer = [];
 
     for (const record of this.records) {
-      if (record.type !== hsTypes.DS)
-        continue;
+      if (record.type !== hsTypes.DS) continue;
 
       answer.push(record.toDNS(name, this.ttl));
     }
@@ -216,8 +209,7 @@ class Resource extends Struct {
     const answer = [];
 
     for (const record of this.records) {
-      if (record.type !== hsTypes.TXT)
-        continue;
+      if (record.type !== hsTypes.TXT) continue;
 
       answer.push(record.toDNS(name, this.ttl));
     }
@@ -233,8 +225,7 @@ class Resource extends Struct {
       const rr = record.toDNS(name, this.ttl);
 
       if (rr.type === types.NS) {
-        if (set.has(rr.data.ns))
-          continue;
+        if (set.has(rr.data.ns)) continue;
 
         set.add(rr.data.ns);
       }
@@ -245,13 +236,11 @@ class Resource extends Struct {
     if (sign) {
       const set = new Set();
 
-      for (const rr of zone)
-        set.add(rr.type);
+      for (const rr of zone) set.add(rr.type);
 
       const types = [...set].sort();
 
-      for (const type of types)
-        key.signZSK(zone, type);
+      for (const type of types) key.signZSK(zone, type);
     }
 
     // Add the glue last.
@@ -261,8 +250,7 @@ class Resource extends Struct {
         case hsTypes.GLUE6:
         case hsTypes.SYNTH4:
         case hsTypes.SYNTH6: {
-          if (!util.isSubdomain(name, record.ns))
-            continue;
+          if (!util.isSubdomain(name, record.ns)) continue;
 
           zone.push(record.toGlue(record.ns, this.ttl));
           break;
@@ -277,18 +265,13 @@ class Resource extends Struct {
     const res = new Message();
 
     if (this.hasNS()) {
-      res.authority = [
-        ...this.toNS(name),
-        ...this.toDS(name)
-      ];
+      res.authority = [...this.toNS(name), ...this.toDS(name)];
 
       res.additional = this.toGlue(name);
 
       // Note: should have nsec unsigned zone proof.
-      if (!this.hasDS())
-        key.signZSK(res.authority, types.NS);
-      else
-        key.signZSK(res.authority, types.DS);
+      if (!this.hasDS()) key.signZSK(res.authority, types.NS);
+      else key.signZSK(res.authority, types.DS);
     } else {
       // Needs SOA.
     }
@@ -298,7 +281,7 @@ class Resource extends Struct {
 
   toDNS(name, type) {
     assert(util.isFQDN(name));
-    assert((type >>> 0) === type);
+    assert(type >>> 0 === type);
 
     const labels = util.split(name);
 
@@ -328,8 +311,7 @@ class Resource extends Struct {
     }
 
     // Nope, we need a referral.
-    if (res.answer.length === 0
-        && res.authority.length === 0) {
+    if (res.answer.length === 0 && res.authority.length === 0) {
       return this.toReferral(name);
     }
 
@@ -342,23 +324,21 @@ class Resource extends Struct {
   getJSON(name) {
     const json = { records: [] };
 
-    for (const record of this.records)
-      json.records.push(record.getJSON());
+    for (const record of this.records) json.records.push(record.getJSON());
 
     return json;
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid json.');
-    assert(Array.isArray(json.records), 'Invalid records.');
+    assert(json && typeof json === "object", "Invalid json.");
+    assert(Array.isArray(json.records), "Invalid records.");
 
     for (const item of json.records) {
-      assert(item && typeof item === 'object', 'Invalid record.');
+      assert(item && typeof item === "object", "Invalid record.");
 
       const RD = stringToClass(item.type);
 
-      if (!RD)
-        throw new Error(`Unknown type: ${item.type}.`);
+      if (!RD) throw new Error(`Unknown type: ${item.type}.`);
 
       this.records.push(RD.fromJSON(item));
     }
@@ -406,9 +386,9 @@ class DS extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     assert(util.isFQDN(name));
-    assert((ttl >>> 0) === ttl);
+    assert(ttl >>> 0 === ttl);
 
     const rr = new Record();
     const rd = new DSRecord();
@@ -428,28 +408,37 @@ class DS extends Struct {
 
   getJSON() {
     return {
-      type: 'DS',
+      type: "DS",
       keyTag: this.keyTag,
       algorithm: this.algorithm,
       digestType: this.digestType,
-      digest: this.digest.toString('hex')
+      digest: this.digest.toString("hex"),
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid DS record.');
-    assert(json.type === 'DS',
-      'Invalid DS record. Type must be "DS".');
-    assert((json.keyTag & 0xffff) === json.keyTag,
-      'Invalid DS record. KeyTag must be a uint16.');
-    assert((json.algorithm & 0xff) === json.algorithm,
-      'Invalid DS record. Algorithm must be a uint8.');
-    assert((json.digestType & 0xff) === json.digestType,
-      'Invalid DS record. DigestType must be a uint8.');
-    assert(typeof json.digest === 'string',
-      'Invalid DS record. Digest must be a String.');
-    assert((json.digest.length >>> 1) <= 255,
-      'Invalid DS record. Digest is too large.');
+    assert(json && typeof json === "object", "Invalid DS record.");
+    assert(json.type === "DS", 'Invalid DS record. Type must be "DS".');
+    assert(
+      (json.keyTag & 0xffff) === json.keyTag,
+      "Invalid DS record. KeyTag must be a uint16."
+    );
+    assert(
+      (json.algorithm & 0xff) === json.algorithm,
+      "Invalid DS record. Algorithm must be a uint8."
+    );
+    assert(
+      (json.digestType & 0xff) === json.digestType,
+      "Invalid DS record. DigestType must be a uint8."
+    );
+    assert(
+      typeof json.digest === "string",
+      "Invalid DS record. Digest must be a String."
+    );
+    assert(
+      json.digest.length >>> 1 <= 255,
+      "Invalid DS record. Digest is too large."
+    );
 
     this.keyTag = json.keyTag;
     this.algorithm = json.algorithm;
@@ -468,7 +457,7 @@ class DS extends Struct {
 class NS extends Struct {
   constructor() {
     super();
-    this.ns = '.';
+    this.ns = ".";
   }
 
   get type() {
@@ -489,24 +478,21 @@ class NS extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     return createNS(name, ttl, this.ns);
   }
 
   getJSON() {
     return {
-      type: 'NS',
-      ns: this.ns
+      type: "NS",
+      ns: this.ns,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object',
-      'Invalid NS record.');
-    assert(json.type === 'NS',
-      'Invalid NS record. Type must be "NS".');
-    assert(isName(json.ns),
-      'Invalid NS record. ns must be a valid name.');
+    assert(json && typeof json === "object", "Invalid NS record.");
+    assert(json.type === "NS", 'Invalid NS record. Type must be "NS".');
+    assert(isName(json.ns), "Invalid NS record. ns must be a valid name.");
 
     this.ns = json.ns;
 
@@ -522,8 +508,8 @@ class NS extends Struct {
 class GLUE4 extends Struct {
   constructor() {
     super();
-    this.ns = '.';
-    this.address = '0.0.0.0';
+    this.ns = ".";
+    this.address = "0.0.0.0";
   }
 
   get type() {
@@ -546,30 +532,33 @@ class GLUE4 extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     return createNS(name, ttl, this.ns);
   }
 
-  toGlue(name = '.', ttl = DEFAULT_TTL) {
+  toGlue(name = ".", ttl = DEFAULT_TTL) {
     return createA(name, ttl, this.address);
   }
 
   getJSON() {
     return {
-      type: 'GLUE4',
+      type: "GLUE4",
       ns: this.ns,
-      address: this.address
+      address: this.address,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid GLUE4 record.');
-    assert(json.type === 'GLUE4',
-      'Invalid GLUE4 record. Type must be "GLUE4".');
-    assert(isName(json.ns),
-      'Invalid GLUE4 record. ns must be a valid name.');
-    assert(IP.isIPv4String(json.address),
-      'Invalid GLUE4 record. Address must be a valid IPv4 address.');
+    assert(json && typeof json === "object", "Invalid GLUE4 record.");
+    assert(
+      json.type === "GLUE4",
+      'Invalid GLUE4 record. Type must be "GLUE4".'
+    );
+    assert(isName(json.ns), "Invalid GLUE4 record. ns must be a valid name.");
+    assert(
+      IP.isIPv4String(json.address),
+      "Invalid GLUE4 record. Address must be a valid IPv4 address."
+    );
 
     this.ns = json.ns;
     this.address = IP.normalize(json.address);
@@ -586,8 +575,8 @@ class GLUE4 extends Struct {
 class GLUE6 extends Struct {
   constructor() {
     super();
-    this.ns = '.';
-    this.address = '::';
+    this.ns = ".";
+    this.address = "::";
   }
 
   get type() {
@@ -610,30 +599,33 @@ class GLUE6 extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     return createNS(name, ttl, this.ns);
   }
 
-  toGlue(name = '.', ttl = DEFAULT_TTL) {
+  toGlue(name = ".", ttl = DEFAULT_TTL) {
     return createAAAA(name, ttl, this.address);
   }
 
   getJSON() {
     return {
-      type: 'GLUE6',
+      type: "GLUE6",
       ns: this.ns,
-      address: this.address
+      address: this.address,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid GLUE6 record.');
-    assert(json.type === 'GLUE6',
-      'Invalid GLUE6 record. Type must be "GLUE6".');
-    assert(isName(json.ns),
-      'Invalid GLUE6 record. ns must be a valid name.');
-    assert(IP.isIPv6String(json.address),
-      'Invalid GLUE6 record. Address must be a valid IPv6 address.');
+    assert(json && typeof json === "object", "Invalid GLUE6 record.");
+    assert(
+      json.type === "GLUE6",
+      'Invalid GLUE6 record. Type must be "GLUE6".'
+    );
+    assert(isName(json.ns), "Invalid GLUE6 record. ns must be a valid name.");
+    assert(
+      IP.isIPv6String(json.address),
+      "Invalid GLUE6 record. Address must be a valid IPv6 address."
+    );
 
     this.ns = json.ns;
     this.address = IP.normalize(json.address);
@@ -650,7 +642,7 @@ class GLUE6 extends Struct {
 class SYNTH4 extends Struct {
   constructor() {
     super();
-    this.address = '0.0.0.0';
+    this.address = "0.0.0.0";
   }
 
   get type() {
@@ -676,27 +668,31 @@ class SYNTH4 extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     return createNS(name, ttl, this.ns);
   }
 
-  toGlue(name = '.', ttl = DEFAULT_TTL) {
+  toGlue(name = ".", ttl = DEFAULT_TTL) {
     return createA(name, ttl, this.address);
   }
 
   getJSON() {
     return {
-      type: 'SYNTH4',
-      address: this.address
+      type: "SYNTH4",
+      address: this.address,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid SYNTH4 record.');
-    assert(json.type === 'SYNTH4',
-      'Invalid SYNTH4 record. Type must be "SYNTH4".');
-    assert(IP.isIPv4String(json.address),
-      'Invalid SYNTH4 record. Address must be a valid IPv4 address.');
+    assert(json && typeof json === "object", "Invalid SYNTH4 record.");
+    assert(
+      json.type === "SYNTH4",
+      'Invalid SYNTH4 record. Type must be "SYNTH4".'
+    );
+    assert(
+      IP.isIPv4String(json.address),
+      "Invalid SYNTH4 record. Address must be a valid IPv4 address."
+    );
 
     this.address = IP.normalize(json.address);
 
@@ -712,7 +708,7 @@ class SYNTH4 extends Struct {
 class SYNTH6 extends Struct {
   constructor() {
     super();
-    this.address = '::';
+    this.address = "::";
   }
 
   get type() {
@@ -738,27 +734,31 @@ class SYNTH6 extends Struct {
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     return createNS(name, ttl, this.ns);
   }
 
-  toGlue(name = '.', ttl = DEFAULT_TTL) {
+  toGlue(name = ".", ttl = DEFAULT_TTL) {
     return createAAAA(name, ttl, this.address);
   }
 
   getJSON() {
     return {
-      type: 'SYNTH6',
-      address: this.address
+      type: "SYNTH6",
+      address: this.address,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object', 'Invalid SYNTH6 record.');
-    assert(json.type === 'SYNTH6',
-      'Invalid SYNTH6 record. Type must be "SYNTH6".');
-    assert(IP.isIPv6String(json.address),
-      'Invalid SYNTH6 record. Address must be a valid IPv6 address.');
+    assert(json && typeof json === "object", "Invalid SYNTH6 record.");
+    assert(
+      json.type === "SYNTH6",
+      'Invalid SYNTH6 record. Type must be "SYNTH6".'
+    );
+    assert(
+      IP.isIPv6String(json.address),
+      "Invalid SYNTH6 record. Address must be a valid IPv6 address."
+    );
 
     this.address = IP.normalize(json.address);
 
@@ -783,16 +783,14 @@ class TXT extends Struct {
 
   getSize() {
     let size = 1;
-    for (const txt of this.txt)
-      size += sizeString(txt);
+    for (const txt of this.txt) size += sizeString(txt);
     return size;
   }
 
   write(bw) {
     bw.writeU8(this.txt.length);
 
-    for (const txt of this.txt)
-      writeStringBW(bw, txt);
+    for (const txt of this.txt) writeStringBW(bw, txt);
 
     return this;
   }
@@ -800,15 +798,14 @@ class TXT extends Struct {
   read(br) {
     const count = br.readU8();
 
-    for (let i = 0; i < count; i++)
-      this.txt.push(readStringBR(br));
+    for (let i = 0; i < count; i++) this.txt.push(readStringBR(br));
 
     return this;
   }
 
-  toDNS(name = '.', ttl = DEFAULT_TTL) {
+  toDNS(name = ".", ttl = DEFAULT_TTL) {
     assert(util.isFQDN(name));
-    assert((ttl >>> 0) === ttl);
+    assert(ttl >>> 0 === ttl);
 
     const rr = new Record();
     const rd = new TXTRecord();
@@ -825,24 +822,28 @@ class TXT extends Struct {
 
   getJSON() {
     return {
-      type: 'TXT',
-      txt: this.txt
+      type: "TXT",
+      txt: this.txt,
     };
   }
 
   fromJSON(json) {
-    assert(json && typeof json === 'object',
-      'Invalid TXT record.');
-    assert(json.type === 'TXT',
-      'Invalid TXT record. Type must be "TXT".');
-    assert(Array.isArray(json.txt),
-      'Invalid TXT record. txt must be an Array.');
+    assert(json && typeof json === "object", "Invalid TXT record.");
+    assert(json.type === "TXT", 'Invalid TXT record. Type must be "TXT".');
+    assert(
+      Array.isArray(json.txt),
+      "Invalid TXT record. txt must be an Array."
+    );
 
     for (const txt of json.txt) {
-      assert(typeof txt === 'string',
-        'Invalid TXT record. Entries in txt Array must be type String.');
-      assert(txt.length <= 255,
-        'Invalid TXT record. Entries in txt Array must be <= 255 in length.');
+      assert(
+        typeof txt === "string",
+        "Invalid TXT record. Entries in txt Array must be type String."
+      );
+      assert(
+        txt.length <= 255,
+        "Invalid TXT record. Entries in txt Array must be <= 255 in length."
+      );
 
       this.txt.push(txt);
     }
@@ -878,17 +879,16 @@ function typeToClass(type) {
 }
 
 function stringToClass(type) {
-  assert(typeof type === 'string');
+  assert(typeof type === "string");
 
-  if (!hsTypes.hasOwnProperty(type))
-    return null;
+  if (!hsTypes.hasOwnProperty(type)) return null;
 
   return typeToClass(hsTypes[type]);
 }
 
 function createNS(name, ttl, ns) {
   assert(util.isFQDN(name));
-  assert((ttl >>> 0) === ttl);
+  assert(ttl >>> 0 === ttl);
   assert(util.isFQDN(ns));
 
   const rr = new Record();
@@ -905,7 +905,7 @@ function createNS(name, ttl, ns) {
 
 function createA(name, ttl, address) {
   assert(util.isFQDN(name));
-  assert((ttl >>> 0) === ttl);
+  assert(ttl >>> 0 === ttl);
   assert(IP.isIPv4String(address));
 
   const rr = new Record();
@@ -922,7 +922,7 @@ function createA(name, ttl, address) {
 
 function createAAAA(name, ttl, address) {
   assert(util.isFQDN(name));
-  assert((ttl >>> 0) === ttl);
+  assert(ttl >>> 0 === ttl);
   assert(IP.isIPv6String(address));
 
   const rr = new Record();
@@ -940,7 +940,6 @@ function createAAAA(name, ttl, address) {
 /*
  * Expose
  */
-
 
 exports.types = hsTypes;
 exports.typesByVal = hsTypesByVal;

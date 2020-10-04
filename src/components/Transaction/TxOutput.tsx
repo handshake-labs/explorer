@@ -3,6 +3,8 @@ import { TxOutput as TxOutputModel } from "api";
 import NameLink from "components/Name/Link";
 import Money from "components/Money";
 
+import "./TxOutput.css";
+
 interface Props {
   output: TxOutputModel;
   detailed?: boolean;
@@ -48,14 +50,16 @@ const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => {
           )}
         </div>
       ) : (
-        <div>
-          <b>{output.covenantAction}</b>
-          {output.name && (
-            <span>
-              <NameLink name={output.name} />
-            </span>
-          )}
-        </div>
+        output.name && (
+          <div>
+            <b styleName="b">{output.covenantAction}</b>
+            {output.name && (
+              <span>
+                <NameLink name={output.name} />
+              </span>
+            )}
+          </div>
+        )
       )}
     </div>
   );

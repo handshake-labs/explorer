@@ -9,11 +9,11 @@ interface Props {
 const Card: React.FC<Props> = ({ transaction }: Props) => (
   <div className="card">
     <div>
-      <span>txid</span>
+      <span>TXID</span>
       <span>{transaction.txid}</span>
     </div>
     <div>
-      <span>block</span>
+      <span>Block Height</span>
       <span>
         {transaction.block_height === -1 ? (
           "Mempool"
@@ -23,27 +23,27 @@ const Card: React.FC<Props> = ({ transaction }: Props) => (
       </span>
     </div>
     <div>
-      <span>fee</span>
+      <span>Fee</span>
       <span>{transaction.fee}</span>
     </div>
     <div>
-      <span>locktime</span>
+      <span>Locktime</span>
       <span>{transaction.locktime}</span>
     </div>
     <div>
-      <span>rate</span>
+      <span>Rate</span>
       <span>{transaction.rate}</span>
     </div>
     <div>
-      <span>size</span>
+      <span>Size</span>
       <span>{transaction.size}</span>
     </div>
     <div>
-      <span>version</span>
+      <span>Version</span>
       <span>{transaction.version}</span>
     </div>
     <div>
-      <span>witness</span>
+      <span>Witness</span>
       <span>{transaction.witnessTx}</span>
     </div>
   </div>
