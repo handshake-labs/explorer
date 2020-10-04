@@ -1,11 +1,9 @@
 import { listen, getRoute, replaceRoute } from "history";
 
-import Home from "pages/Home";
 import Blocks from "pages/Blocks";
 import Block from "pages/Block";
 import Transaction from "pages/Transaction";
 import Name from "pages/Name";
-import ListExpensive from "pages/ListExpensive";
 import Mempool from "pages/Mempool";
 import SearchResult from "pages/SearchResult";
 

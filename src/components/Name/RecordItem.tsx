@@ -1,11 +1,12 @@
+//@ts-ignore
 import { Resource } from "record/resource";
 
-const parseRecord = (data) => {
+const parseRecord = (data: any) => {
   const hexResource = Buffer.from(data, "hex");
   return Resource.decode(hexResource);
 };
 
-const renderRecord = (record) => {
+const renderRecord = (record: any) => {
   var resource;
   switch (record.getJSON().type) {
     case "DS":
@@ -63,7 +64,7 @@ const RecordItem: React.FC<Props> = ({ data }: Props) => {
   var record = parseRecord(data);
   return (
     <>
-      <div>{record.records.map((record) => renderRecord(record))}</div>
+      <div>{record.records.map((record: any) => renderRecord(record))}</div>
     </>
   );
 };
