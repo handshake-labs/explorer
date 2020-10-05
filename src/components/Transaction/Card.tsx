@@ -9,7 +9,7 @@ interface Props {
 const Card: React.FC<Props> = ({ transaction }: Props) => (
   <div className="card">
     <div>
-      <span>TXID</span>
+      <span>Txid</span>
       <span>{transaction.txid}</span>
     </div>
     <div>

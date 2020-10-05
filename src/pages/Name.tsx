@@ -1,5 +1,6 @@
 import { useAPI } from "hooks/api";
 import { useTitle } from "hooks/title";
+import { toUnicode } from "punycode";
 
 import Spinner from "components/Spinner";
 import Pagination from "components/Pagination";
@@ -32,11 +33,12 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
   });
 
   if (!info) return <Spinner />;
+  const unicodeName = toUnicode(name)
 
   return (
     <>
       <h2 className="separator">
-        <span className="icon name">{name}</span>
+        <span className="icon name">{name} {unicodeName != name && '('+unicodeName+')'}</span>
       </h2>
       <div className="card">
         {info.release_block && (
@@ -82,6 +84,9 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
           </div>
         )}
       </div>
+      <h2 className="separator">
+        <span>Auction history</span>
+      </h2>
       {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
       <Pagination
         count={info.bids_count}
@@ -92,6 +97,9 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
           params: { name, bids_page, records_page },
         })}
       />
+      <h2 className="separator">
+        <span>Record history</span>
+      </h2>
       {records ? <RecordsTable records={records.records} /> : <Spinner />}
       <Pagination
         count={info.records_count}
