@@ -10,7 +10,7 @@ interface Props {
   detailed?: boolean;
 }
 
-const TxOutput: React.FC<Props> = ({ output, detailed }: Props) => {
+const TxOutput: FC<Props> = ({ output, detailed }: Props) => {
   return (
     <div>
       <div>

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "preact/hooks";
+
 import { API } from "api";
 
 type Actions = keyof API;
@@ -15,9 +17,9 @@ export const useAPI = <A extends Actions>(
   }
   const path = `${action}?${search.join("&")}`;
 
-  const [state, setState] = React.useState<Result<A> | undefined>();
+  const [state, setState] = useState<Result<A> | undefined>(undefined);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setState(undefined);
     let aborted = false;
     const url = API_ORIGIN + path;

@@ -6,7 +6,7 @@ interface Props {
   block: Block;
 }
 
-const Card: React.FC<Props> = ({ block }: Props) => (
+const Card: FC<Props> = ({ block }: Props) => (
   <div className="card">
     <div>
       <span>Hash</span>

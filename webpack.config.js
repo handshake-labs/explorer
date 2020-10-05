@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const PROD_MODE = process.env.NODE_ENV === "production";
 const SRC_DIR = path.join(__dirname, "src");
@@ -75,8 +76,10 @@ const config = {
       ),
     }),
     new webpack.ProvidePlugin({
-      React: "react",
+      _prh: ["preact", "h"],
+      _prf: ["preact", "Fragment"],
     }),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
   devServer: {
     contentBase: DIST_DIR,

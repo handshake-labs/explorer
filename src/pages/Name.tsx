@@ -17,7 +17,7 @@ interface Props {
 
 const limit = 50;
 
-const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
+const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
   useTitle(`Name ${name}`);
 
   const info = useAPI("/name", { name });
@@ -33,12 +33,14 @@ const Name: React.FC<Props> = ({ name, bids_page, records_page }: Props) => {
   });
 
   if (!info) return <Spinner />;
-  const unicodeName = toUnicode(name)
+  const unicodeName = toUnicode(name);
 
   return (
     <>
       <h2 className="separator">
-        <span className="icon name">{name} {unicodeName != name && '('+unicodeName+')'}</span>
+        <span className="icon name">
+          {name} {unicodeName != name && "(" + unicodeName + ")"}
+        </span>
       </h2>
       <div className="card">
         {info.release_block && (

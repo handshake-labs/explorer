@@ -1,3 +1,4 @@
+import { useState, useEffect } from "preact/hooks";
 import { listen, getRoute, replaceRoute } from "history";
 
 import Blocks from "pages/Blocks";
@@ -12,10 +13,10 @@ import Link from "components/Link";
 
 import "./App.css";
 
-const App: React.FC = () => {
-  const [route, setRoute] = React.useState(getRoute());
+const App: FC = () => {
+  const [route, setRoute] = useState(getRoute());
 
-  React.useEffect(() => listen(() => setRoute(getRoute())), []);
+  useEffect(() => listen(() => setRoute(getRoute())), []);
 
   return (
     <>

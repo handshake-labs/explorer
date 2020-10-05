@@ -1,19 +1,18 @@
 import { setPath } from "history";
 import { buildPath, Route } from "routes";
 
-const onClick = (path: string) => (e: React.MouseEvent) => {
+const onClick = (path: string) => (e: MouseEvent) => {
   if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey) {
     setPath(path);
     e.preventDefault();
   }
 };
 
-interface Props {
+type Props = WithChildren<{
   route: Route;
-  children: React.ReactNode;
-}
+}>;
 
-const Link: React.FC<Props> = ({ route, children }: Props) => {
+const Link: FC<Props> = ({ route, children }: Props) => {
   const path = buildPath(route);
 
   return (

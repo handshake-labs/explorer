@@ -15,7 +15,7 @@ interface Props {
 
 const limit = 50;
 
-const Block: React.FC<Props> = ({ height, page }) => {
+const Block: FC<Props> = ({ height, page }) => {
   useTitle(`Block ${height}`);
 
   const block = useAPI("/block", { height });

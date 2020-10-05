@@ -60,7 +60,7 @@ interface Props {
 
 //Record is a collection of Resources
 //each resource can be thought as DNS record
-const RecordItem: React.FC<Props> = ({ data }: Props) => {
+const RecordItem: FC<Props> = ({ data }: Props) => {
   var record = parseRecord(data);
   return (
     <>

@@ -6,7 +6,7 @@ interface Props {
   transaction: Transaction;
 }
 
-const Card: React.FC<Props> = ({ transaction }: Props) => (
+const Card: FC<Props> = ({ transaction }: Props) => (
   <div className="card">
     <div>
       <span>Txid</span>

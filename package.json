@@ -12,7 +12,6 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@types/react-css-modules": "^4.6.2",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-react-css-modules": "^5.2.6",
@@ -28,20 +27,17 @@
     "prettier": "^2.0.5",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.1.0",
-    "typescript": "^3.9.7",
+    "typescript": "^4.0.0",
     "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@types/react": "^16.9.46",
-    "@types/react-dom": "^16.9.8",
     "bns": "^0.13.0",
     "bsert": "0.0.10",
-    "punycode": "^2.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-use-clipboard": "^1.0.0"
+    "preact": "^10.5.4",
+    "punycode": "^2.1.1"
   },
   "browserslist": [
     "defaults"

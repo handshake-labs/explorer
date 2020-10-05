@@ -8,7 +8,7 @@ interface Props {
   blocks: Array<Block>;
 }
 
-const Table: React.FC<Props> = ({ blocks }: Props) => (
+const Table: FC<Props> = ({ blocks }: Props) => (
   <div className="table">
     <div>
       <div>

@@ -11,7 +11,7 @@ interface Props {
 
 const limit = 50;
 
-const Block: React.FC<Props> = ({ page }) => {
+const Block: FC<Props> = ({ page }) => {
   useTitle(`Blocks List`);
 
   const blocks = useAPI("/blocks", { limit, offset: page * limit });

@@ -13,7 +13,7 @@ interface Props {
 
 const limit = 50;
 
-const Mempool: React.FC<Props> = ({ page }: Props) => {
+const Mempool: FC<Props> = ({ page }: Props) => {
   useTitle(`Mempool`);
 
   const transactions = useAPI("/mempool", {

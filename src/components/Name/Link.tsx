@@ -2,12 +2,11 @@ import { toUnicode } from "punycode";
 
 import BaseLink from "components/Link";
 
-interface Props {
+type Props = WithChildren<{
   name: string;
-  children?: React.ReactNode;
-}
+}>;
 
-const Link: React.FC<Props> = ({ name, children }: Props) => (
+const Link: FC<Props> = ({ name, children }: Props) => (
   <BaseLink
     route={{ id: "name", params: { name, bids_page: 0, records_page: 0 } }}
   >

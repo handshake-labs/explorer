@@ -2,7 +2,13 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-typescript",
-    "@babel/preset-react"
+    [
+      "@babel/preset-react",
+      {
+        "pragma": "_prh",
+        "pragmaFrag": "_prf"
+      }
+    ]
   ],
   "plugins": [
     ["@babel/plugin-transform-runtime"],

@@ -10,7 +10,7 @@ interface Props {
 
 import "./Table.css";
 
-const Table: React.FC<Props> = ({ transactions }: Props) => (
+const Table: FC<Props> = ({ transactions }: Props) => (
   <div className="table">
     <div>
       <div>

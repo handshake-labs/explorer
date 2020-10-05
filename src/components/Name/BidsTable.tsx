@@ -8,7 +8,7 @@ interface Props {
   bids: Array<NameBid>;
 }
 
-const Table: React.FC<Props> = ({ bids }: Props) => (
+const Table: FC<Props> = ({ bids }: Props) => (
   <div className="table">
     <div>
       <div>

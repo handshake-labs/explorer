@@ -5,6 +5,8 @@
     "module": "esnext",
     "target": "es6",
     "jsx": "react",
+    "jsxFactory": "_prh",
+    "jsxFragmentFactory": "_prf",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,

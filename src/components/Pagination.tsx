@@ -11,7 +11,7 @@ interface Props {
   route: (page: number) => Route;
 }
 
-const Pagination: React.FC<Props> = ({ count, page, limit, route }: Props) => {
+const Pagination: FC<Props> = ({ count, page, limit, route }: Props) => {
   const max = (Math.ceil(count / limit) || 1) - 1;
 
   if (!max) return null;

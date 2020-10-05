@@ -7,7 +7,7 @@ interface Props {
   detailed?: boolean;
 }
 
-const TxInput: React.FC<Props> = ({ input, detailed }: Props) => (
+const TxInput: FC<Props> = ({ input, detailed }: Props) => (
   <div>
     {" "}
     <div>

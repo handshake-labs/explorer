@@ -1,12 +1,11 @@
 import BaseLink from "components/Link";
 import Hash from "components/Hash";
 
-interface Props {
+type Props = WithChildren<{
   txid: string;
-  children?: React.ReactNode;
-}
+}>;
 
-const Link: React.FC<Props> = ({ txid, children }: Props) => (
+const Link: FC<Props> = ({ txid, children }: Props) => (
   <BaseLink route={{ id: "transaction", params: { txid } }}>
     {children ? (
       children

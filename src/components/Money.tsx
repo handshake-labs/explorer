@@ -2,7 +2,7 @@ interface Props {
   value: number;
 }
 
-const Money: React.FC<Props> = ({ value }: Props) => {
+const Money: FC<Props> = ({ value }: Props) => {
   const s = "000000" + value.toString();
   const l = s.length - 6;
   return (

@@ -7,7 +7,7 @@ interface Props {
   records: Array<NameRecord>;
 }
 
-const Table: React.FC<Props> = ({ records }: Props) => {
+const Table: FC<Props> = ({ records }: Props) => {
   return (
     <div className="table">
       <div>

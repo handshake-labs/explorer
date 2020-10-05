@@ -13,7 +13,7 @@ interface Props {
   query: string;
 }
 
-const SearchResult: React.FC<Props> = ({ query }) => {
+const SearchResult: FC<Props> = ({ query }) => {
   const search = useAPI("/search", { query });
 
   if (!search) return <Spinner />;
@@ -36,7 +36,7 @@ const SearchResult: React.FC<Props> = ({ query }) => {
       ) : null}
       {name ? (
         <div styleName="result">
-         Name <NameLink name={name} />
+          Name <NameLink name={name} />
         </div>
       ) : null}
     </>

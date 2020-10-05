@@ -1,5 +1,7 @@
+import { useEffect } from "preact/hooks";
+
 export const useTitle = (title: string): void => {
-  React.useEffect(() => {
+  useEffect(() => {
     const prevTitle = document.title;
     document.title = title;
     return () => {

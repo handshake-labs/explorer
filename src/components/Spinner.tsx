@@ -1,6 +1,6 @@
 import "./Spinner.css";
 
-const Spinner: React.FC = () => (
+const Spinner: FC = () => (
   <div styleName="spinner">
     <div styleName="sk-fold">
       <div styleName="sk-fold-cube"></div>

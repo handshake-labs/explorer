@@ -15,7 +15,7 @@ interface Props {
   txid: string;
 }
 
-const Transaction: React.FC<Props> = ({ txid }) => {
+const Transaction: FC<Props> = ({ txid }) => {
   useTitle(`Transaction ${txid}`);
 
   const tx = useAPI("/tx", { txid });

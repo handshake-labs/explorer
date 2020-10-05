@@ -4,7 +4,7 @@ interface Props {
   hash: string;
 }
 
-const Hash: React.FC<Props> = ({ hash }: Props) => (
+const Hash: FC<Props> = ({ hash }: Props) => (
   <span styleName="hash">
     {hash.substr(0, 6)}
     <span styleName="ellipsis" />
