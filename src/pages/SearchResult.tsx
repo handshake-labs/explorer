@@ -26,17 +26,17 @@ const SearchResult: React.FC<Props> = ({ query }) => {
       <h2 className="separator">Search</h2>
       {transaction ? (
         <div styleName="result">
-          <TransactionLink txid={transaction} />
+          Transaction <TransactionLink txid={transaction} />
         </div>
       ) : null}
       {block ? (
         <div styleName="result">
-          <BlockLink height={block} />
+          Block <BlockLink height={block} />
         </div>
       ) : null}
       {name ? (
         <div styleName="result">
-          <NameLink name={name} />
+         Name <NameLink name={name} />
         </div>
       ) : null}
     </>
