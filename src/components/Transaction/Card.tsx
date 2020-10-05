@@ -9,13 +9,13 @@ interface Props {
 const Card: React.FC<Props> = ({ transaction }: Props) => (
   <div className="card">
     <div>
-      <span>TXID</span>
+      <span>Txid</span>
       <span>{transaction.txid}</span>
     </div>
     <div>
       <span>Block Height</span>
       <span>
-        {transaction.block_height === -1 ? (
+        {transaction.block_height === null ? (
           "Mempool"
         ) : (
           <BlockLink height={transaction.block_height} />

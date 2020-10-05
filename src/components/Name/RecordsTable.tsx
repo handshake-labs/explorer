@@ -24,7 +24,13 @@ const Table: React.FC<Props> = ({ records }: Props) => {
       {records.map((record, i) => (
         <div key={i}>
           <div>
-            <BlockLink height={record.height} />
+            <span>
+              {record.height === null ? (
+                "Mempool"
+              ) : (
+                <BlockLink height={record.height} />
+              )}
+            </span>
           </div>
           <div>
             <TransactionLink txid={record.txid} />

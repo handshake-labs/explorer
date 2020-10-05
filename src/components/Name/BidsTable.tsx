@@ -27,7 +27,13 @@ const Table: React.FC<Props> = ({ bids }: Props) => (
     {bids.map((bid, i) => (
       <div key={i}>
         <div>
-          <BlockLink height={bid.height} />
+          <span>
+            {bid.height === null ? (
+              "Mempool"
+            ) : (
+              <BlockLink height={bid.height} />
+            )}
+          </span>
         </div>
         <div>
           <TransactionLink txid={bid.txid} />
@@ -36,7 +42,9 @@ const Table: React.FC<Props> = ({ bids }: Props) => (
           <Money value={bid.lockup} />
         </div>
         <div>
-          {bid.reveal === -1 ? <b>NONE</b> : <Money value={bid.reveal} />}
+          <span>
+            {bid.reveal === null ? <b>NONE</b> : <Money value={bid.reveal} />}
+          </span>
         </div>
       </div>
     ))}

@@ -40,8 +40,12 @@ const Table: React.FC<Props> = ({ blocks }: Props) => (
         <div>
           <Time time={block.time} />
         </div>
-        <div>{block.size}</div>
-        <div>{block.txsCount}</div>
+        <div>
+          <span>{block.size}</span>
+        </div>
+        <div>
+          <span>{block.txsCount}</span>
+        </div>
       </div>
     ))}
   </div>
