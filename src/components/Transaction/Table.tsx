@@ -1,6 +1,6 @@
 import { Transaction } from "api";
 
-import { Table as BaseTable, TR, TD, TH } from "components/Table";
+import BaseTable from "components/Table";
 import TransactionLink from "components/Transaction/Link";
 import TxInput from "components/Transaction/TxInput";
 import TxOutput from "components/Transaction/TxOutput";
@@ -13,31 +13,31 @@ interface Props {
 
 const Table: FC<Props> = ({ transactions }: Props) => (
   <BaseTable>
-    <TR>
-      <TH id="txid" />
-      <TH id="inputs" />
-      <TH id="outputs" />
-    </TR>
+    <BaseTable.TR>
+      <BaseTable.TH id="txid" />
+      <BaseTable.TH id="inputs" />
+      <BaseTable.TH id="outputs" />
+    </BaseTable.TR>
     {transactions.map(({ txid, inputs, outputs }) => (
-      <TR>
-        <TD>
+      <BaseTable.TR>
+        <BaseTable.TD>
           <TransactionLink txid={txid} />
-        </TD>
-        <TD>
+        </BaseTable.TD>
+        <BaseTable.TD>
           <div styleName="inputs">
             {inputs.map((input) => (
               <TxInput input={input} />
             ))}
           </div>
-        </TD>
-        <TD>
+        </BaseTable.TD>
+        <BaseTable.TD>
           <div styleName="inputs">
             {outputs.map((output) => (
               <TxOutput output={output} />
             ))}
           </div>
-        </TD>
-      </TR>
+        </BaseTable.TD>
+      </BaseTable.TR>
     ))}
   </BaseTable>
 );

@@ -1,6 +1,6 @@
 import { NameRecord } from "api";
 
-import { Table as BaseTable, TR, TD, TH } from "components/Table";
+import BaseTable from "components/Table";
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
 import RecordItem from "components/Name/RecordItem";
@@ -11,22 +11,24 @@ interface Props {
 
 const Table: FC<Props> = ({ records }: Props) => (
   <BaseTable>
-    <TR>
-      <TH id="block" />
-      <TH id="transaction" />
-      <TH id="recordData" />
-    </TR>
+    <BaseTable.TR>
+      <BaseTable.TH id="block" />
+      <BaseTable.TH id="transaction" />
+      <BaseTable.TH id="recordData" />
+    </BaseTable.TR>
     {records.map(({ height, txid, data }) => (
-      <TR>
-        <TD>{height === null ? "Mempool" : <BlockLink height={height} />}</TD>
-        <TD>
+      <BaseTable.TR>
+        <BaseTable.TD>
+          {height === null ? "Mempool" : <BlockLink height={height} />}
+        </BaseTable.TD>
+        <BaseTable.TD>
           <TransactionLink txid={txid} />
-        </TD>
-        <TD>
+        </BaseTable.TD>
+        <BaseTable.TD>
           {" "}
           <RecordItem data={data} />
-        </TD>
-      </TR>
+        </BaseTable.TD>
+      </BaseTable.TR>
     ))}
   </BaseTable>
 );

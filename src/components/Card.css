@@ -29,11 +29,10 @@
 
 @media (max-width: 840px) {
   .card,
-  .row,
   .key,
   .value {
-    width: auto;
     display: block;
+    width: auto;
     text-align: center;
   }
 }

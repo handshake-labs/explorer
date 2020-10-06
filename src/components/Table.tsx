@@ -77,3 +77,7 @@ export const Table: FC<TableProps> = ({ children }: TableProps) => {
     </div>
   );
 };
+
+const ITable = Object.assign(Table, { TR, TD, TH });
+
+export default ITable;

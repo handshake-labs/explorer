@@ -1,7 +1,7 @@
 import { NameBid } from "api";
 
 import Money from "components/Money";
-import { Table as BaseTable, TR, TD, TH } from "components/Table";
+import BaseTable from "components/Table";
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
 
@@ -11,24 +11,28 @@ interface Props {
 
 const Table: FC<Props> = ({ bids }: Props) => (
   <BaseTable>
-    <TR>
-      <TH id="block" />
-      <TH id="transaction" />
-      <TH id="lockup" />
-      <TH id="reveal" />
-    </TR>
+    <BaseTable.TR>
+      <BaseTable.TH id="block" />
+      <BaseTable.TH id="transaction" />
+      <BaseTable.TH id="lockup" />
+      <BaseTable.TH id="reveal" />
+    </BaseTable.TR>
     {bids.map(({ height, txid, lockup, reveal }) => (
-      <TR>
-        <TD>{height === null ? "Mempool" : <BlockLink height={height} />}</TD>
-        <TD>
+      <BaseTable.TR>
+        <BaseTable.TD>
+          {height === null ? "Mempool" : <BlockLink height={height} />}
+        </BaseTable.TD>
+        <BaseTable.TD>
           <TransactionLink txid={txid} />
-        </TD>
-        <TD>
+        </BaseTable.TD>
+        <BaseTable.TD>
           {" "}
           <Money value={lockup} />
-        </TD>
-        <TD>{reveal === null ? "None" : <Money value={reveal} />}</TD>
-      </TR>
+        </BaseTable.TD>
+        <BaseTable.TD>
+          {reveal === null ? "None" : <Money value={reveal} />}
+        </BaseTable.TD>
+      </BaseTable.TR>
     ))}
   </BaseTable>
 );
