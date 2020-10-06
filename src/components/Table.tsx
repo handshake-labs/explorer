@@ -1,17 +1,46 @@
-import { Ref, useRef, useEffect } from "preact/hooks";
+import { useRef, useEffect } from "preact/hooks";
+
+import strings from "strings";
 
 import "./Table.css";
 
-interface Props {
-  head: Children[];
-  rows: Children[][];
+interface TRProps {
+  children?: Children;
 }
 
-const Table: FC<Props> = ({ head, rows }: Props) => {
-  const tableRef = useRef<HTMLElement | null>(null);
+export const TR: FC<TRProps> = ({ children }: TRProps) => (
+  <div styleName="tr">{children}</div>
+);
+
+interface TDProps {
+  children?: Children;
+}
+
+export const TD: FC<TDProps> = ({ children }: TDProps) => (
+  <div styleName="td">
+    <span>{children}</span>
+  </div>
+);
+
+interface THProps {
+  id: keyof typeof strings;
+}
+
+export const TH: FC<THProps> = ({ id }: THProps) => (
+  <div styleName="th">
+    <span>{strings[id]}</span>
+  </div>
+);
+
+interface TableProps {
+  children?: Children;
+}
+
+export const Table: FC<TableProps> = ({ children }: TableProps) => {
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const table = tableRef.current;
+    const table = ref.current;
     if (table === null) {
       return;
     }
@@ -35,33 +64,16 @@ const Table: FC<Props> = ({ head, rows }: Props) => {
         const cell = cells[i] as HTMLElement;
         cell.style.minWidth = widthPx[i] + "px";
         cell.style.maxWidth =
-          widthPercent[i] < maxWidthPercent ? widthPercent[i] + "%" : "auto";
+          widthPercent[i] < maxWidthPercent ? widthPercent[i] + "%" : "none";
       }
     }
   });
 
   return (
     <div styleName="wrapper">
-      {" "}
-      <div styleName="table" ref={(e) => (tableRef.current = e)}>
-        <div styleName="head">
-          {head.map((c, i) => (
-            <div styleName="cell">
-              <span>{c}</span>
-            </div>
-          ))}
-        </div>
-        {rows.map((row, j) => (
-          <div styleName="row">
-            {row.map((c, i) => (
-              <div styleName="cell">
-                <span>{c}</span>
-              </div>
-            ))}
-          </div>
-        ))}
+      <div styleName="table" ref={(e) => (ref.current = e)}>
+        {children}
       </div>
     </div>
   );
 };
-export default Table;

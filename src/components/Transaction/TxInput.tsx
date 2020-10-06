@@ -9,7 +9,6 @@ interface Props {
 
 const TxInput: FC<Props> = ({ input, detailed }: Props) => (
   <div>
-    {" "}
     <div>
       {input.hashPrevout ===
       "0000000000000000000000000000000000000000000000000000000000000000" ? (

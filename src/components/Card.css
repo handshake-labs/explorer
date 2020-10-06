@@ -1,12 +1,9 @@
 .card {
-  display: table;
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid #d6d6d6;
   border-radius: 10px;
   overflow: hidden;
-}
-
-.row {
-  display: table-row;
 }
 
 .key,
@@ -14,7 +11,7 @@
   display: table-cell;
   padding: 10px;
   border-bottom: 1px solid #d6d6d6;
-  overflow-x: auto;
+  box-sizing: border-box;
 }
 
 .key {
@@ -23,6 +20,11 @@
   background: #0080a9;
   color: #fff;
   text-align: right;
+}
+
+.value {
+  flex: 1 70%;
+  overflow-x: auto;
 }
 
 @media (max-width: 840px) {

@@ -9,20 +9,20 @@
   white-space: nowrap;
 }
 
-.row,
-.head {
+.tr {
   display: flex;
   border-bottom: 1px solid #d6d6d6;
 }
 
-.head {
-  font-weight: bold;
-}
-
-.cell {
+.td,
+.th {
   flex: 1;
   padding: 10px;
   & > span {
     display: inline-block;
   }
+}
+
+.th {
+  font-weight: bold;
 }

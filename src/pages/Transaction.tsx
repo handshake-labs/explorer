@@ -36,7 +36,7 @@ const Transaction: FC<Props> = ({ txid }) => {
           <h3>{tx.inputs.length} Inputs</h3>
           {tx.inputs.map((input, i) => (
             <TxInput input={input} key={i} detailed={true} />
-          ))}{" "}
+          ))}
         </div>
         <div styleName="outputs">
           <h3>{tx.outputs.length} Outputs</h3>

@@ -1,17 +1,27 @@
+import strings from "strings";
+
 import "./Card.css";
 
-interface Props {
-  rows: Array<[string, Children]>;
+interface PropertyProps {
+  id: keyof typeof strings;
+  children?: Children;
 }
 
-const Card: FC<Props> = ({ rows }: Props) => (
-  <div styleName="card">
-    {rows.map(([key, value]) => (
-      <div styleName="row">
-        <div styleName="key">{key}</div>
-        <div styleName="value">{value}</div>
-      </div>
-    ))}
-  </div>
+const Prop: FC<PropertyProps> = ({ id, children }: PropertyProps) => (
+  <>
+    <div styleName="key">{strings[id]}</div>
+    <div styleName="value">{children}</div>
+  </>
 );
-export default Card;
+
+interface CardProps {
+  children?: Children;
+}
+
+const Card: FC<CardProps> = ({ children }: CardProps) => (
+  <div styleName="card">{children}</div>
+);
+
+const ICard = Object.assign(Card, { Prop });
+
+export default ICard;
