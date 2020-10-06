@@ -1,6 +1,10 @@
 .inputs,
 .outputs {
-  & > div {
-    display: block !important;
+  & > * {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+  max-width: 100%;
 }

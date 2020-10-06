@@ -1,46 +1,22 @@
 import { NameRecord } from "api";
+
+import BaseTable from "components/Table";
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
 import RecordItem from "components/Name/RecordItem";
 
 interface Props {
-  records: Array<NameRecord>;
+  records: NameRecord[];
 }
 
-const Table: FC<Props> = ({ records }: Props) => {
-  return (
-    <div className="table">
-      <div>
-        <div>
-          <span>Block</span>
-        </div>
-        <div>
-          <span>Transaction</span>
-        </div>
-        <div>
-          <span>Data</span>
-        </div>
-      </div>
-      {records.map((record, i) => (
-        <div key={i}>
-          <div>
-            <span>
-              {record.height === null ? (
-                "Mempool"
-              ) : (
-                <BlockLink height={record.height} />
-              )}
-            </span>
-          </div>
-          <div>
-            <TransactionLink txid={record.txid} />
-          </div>
-          <div>
-            <RecordItem data={record.data} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+const Table: FC<Props> = ({ records }: Props) => (
+  <BaseTable
+    head={["Block", "Transaction", "Data"]}
+    rows={records.map(({ height, txid, data }) => [
+      height === null ? "Mempool" : <BlockLink height={height} />,
+      <TransactionLink txid={txid} />,
+      <RecordItem data={data} />,
+    ])}
+  />
+);
 export default Table;

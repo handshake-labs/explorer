@@ -37,3 +37,8 @@ h3 {
 b {
   font-weight: bold;
 }
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}

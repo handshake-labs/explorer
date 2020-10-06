@@ -22,11 +22,16 @@ const App: FC = () => {
     <>
       <header styleName="header">
         <div styleName="wrapper">
-          <Link route={{ id: "home", params: {} }}>
-            <h1 styleName="home">
+          <h1 styleName="home">
+            <Link route={{ id: "home", params: {} }}>
+              <div styleName="logo" />
               <span>{"handshake\nnetwork"}</span>
-            </h1>
-          </Link>
+            </Link>
+          </h1>
+          <label styleName="toggle" for="header-toggle-menu">
+            <div styleName="logo" /> handshake network
+          </label>
+          <input type="checkbox" id="header-toggle-menu" />
           <nav styleName="menu">
             <ul>
               <li>
@@ -40,26 +45,26 @@ const App: FC = () => {
                 </Link>
               </li>
             </ul>
+            <form
+              styleName="search"
+              onSubmit={(e) => {
+                const query = (e.target as any).search.value.replace(/\s/g, "");
+                if (query) {
+                  (e.target as any).search.value = "";
+                  replaceRoute({
+                    id: "search",
+                    params: {
+                      query,
+                    },
+                  });
+                }
+                e.preventDefault();
+              }}
+            >
+              <input name="search" />
+              <button role="submit">Search</button>
+            </form>
           </nav>
-          <form
-            styleName="search"
-            onSubmit={(e) => {
-              const query = (e.target as any).search.value.replace(/\s/g, "");
-              if (query) {
-                (e.target as any).search.value = "";
-                replaceRoute({
-                  id: "search",
-                  params: {
-                    query,
-                  },
-                });
-              }
-              e.preventDefault();
-            }}
-          >
-            <input name="search" />
-            <button role="submit">Search</button>
-          </form>
         </div>
       </header>
       <main styleName="main">

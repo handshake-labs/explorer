@@ -17,7 +17,7 @@ const TxInput: FC<Props> = ({ input, detailed }: Props) => (
       ) : (
         <>
           <TransactionLink txid={input.hashPrevout} />
-          &nbsp;#{input.indexPrevout}
+          <sub>{input.indexPrevout}</sub>
         </>
       )}
     </div>

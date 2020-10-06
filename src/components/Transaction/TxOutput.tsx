@@ -1,7 +1,8 @@
 import { TxOutput as TxOutputModel } from "api";
 
-import NameLink from "components/Name/Link";
+import Hash from "components/Hash";
 import Money from "components/Money";
+import NameLink from "components/Name/Link";
 
 import "./TxOutput.css";
 
@@ -14,9 +15,11 @@ const TxOutput: FC<Props> = ({ output, detailed }: Props) => {
   return (
     <div>
       <div>
+        <Hash hash={output.address} />
+      </div>
+      <div>
         <Money value={output.value} />
       </div>
-      <div>{output.address}</div>
       {detailed ? (
         <div>
           <div>

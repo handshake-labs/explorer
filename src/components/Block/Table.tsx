@@ -2,8 +2,8 @@ import { Block } from "api";
 
 import Hash from "components/Hash";
 import Time from "components/Time";
-import BlockLink from "components/Block/Link";
 import BaseTable from "components/Table";
+import BlockLink from "components/Block/Link";
 
 interface Props {
   blocks: Block[];
@@ -11,15 +11,13 @@ interface Props {
 
 const Table: FC<Props> = ({ blocks }: Props) => (
   <BaseTable
-    header={["Height", "Hash", "Time", "Size", "TXs count"]}
-    rows={blocks.map((block) => [
-      <BlockLink height={block.height} />,
-      <BlockLink height={block.height}>
-        <Hash hash={block.hash} />
-      </BlockLink>,
-      <Time time={block.time} />,
-      block.size,
-      block.txsCount,
+    head={["Height", "Hash", "Time", "Size", "TXs count"]}
+    rows={blocks.map(({ height, hash, time, size, txsCount }) => [
+      <BlockLink height={height} />,
+      <Hash hash={hash} />,
+      <Time time={time} />,
+      size,
+      txsCount,
     ])}
   />
 );
