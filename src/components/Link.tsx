@@ -8,9 +8,10 @@ const onClick = (path: string) => (e: MouseEvent) => {
   }
 };
 
-type Props = WithChildren<{
+interface Props {
   route: Route;
-}>;
+  children?: Children;
+}
 
 const Link: FC<Props> = ({ route, children }: Props) => {
   const path = buildPath(route);

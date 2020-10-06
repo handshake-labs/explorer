@@ -5,7 +5,7 @@ import { toUnicode } from "punycode";
 import Spinner from "components/Spinner";
 import Pagination from "components/Pagination";
 
-import BlockLink from "components/Block/Link";
+import NameCard from "components/Name/Card";
 import BidsTable from "components/Name/BidsTable";
 import RecordsTable from "components/Name/RecordsTable";
 
@@ -20,7 +20,7 @@ const limit = 50;
 const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
   useTitle(`Name ${name}`);
 
-  const info = useAPI("/name", { name });
+  const data = useAPI("/name", { name });
   const bids = useAPI("/name/bids", {
     name,
     limit,
@@ -32,7 +32,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
     offset: records_page * limit,
   });
 
-  if (!info) return <Spinner />;
+  if (!data) return <Spinner />;
   const unicodeName = toUnicode(name);
 
   return (
@@ -42,56 +42,13 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
           {name} {unicodeName != name && "(" + unicodeName + ")"}
         </span>
       </h2>
-      <div className="card">
-        {info.release_block && (
-          <div>
-            <span>Release block</span>
-            <span>
-              <BlockLink height={info.release_block} />
-            </span>
-          </div>
-        )}
-        {info.state.open_height && (
-          <>
-            <div>
-              <span>Last auction open block</span>
-              <span>
-                <BlockLink height={info.state.open_height} />
-              </span>
-            </div>
-            <div>
-              <span>Bid period start</span>
-              <span>
-                <BlockLink height={info.state.open_height + 36} />
-              </span>
-            </div>
-            <div>
-              <span>Reveal period start</span>
-              <span>
-                <BlockLink height={info.state.open_height + 36 + 144 * 5} />
-              </span>
-            </div>
-            <div>
-              <span>Reveal period end</span>
-              <span>
-                <BlockLink height={info.state.open_height + 36 + 144 * 15} />
-              </span>
-            </div>
-          </>
-        )}
-        {info.state.current_state && (
-          <div>
-            <span>Auction state</span>
-            <span>{info.state.current_state}</span>
-          </div>
-        )}
-      </div>
+      <NameCard data={data} />
       <h2 className="separator">
         <span>Auction history</span>
       </h2>
       {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
       <Pagination
-        count={info.bids_count}
+        count={data.bids_count}
         limit={limit}
         page={bids_page}
         route={(bids_page: number) => ({
@@ -104,7 +61,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
       </h2>
       {records ? <RecordsTable records={records.records} /> : <Spinner />}
       <Pagination
-        count={info.records_count}
+        count={data.records_count}
         limit={limit}
         page={records_page}
         route={(records_page: number) => ({

@@ -2,9 +2,10 @@ import { toUnicode } from "punycode";
 
 import BaseLink from "components/Link";
 
-type Props = WithChildren<{
+interface Props {
   name: string;
-}>;
+  children?: Children;
+}
 
 const Link: FC<Props> = ({ name, children }: Props) => (
   <BaseLink

@@ -1,0 +1,22 @@
+.table {
+  display: table;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.row {
+  display: table-row;
+}
+
+.header {
+  display: table-row;
+  font-weight: bold;
+}
+
+.cell {
+  padding: 10px;
+  display: table-cell;
+  vertical-align: top;
+  border-bottom: 1px solid #d6d6d6;
+}

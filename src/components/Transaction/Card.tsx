@@ -1,5 +1,6 @@
 import { Transaction } from "api";
 
+import BaseCard from "components/Card";
 import BlockLink from "components/Block/Link";
 
 interface Props {
@@ -7,45 +8,24 @@ interface Props {
 }
 
 const Card: FC<Props> = ({ transaction }: Props) => (
-  <div className="card">
-    <div>
-      <span>Txid</span>
-      <span>{transaction.txid}</span>
-    </div>
-    <div>
-      <span>Block Height</span>
-      <span>
-        {transaction.block_height === null ? (
+  <BaseCard
+    rows={[
+      ["Txid", transaction.txid],
+      [
+        "Block",
+        transaction.block_height === null ? (
           "Mempool"
         ) : (
           <BlockLink height={transaction.block_height} />
-        )}
-      </span>
-    </div>
-    <div>
-      <span>Fee</span>
-      <span>{transaction.fee}</span>
-    </div>
-    <div>
-      <span>Locktime</span>
-      <span>{transaction.locktime}</span>
-    </div>
-    <div>
-      <span>Rate</span>
-      <span>{transaction.rate}</span>
-    </div>
-    <div>
-      <span>Size</span>
-      <span>{transaction.size}</span>
-    </div>
-    <div>
-      <span>Version</span>
-      <span>{transaction.version}</span>
-    </div>
-    <div>
-      <span>Witness</span>
-      <span>{transaction.witnessTx}</span>
-    </div>
-  </div>
+        ),
+      ],
+      ["Fee", transaction.fee],
+      ["Locktime", transaction.locktime],
+      ["Rate", transaction.rate],
+      ["Size", transaction.size],
+      ["Version", transaction.version],
+      ["Witness", transaction.witnessTx],
+    ]}
+  />
 );
 export default Card;

@@ -7,6 +7,9 @@ import {
 } from "preact";
 
 declare global {
+  type Children = ComponentChildren;
+  type FC<P = {}> = FunctionComponent<P>;
+
   const API_ORIGIN: string;
 
   function _prh(
@@ -19,10 +22,6 @@ declare global {
     ...children: ComponentChildren[]
   ): VNode<any>;
   const _prf: ComponentClass;
-  type WithChildren<P, C = ComponentChildren> = P & {
-    children?: C;
-  };
-  type FC<P = {}> = FunctionComponent<P>;
   namespace JSX {
     type IntrinsicElementsInternal = JSXInternal.IntrinsicElements;
     type IntrinsicElements = {

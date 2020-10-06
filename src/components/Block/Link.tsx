@@ -1,8 +1,9 @@
 import BaseLink from "components/Link";
 
-type Props = WithChildren<{
+interface Props {
   height: number;
-}>;
+  children?: Children;
+}
 
 const Link: FC<Props> = ({ height, children }: Props) => (
   <BaseLink route={{ id: "block", params: { height, page: 0 } }}>

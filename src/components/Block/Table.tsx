@@ -3,51 +3,24 @@ import { Block } from "api";
 import Hash from "components/Hash";
 import Time from "components/Time";
 import BlockLink from "components/Block/Link";
+import BaseTable from "components/Table";
 
 interface Props {
-  blocks: Array<Block>;
+  blocks: Block[];
 }
 
 const Table: FC<Props> = ({ blocks }: Props) => (
-  <div className="table">
-    <div>
-      <div>
-        <span>Height</span>
-      </div>
-      <div>
-        <span>Hash</span>
-      </div>
-      <div>
-        <span>Time</span>
-      </div>
-      <div>
-        <span>Size</span>
-      </div>
-      <div>
-        <span>TXs count</span>
-      </div>
-    </div>
-    {blocks.map((block) => (
-      <div key={block.hash}>
-        <div>
-          <BlockLink height={block.height} />
-        </div>
-        <div>
-          <BlockLink height={block.height}>
-            <Hash hash={block.hash} />
-          </BlockLink>
-        </div>
-        <div>
-          <Time time={block.time} />
-        </div>
-        <div>
-          <span>{block.size}</span>
-        </div>
-        <div>
-          <span>{block.txsCount}</span>
-        </div>
-      </div>
-    ))}
-  </div>
+  <BaseTable
+    header={["Height", "Hash", "Time", "Size", "TXs count"]}
+    rows={blocks.map((block) => [
+      <BlockLink height={block.height} />,
+      <BlockLink height={block.height}>
+        <Hash hash={block.hash} />
+      </BlockLink>,
+      <Time time={block.time} />,
+      block.size,
+      block.txsCount,
+    ])}
+  />
 );
 export default Table;
