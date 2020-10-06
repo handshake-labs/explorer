@@ -15,7 +15,7 @@ const TxOutput: FC<Props> = ({ output, detailed }: Props) => {
   return (
     <div>
       <div>
-        <Hash hash={output.address} />
+        {detailed ?output.address: <Hash hash={output.address} /> }
       </div>
       <div>
         <Money value={output.value} />

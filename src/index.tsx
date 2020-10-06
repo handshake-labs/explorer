@@ -1,6 +1,6 @@
 import { render } from "preact";
 
-import "./css/reset.css";
+import "normalize.css";
 import "./css/defaults.css";
 import "./css/icons.css";
 import "./css/mixins.css";

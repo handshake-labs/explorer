@@ -25,20 +25,3 @@ a:hover {
     flex: 1;
   }
 }
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 25px;
-}
-
-b {
-  font-weight: bold;
-}
-
-sub {
-  vertical-align: sub;
-  font-size: smaller;
-}

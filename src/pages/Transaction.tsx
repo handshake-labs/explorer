@@ -31,19 +31,21 @@ const Transaction: FC<Props> = ({ txid }) => {
         </span>
       </h2>
       <Card transaction={tx}></Card>
-      <div styleName="txios">
-        <div styleName="inputs">
-          <h3>{tx.inputs.length} Inputs</h3>
-          {tx.inputs.map((input, i) => (
-            <TxInput input={input} key={i} detailed={true} />
-          ))}
-        </div>
-        <div styleName="outputs">
-          <h3>{tx.outputs.length} Outputs</h3>
-          {tx.outputs.map((output, i) => (
-            <TxOutput output={output} key={i} detailed={true} />
-          ))}
-        </div>
+      <h2 className="separator">
+        <span>Inputs ({tx.inputs.length})</span>
+      </h2>
+      <div styleName="list">
+        {tx.inputs.map((input, i) => (
+          <TxInput input={input} key={i} detailed={true} />
+        ))}
+      </div>
+      <h2 className="separator">
+        <span>Outputs ({tx.outputs.length})</span>
+      </h2>
+      <div styleName="list">
+        {tx.outputs.map((output, i) => (
+          <TxOutput output={output} key={i} detailed={true} />
+        ))}
       </div>
     </>
   );

@@ -5,6 +5,7 @@ const onClick = (path: string) => (e: MouseEvent) => {
   if (e.button === 0 && !e.ctrlKey && !e.shiftKey && !e.metaKey) {
     setPath(path);
     e.preventDefault();
+    e.stopPropagation();
   }
 };
 

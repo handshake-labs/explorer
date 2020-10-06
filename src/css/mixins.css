@@ -15,33 +15,3 @@
     margin-left: 10px;
   }
 }
-
-.table {
-  display: table;
-  width: 100%;
-  border: 1px solid #d6d6d6;
-  border-radius: 10px;
-  overflow: hidden;
-  & > div:first-child {
-    font-weight: bold;
-  }
-  & > div {
-    width: 100%;
-    display: table-row;
-    & > div {
-      display: table-cell;
-      vertical-align: top;
-      border-bottom: 1px solid #d6d6d6;
-      &:first-child {
-        padding-left: 10px;
-      }
-      &:last-child {
-        padding-right: 10px;
-      }
-      & > * {
-        display: inline-block;
-        padding: 10px 0;
-      }
-    }
-  }
-}

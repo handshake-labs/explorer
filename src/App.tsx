@@ -15,36 +15,46 @@ import "./App.css";
 
 const App: FC = () => {
   const [route, setRoute] = useState(getRoute());
+  const [menuShown, setMenuShown] = useState<boolean>(false);
 
-  useEffect(() => listen(() => setRoute(getRoute())), []);
+  useEffect(() => listen(() => {
+    setMenuShown(false);
+    setRoute(getRoute())
+  }), []);
+
+  console.log(route, menuShown)
 
   return (
     <>
-      <header styleName="header">
+      <header
+      styleName={"header" + (menuShown ?  " menu-shown" : "")}
+      onClick={(e) => {
+        if (!menuShown) return;
+        setMenuShown(false);
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      >
         <div styleName="wrapper">
-          <h1 styleName="home">
-            <Link route={{ id: "home", params: {} }}>
-              <div styleName="logo" />
-              <span>{"handshake\nnetwork"}</span>
-            </Link>
-          </h1>
-          <label styleName="toggle" for="header-toggle-menu">
-            <div styleName="logo" /> handshake network
-          </label>
-          <input type="checkbox" id="header-toggle-menu" />
+          <div styleName="home">
+          <Link route={{ id: "home", params: {} }}>
+          <h1><span>{"handshake\nnetwork"}</span></h1>
+          </Link>
+          </div>
+          <div styleName="menu-show" onClick={(e) => {
+            setMenuShown(true);
+            e.preventDefault();
+            e.stopPropagation();
+          }}>
+          <h1><span>{"handshake\nnetwork"}</span></h1>
+          </div>
           <nav styleName="menu">
-            <ul>
-              <li>
-                <Link route={{ id: "blocks", params: { page: 0 } }}>
-                  Blocks
-                </Link>
-              </li>
-              <li>
-                <Link route={{ id: "mempool", params: { page: 0 } }}>
-                  Mempool
-                </Link>
-              </li>
-            </ul>
+            <Link route={{ id: "blocks", params: { page: 0 } }}>
+              Blocks
+            </Link>
+            <Link route={{ id: "mempool", params: { page: 0 } }}>
+              Mempool
+            </Link>
             <form
               styleName="search"
               onSubmit={(e) => {

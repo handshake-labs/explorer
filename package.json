@@ -36,6 +36,7 @@
   "dependencies": {
     "bns": "^0.13.0",
     "bsert": "0.0.10",
+    "normalize.css": "^8.0.1",
     "preact": "^10.5.4",
     "punycode": "^2.1.1"
   },
