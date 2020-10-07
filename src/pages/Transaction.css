@@ -3,6 +3,6 @@
   max-width: 100%;
   overflow-x: auto;
   & > div {
-  margin: 10px 0;
-}
+    margin: 10px 0;
+  }
 }

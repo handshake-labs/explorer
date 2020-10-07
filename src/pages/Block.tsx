@@ -34,6 +34,9 @@ const Block: FC<Props> = ({ height, page }) => {
         <span className="icon block">{height} </span>
       </h2>
       <Card block={block.block} />
+      <h2 className="separator">
+        <span>Transactions ({block.block.txsCount}) </span>
+      </h2>
       {transactions ? (
         <Transactions transactions={transactions.txs} />
       ) : (

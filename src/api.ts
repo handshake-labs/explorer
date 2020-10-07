@@ -1,44 +1,3 @@
-export type GetBlockByHeightParams = {
-  height: number;
-};
-export type GetBlockByHeightResult = {
-  block: Block;
-  height: number;
-};
-export type Block = {
-  hash: Bytes;
-  height: number;
-  weight: number;
-  size: number;
-  version: number;
-  hashMerkleRoot: Bytes;
-  witnessRoot: Bytes;
-  treeRoot: Bytes;
-  reservedRoot: Bytes;
-  mask: Bytes;
-  time: number;
-  bits: Bytes;
-  difficulty: number;
-  chainwork: Bytes;
-  nonce: number;
-  extraNonce: Bytes;
-  txsCount: number;
-};
-export type Bytes = string;
-export type GetNameBidsByHashParams = {
-  name: string;
-  limit: number;
-  offset: number;
-};
-export type GetNameBidsByHashResult = {
-  bids: Array<NameBid>;
-};
-export type NameBid = {
-  txid: Bytes;
-  height: number | null;
-  lockup: number;
-  reveal: number | null;
-};
 export type GetNameRecordsByHashParams = {
   name: string;
   limit: number;
@@ -52,10 +11,23 @@ export type NameRecord = {
   height: number | null;
   data: Bytes;
 };
-export type GetTransactionByTxidParams = {
-  txid: Bytes;
+export type Bytes = string;
+export type SearchParams = {
+  query: string;
 };
-export type GetTransactionByTxidResult = {
+export type SearchResult = {
+  transaction: string;
+  block: number;
+  name: string;
+};
+export type GetMempoolTxsParams = {
+  limit: number;
+  offset: number;
+};
+export type GetMempoolTxsResult = {
+  txs: Array<Transaction>;
+};
+export type Transaction = {
   txid: Bytes;
   block_height: number | null;
   witnessTx: Bytes;
@@ -91,14 +63,72 @@ export type TxOutput = {
   name?: string;
 };
 export type CovenantAction = string;
-export type GetMempoolTxsParams = {
+export type GetBlockByHeightParams = {
+  height: number;
+};
+export type GetBlockByHeightResult = {
+  block: Block;
+  height: number;
+};
+export type Block = {
+  hash: Bytes;
+  height: number;
+  weight: number;
+  size: number;
+  version: number;
+  hashMerkleRoot: Bytes;
+  witnessRoot: Bytes;
+  treeRoot: Bytes;
+  reservedRoot: Bytes;
+  mask: Bytes;
+  time: number;
+  bits: Bytes;
+  difficulty: number;
+  chainwork: Bytes;
+  nonce: number;
+  extraNonce: Bytes;
+  txsCount: number;
+};
+export type GetNameBidsByHashParams = {
+  name: string;
   limit: number;
   offset: number;
 };
-export type GetMempoolTxsResult = {
-  txs: Array<Transaction>;
+export type GetNameBidsByHashResult = {
+  bids: Array<NameBid>;
 };
-export type Transaction = {
+export type NameBid = {
+  txid: Bytes;
+  height: number | null;
+  lockup: number;
+  reveal: number | null;
+};
+export type GetNameParams = {
+  name: string;
+};
+export type GetNameResult = {
+  reserved?: ReservedName;
+  release_block: number;
+  bids_count: number;
+  records_count: number;
+  state: State;
+};
+export type ReservedName = {
+  originName: Bytes;
+  name: string;
+  nameHash: Bytes;
+  claimAmount: number;
+};
+export type State = {
+  open_height?: number;
+  current_state: AuctionState;
+  auction_completed: boolean;
+};
+export type AuctionState = string;
+export type GetTransactionByTxidParams = {
+  txid: Bytes;
+};
+export type GetTransactionByTxidResult = {
   txid: Bytes;
   block_height: number | null;
   witnessTx: Bytes;
@@ -127,52 +157,14 @@ export type GetTransactionsByBlockHeightParams = {
 export type GetTransactionsByBlockHeightResult = {
   txs: Array<Transaction>;
 };
-export type GetNameParams = {
-  name: string;
-};
-export type GetNameResult = {
-  reserved?: ReservedName;
-  release_block: number;
-  bids_count: number;
-  records_count: number;
-  state: State;
-};
-export type ReservedName = {
-  originName: Bytes;
-  name: string;
-  nameHash: Bytes;
-  claimAmount: number;
-};
-export type State = {
-  open_height: number;
-  current_state: AuctionState;
-  auction_completed: boolean;
-};
-export type AuctionState = string;
-export type SearchParams = {
-  query: string;
-};
-export type SearchResult = {
-  transaction: string;
-  block: number;
-  name: string;
-};
 export type API = {
-  "/block": {
-    params: GetBlockByHeightParams;
-    result: GetBlockByHeightResult;
-  };
-  "/name/bids": {
-    params: GetNameBidsByHashParams;
-    result: GetNameBidsByHashResult;
-  };
   "/name/records": {
     params: GetNameRecordsByHashParams;
     result: GetNameRecordsByHashResult;
   };
-  "/tx": {
-    params: GetTransactionByTxidParams;
-    result: GetTransactionByTxidResult;
+  "/search": {
+    params: SearchParams;
+    result: SearchResult;
   };
   "/mempool": {
     params: GetMempoolTxsParams;
@@ -182,6 +174,22 @@ export type API = {
     params: GetBlockByHeightParams;
     result: GetBlockByHeightResult;
   };
+  "/block": {
+    params: GetBlockByHeightParams;
+    result: GetBlockByHeightResult;
+  };
+  "/name/bids": {
+    params: GetNameBidsByHashParams;
+    result: GetNameBidsByHashResult;
+  };
+  "/name": {
+    params: GetNameParams;
+    result: GetNameResult;
+  };
+  "/tx": {
+    params: GetTransactionByTxidParams;
+    result: GetTransactionByTxidResult;
+  };
   "/blocks": {
     params: GetBlocksParams;
     result: GetBlocksResult;
@@ -189,13 +197,5 @@ export type API = {
   "/block/txs": {
     params: GetTransactionsByBlockHeightParams;
     result: GetTransactionsByBlockHeightResult;
-  };
-  "/name": {
-    params: GetNameParams;
-    result: GetNameResult;
-  };
-  "/search": {
-    params: SearchParams;
-    result: SearchResult;
   };
 };

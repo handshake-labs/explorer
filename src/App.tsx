@@ -17,44 +17,49 @@ const App: FC = () => {
   const [route, setRoute] = useState(getRoute());
   const [menuShown, setMenuShown] = useState<boolean>(false);
 
-  useEffect(() => listen(() => {
-    setMenuShown(false);
-    setRoute(getRoute())
-  }), []);
-
-  console.log(route, menuShown)
+  useEffect(
+    () =>
+      listen(() => {
+        setMenuShown(false);
+        setRoute(getRoute());
+      }),
+    []
+  );
 
   return (
     <>
       <header
-      styleName={"header" + (menuShown ?  " menu-shown" : "")}
-      onClick={(e) => {
-        if (!menuShown) return;
-        setMenuShown(false);
-        e.preventDefault();
-        e.stopPropagation();
-      }}
+        styleName={"header" + (menuShown ? " menu-shown" : "")}
+        onClick={(e) => {
+          if (!menuShown) return;
+          setMenuShown(false);
+          e.preventDefault();
+          e.stopPropagation();
+        }}
       >
         <div styleName="wrapper">
           <div styleName="home">
-          <Link route={{ id: "home", params: {} }}>
-          <h1><span>{"handshake\nnetwork"}</span></h1>
-          </Link>
+            <Link route={{ id: "home", params: {} }}>
+              <h1>
+                <span>{"handshake\nnetwork"}</span>
+              </h1>
+            </Link>
           </div>
-          <div styleName="menu-show" onClick={(e) => {
-            setMenuShown(true);
-            e.preventDefault();
-            e.stopPropagation();
-          }}>
-          <h1><span>{"handshake\nnetwork"}</span></h1>
+          <div
+            styleName="menu-show"
+            onClick={(e) => {
+              setMenuShown(true);
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            <h1>
+              <span>{"handshake\nnetwork"}</span>
+            </h1>
           </div>
           <nav styleName="menu">
-            <Link route={{ id: "blocks", params: { page: 0 } }}>
-              Blocks
-            </Link>
-            <Link route={{ id: "mempool", params: { page: 0 } }}>
-              Mempool
-            </Link>
+            <Link route={{ id: "blocks", params: { page: 0 } }}>Blocks</Link>
+            <Link route={{ id: "mempool", params: { page: 0 } }}>Mempool</Link>
             <form
               styleName="search"
               onSubmit={(e) => {
@@ -94,7 +99,13 @@ const App: FC = () => {
       </main>
       <footer styleName="footer">
         <div styleName="wrapper">
-          <div styleName="copyright"> &copy; 2020</div>
+          <div styleName="copyright">
+            {" "}
+            &copy; 2020{" "}
+            <div styleName="contactUs">
+              <a href="https://t.me/hnsnetwork">Contact us</a>{" "}
+            </div>
+          </div>
         </div>
       </footer>
     </>

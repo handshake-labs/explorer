@@ -34,6 +34,8 @@ const strings = {
   revealHeightStart: "Reveal Period Start",
   revealHeightEnd: "Reveal Period End",
   auctionState: "Auction State",
+  claimAmount: "Claim Amount",
+  originName: "Origin Name",
 } as const;
 
 export default strings;

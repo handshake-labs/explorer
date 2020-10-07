@@ -10,18 +10,19 @@
     display: flex;
     align-items: center;
   }
-    & a, & h1 {
-        display: inline-block;
-        height: 80px;
-        color: #000;
-        line-height: 80px;
-        font-weight: bold;
-    }
+  & a,
+  & h1 {
+    display: inline-block;
+    height: 80px;
+    color: #000;
+    line-height: 80px;
+    font-weight: bold;
+  }
   & h1 {
     margin: 0;
     font-size: 1.3em;
-    &:before{
-      content:'';
+    &:before {
+      content: "";
       display: inline-block;
       vertical-align: middle;
       width: 60px;
@@ -55,7 +56,8 @@
 .search {
   max-width: 300px;
   margin-left: auto;
-  & input, & button {
+  & input,
+  & button {
     display: inline-block;
     padding: 5px 10px;
     border: 1px solid #d6d6d6;
@@ -90,7 +92,8 @@
   .main {
     margin-top: 80px;
   }
-  .home, .menu {
+  .home,
+  .menu {
     display: none;
   }
   .menu-show {
@@ -130,6 +133,14 @@
 .footer {
   background: #f3f3f3;
   border-top: 1px solid #d6d6d6;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.contactUs {
+  background: #f3f3f3;
+  display: inline-block;
+  text-align: right;
   padding: 5px 0;
   font-size: 14px;
 }
