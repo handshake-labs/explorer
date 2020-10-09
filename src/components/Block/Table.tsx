@@ -12,8 +12,8 @@ interface Props {
 const Table: FC<Props> = ({ blocks }: Props) => (
   <BaseTable>
     <BaseTable.TR>
-      <BaseTable.TH id="hash" />
       <BaseTable.TH id="height" />
+      <BaseTable.TH id="hash" />
       <BaseTable.TH id="time" />
       <BaseTable.TH id="size" />
       <BaseTable.TH id="txsCount" />

@@ -32,6 +32,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
     offset: records_page * limit,
   });
 
+
   if (!data) return <Spinner />;
   const unicodeName = toUnicode(name);
 
