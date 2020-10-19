@@ -34,7 +34,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
 
 
   if (!data) return <Spinner />;
-  const unicodeName = toUnicode(name);
+  const unicodeName = toUnicode(name).toLowerCase();
 
   return (
     <>
