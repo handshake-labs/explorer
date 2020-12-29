@@ -10,4 +10,5 @@ const Link: FC<Props> = ({ height, children }: Props) => (
     {children ? children : <span className="icon block">{height}</span>}
   </BaseLink>
 );
+
 export default Link;
