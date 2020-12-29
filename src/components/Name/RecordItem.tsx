@@ -1,5 +1,6 @@
 //@ts-ignore
 import { Resource } from "record/resource";
+import { toHexString } from "helpers";
 
 const parseRecord = (data: any) => {
   const hexResource = Buffer.from(data, "hex");
@@ -15,7 +16,7 @@ const renderRecord = (record: any) => {
           <div>Keytag: {record.keyTag} </div>
           <div>Algorithm: {record.algorithm}</div>
           <div>Digest type: {record.digestType}</div>
-          <div>Digest: {record.digest}</div>
+          <div>Digest: {toHexString(record.digest)}</div>
         </>
       );
       break;

@@ -32,13 +32,13 @@ const Card: FC<Props> = ({ data }: Props) => (
                 <BlockLink height={data.state.open_height} />
               </BaseCard.Prop>
               <BaseCard.Prop id="bidHeightStart">
-                <BlockLink height={data.state.open_height + 36} />
+                <BlockLink height={data.state.open_height + 36 + 1} />
               </BaseCard.Prop>
               <BaseCard.Prop id="revealHeightStart">
-                <BlockLink height={data.state.open_height + 36 + 144 * 5} />
+                <BlockLink height={data.state.open_height + 36 + 1 + 144 * 5} />
               </BaseCard.Prop>
               <BaseCard.Prop id="revealHeightEnd">
-                <BlockLink height={data.state.open_height + 36 + 144 * 15} />
+                <BlockLink height={data.state.open_height + 36 + 1 + 144 * 15} />
               </BaseCard.Prop>
             </>
           )}
