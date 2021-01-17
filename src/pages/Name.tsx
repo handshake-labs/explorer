@@ -70,7 +70,6 @@ const Name: FC<Props> = ({ name, bids_page, records_page, actions_page }: Props)
             })}
           />
 
-
           <h2 className="separator">
             <span>Auction history</span>
           </h2>
@@ -84,22 +83,22 @@ const Name: FC<Props> = ({ name, bids_page, records_page, actions_page }: Props)
               params: { name, bids_page, records_page, actions_page },
             })}
           />
+
+          <h2 className="separator">
+            <span>Record history</span>
+          </h2>
+          {records ? <RecordsTable records={records.records} /> : <Spinner />}
+          <Pagination
+            count={data.records_count}
+            limit={limit}
+            page={records_page}
+            route={(records_page: number) => ({
+              id: "name",
+              params: { name, bids_page, records_page, actions_page },
+            })}
+          />
         </>
       )}
-
-      <h2 className="separator">
-        <span>Record history</span>
-      </h2>
-      {records ? <RecordsTable records={records.records} /> : <Spinner />}
-      <Pagination
-        count={data.records_count}
-        limit={limit}
-        page={records_page}
-        route={(records_page: number) => ({
-          id: "name",
-          params: { name, bids_page, records_page, actions_page },
-        })}
-      />
     </>
   );
 };
