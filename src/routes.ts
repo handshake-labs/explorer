@@ -8,7 +8,7 @@ const routes = {
   name: new R(
     "/names/:name",
     { name: StrParam },
-    { bids_page: UintParam, records_page: UintParam }
+    { bids_page: UintParam, records_page: UintParam, actions_page: UintParam }
   ),
   search: new R("/search", {}, { query: StrParam }),
   mempool: new R("/mempool", {}, { page: UintParam }),

@@ -8,16 +8,18 @@ import Pagination from "components/Pagination";
 import NameCard from "components/Name/Card";
 import BidsTable from "components/Name/BidsTable";
 import RecordsTable from "components/Name/RecordsTable";
+import ActionsTable from "components/Name/ActionsTable";
 
 interface Props {
   name: string;
   bids_page: number;
   records_page: number;
+  actions_page: number;
 }
 
 const limit = 50;
 
-const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
+const Name: FC<Props> = ({ name, bids_page, records_page, actions_page }: Props) => {
   useTitle(`Name ${name}`);
 
   const data = useAPI("/name", { name });
@@ -31,6 +33,12 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
     limit,
     offset: records_page * limit,
   });
+  const actions = useAPI("/name/actions", {
+    name,
+    limit,
+    offset: actions_page * limit,
+  });
+
 
 
   if (!data) return <Spinner />;
@@ -49,6 +57,21 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
       ) : (
         <>
           <h2 className="separator">
+            <span>Action history</span>
+          </h2>
+          {actions ? <ActionsTable actions={actions.actions} /> : <Spinner />}
+          <Pagination
+            count={data.actions_count}
+            limit={limit}
+            page={actions_page}
+            route={(actions_page: number) => ({
+              id: "name",
+              params: { name, bids_page, records_page, actions_page },
+            })}
+          />
+
+
+          <h2 className="separator">
             <span>Auction history</span>
           </h2>
           {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
@@ -58,7 +81,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
             page={bids_page}
             route={(bids_page: number) => ({
               id: "name",
-              params: { name, bids_page, records_page },
+              params: { name, bids_page, records_page, actions_page },
             })}
           />
         </>
@@ -74,7 +97,7 @@ const Name: FC<Props> = ({ name, bids_page, records_page }: Props) => {
         page={records_page}
         route={(records_page: number) => ({
           id: "name",
-          params: { name, bids_page, records_page },
+          params: { name, bids_page, records_page, actions_page },
         })}
       />
     </>

@@ -1,6 +1,8 @@
 .separator {
   display: flex;
   align-items: center;
+  width: 80%;
+  vertical-align: middle;
   &::before,
   &::after {
     content: "";

@@ -80,6 +80,7 @@ export type GetNameResult = {
 "release_block"?: number
 "bids_count"?: number
 "records_count"?: number
+"actions_count"?: number
 "state"?: State
 }
 export type ReservedName = {
@@ -107,6 +108,19 @@ export type NameBid = {
 "height": number | null
 "lockup": number
 "reveal": number | null
+}
+export type GetNameActionsByHashParams = {
+"name": string
+"limit": number
+"offset": number
+}
+export type GetNameActionsByHashResult = {
+"actions": Array<NameAction>
+}
+export type NameAction = {
+"txid": Bytes
+"height": number | null
+"covenantAction": CovenantAction
 }
 export type GetTransactionsByBlockHeightParams = {
 "height": number
@@ -189,6 +203,10 @@ export type API = {
 "/name/records": {
 "params": GetNameRecordsByHashParams
 "result": GetNameRecordsByHashResult
+}
+"/name/actions": {
+"params": GetNameActionsByHashParams
+"result": GetNameActionsByHashResult
 }
 "/search": {
 "params": SearchParams

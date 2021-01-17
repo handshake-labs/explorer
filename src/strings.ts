@@ -36,6 +36,7 @@ const strings = {
   auctionState: "Auction State",
   claimAmount: "Claim Amount",
   originName: "Origin Name",
+  action: "Action",
 } as const;
 
 export default strings;
