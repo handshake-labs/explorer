@@ -38,7 +38,9 @@ const Card: FC<Props> = ({ data }: Props) => (
                 <BlockLink height={data.state.open_height + 36 + 1 + 144 * 5} />
               </BaseCard.Prop>
               <BaseCard.Prop id="revealHeightEnd">
-                <BlockLink height={data.state.open_height + 36 + 1 + 144 * 15} />
+                <BlockLink
+                  height={data.state.open_height + 36 + 1 + 144 * 15}
+                />
               </BaseCard.Prop>
             </>
           )}

@@ -19,7 +19,12 @@ interface Props {
 
 const limit = 50;
 
-const Name: FC<Props> = ({ name, bids_page, records_page, actions_page }: Props) => {
+const Name: FC<Props> = ({
+  name,
+  bids_page,
+  records_page,
+  actions_page,
+}: Props) => {
   useTitle(`Name ${name}`);
 
   const data = useAPI("/name", { name });
@@ -38,8 +43,6 @@ const Name: FC<Props> = ({ name, bids_page, records_page, actions_page }: Props)
     limit,
     offset: actions_page * limit,
   });
-
-
 
   if (!data) return <Spinner />;
   const unicodeName = toUnicode(name).toLowerCase();

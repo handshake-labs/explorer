@@ -24,9 +24,7 @@ const Table: FC<Props> = ({ actions }: Props) => (
         <BaseTable.TD>
           <TransactionLink txid={txid} />
         </BaseTable.TD>
-        <BaseTable.TD>
-          {covenantAction}
-        </BaseTable.TD>
+        <BaseTable.TD>{covenantAction}</BaseTable.TD>
       </BaseTable.TR>
     ))}
   </BaseTable>
