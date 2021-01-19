@@ -47,6 +47,50 @@ const Name: FC<Props> = ({
   if (!data) return <Spinner />;
   const unicodeName = toUnicode(name).toLowerCase();
 
+  //here i need nested conditionals to have distinct cases when table is empty or not, perhaps can be done in other ways
+  var actionsTable, bidsTable, recordsTable;
+  if (!actions) {
+    actionsTable = <Spinner />
+  }
+  else if ( actions.actions.length>0) {
+    actionsTable = <>
+          <h2 className="separator"> <span>Transfer history</span> </h2>
+          {actions ? <ActionsTable actions={actions.actions} /> : <Spinner />}
+          <Pagination count={data.actions_count} limit={limit} page={actions_page} route={(actions_page: number) => ({ id: "name", params: { name, bids_page, records_page, actions_page }, })} />
+    </>
+  }
+  else {
+    actionsTable = <div></div>
+  }
+
+  if (!bids) {
+    bidsTable = <Spinner />
+  }
+  else if ( bids.bids.length>0) {
+    bidsTable = <>
+          <h2 className="separator"> <span>Auction history</span> </h2>
+          {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
+          <Pagination count={data.bids_count} limit={limit} page={bids_page} route={(bids_page: number) => ({ id: "name", params: { name, bids_page, records_page, actions_page }, })} />
+    </>
+  }
+  else {
+    bidsTable = <div></div>
+  }
+
+  if (!records) {
+    recordsTable = <Spinner />
+  }
+  else if ( records.records.length>0) {
+    recordsTable = <>
+          <h2 className="separator"> <span>Record history</span> </h2>
+          {records ? <RecordsTable records={records.records} /> : <Spinner />}
+          <Pagination count={data.records_count} limit={limit} page={records_page} route={(records_page: number) => ({ id: "name", params: { name, bids_page, records_page, actions_page }, })} />
+    </>
+  }
+  else {
+    recordsTable = <div></div>
+  }
+
   return (
     <>
       <h2 className="separator">
@@ -59,47 +103,9 @@ const Name: FC<Props> = ({
         <div></div>
       ) : (
         <>
-          <h2 className="separator">
-            <span>Action history</span>
-          </h2>
-          {actions ? <ActionsTable actions={actions.actions} /> : <Spinner />}
-          <Pagination
-            count={data.actions_count}
-            limit={limit}
-            page={actions_page}
-            route={(actions_page: number) => ({
-              id: "name",
-              params: { name, bids_page, records_page, actions_page },
-            })}
-          />
-
-          <h2 className="separator">
-            <span>Auction history</span>
-          </h2>
-          {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
-          <Pagination
-            count={data.bids_count}
-            limit={limit}
-            page={bids_page}
-            route={(bids_page: number) => ({
-              id: "name",
-              params: { name, bids_page, records_page, actions_page },
-            })}
-          />
-
-          <h2 className="separator">
-            <span>Record history</span>
-          </h2>
-          {records ? <RecordsTable records={records.records} /> : <Spinner />}
-          <Pagination
-            count={data.records_count}
-            limit={limit}
-            page={records_page}
-            route={(records_page: number) => ({
-              id: "name",
-              params: { name, bids_page, records_page, actions_page },
-            })}
-          />
+          {recordsTable}
+          {actionsTable}
+          {bidsTable}
         </>
       )}
     </>
