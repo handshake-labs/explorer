@@ -145,6 +145,13 @@
   font-size: 14px;
 }
 
+.version {
+  float: right;
+  background: #f3f3f3;
+  text-align: right;
+  font-size: 14px;
+}
+
 .copyright::before {
   content: "";
   display: inline-block;

@@ -101,10 +101,13 @@ const App: FC = () => {
         <div styleName="wrapper">
           <div styleName="copyright">
             {" "}
-            &copy; 2020{" "}
+            &copy; 2021{" "}
             <div styleName="contactUs">
               <a href="https://t.me/hnsnetwork">Contact us</a>{" "}
             </div>
+          <div styleName="version">
+            Version 0.1
+          </div>
           </div>
         </div>
       </footer>
