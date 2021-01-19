@@ -148,7 +148,9 @@
 .version {
   float: right;
   background: #f3f3f3;
+  display: inline-block;
   text-align: right;
+  padding: 5px 0;
   font-size: 14px;
 }
 
