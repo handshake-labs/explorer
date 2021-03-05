@@ -1,6 +1,6 @@
 import strings from "strings";
 import { Transaction } from "api";
-
+import Money from "components/Money";
 import BaseCard from "components/Card";
 import BlockLink from "components/Block/Link";
 
@@ -18,7 +18,9 @@ const Card: FC<Props> = ({ transaction }: Props) => (
         <BlockLink height={transaction.block_height} />
       )}
     </BaseCard.Prop>
-    <BaseCard.Prop id="fee">{transaction.fee}</BaseCard.Prop>
+
+
+    <BaseCard.Prop id="fee"><Money value={transaction.fee} /></BaseCard.Prop>
     <BaseCard.Prop id="locktime">{transaction.locktime}</BaseCard.Prop>
     <BaseCard.Prop id="rate">{transaction.rate}</BaseCard.Prop>
     <BaseCard.Prop id="size">{transaction.size}</BaseCard.Prop>

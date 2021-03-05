@@ -14,6 +14,7 @@ interface Props {
 }
 
 const SearchResult: FC<Props> = ({ query }) => {
+  useTitle(`Search ${query}`);
   const search = useAPI("/search", { query });
 
   if (!search) return <Spinner />;
