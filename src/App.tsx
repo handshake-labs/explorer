@@ -105,9 +105,7 @@ const App: FC = () => {
             <div styleName="contactUs">
               <a href="https://t.me/hnsnetwork">Contact us</a>{" "}
             </div>
-          <div styleName="version">
-            Version 0.1
-          </div>
+            <div styleName="version">Version 0.1.1</div>
           </div>
         </div>
       </footer>

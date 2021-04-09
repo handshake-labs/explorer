@@ -19,8 +19,9 @@ const Card: FC<Props> = ({ transaction }: Props) => (
       )}
     </BaseCard.Prop>
 
-
-    <BaseCard.Prop id="fee"><Money value={transaction.fee} /></BaseCard.Prop>
+    <BaseCard.Prop id="fee">
+      <Money value={transaction.fee} />
+    </BaseCard.Prop>
     <BaseCard.Prop id="locktime">{transaction.locktime}</BaseCard.Prop>
     <BaseCard.Prop id="rate">{transaction.rate}</BaseCard.Prop>
     <BaseCard.Prop id="size">{transaction.size}</BaseCard.Prop>

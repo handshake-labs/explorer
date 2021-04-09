@@ -1,10 +1,9 @@
-export type GetBlocksParams = {
-  limit: number;
-  offset: number;
+export type GetBlockByHeightParams = {
+  height: number;
 };
-export type GetBlocksResult = {
-  blocks: Array<Block>;
-  count: number;
+export type GetBlockByHeightResult = {
+  block: Block;
+  height: number;
 };
 export type Block = {
   hash: Bytes;
@@ -26,12 +25,11 @@ export type Block = {
   txsCount: number;
 };
 export type Bytes = string;
-export type GetTransactionsByBlockHeightParams = {
-  height: number;
+export type GetMempoolTxsParams = {
   limit: number;
   offset: number;
 };
-export type GetTransactionsByBlockHeightResult = {
+export type GetMempoolTxsResult = {
   txs: Array<Transaction>;
 };
 export type Transaction = {
@@ -70,6 +68,19 @@ export type TxOutput = {
   name?: string;
 };
 export type CovenantAction = string;
+export type GetNameRecordsParams = {
+  name: string;
+  limit: number;
+  offset: number;
+};
+export type GetNameRecordsResult = {
+  records: Array<NameRecord>;
+};
+export type NameRecord = {
+  txid: Bytes;
+  height: number | null;
+  data: Bytes;
+};
 export type GetNameActionsParams = {
   name: string;
   limit: number;
@@ -83,18 +94,44 @@ export type NameAction = {
   height: number | null;
   covenantAction: CovenantAction;
 };
-export type GetBlockByHeightParams = {
-  height: number;
+export type SearchParams = {
+  query: string;
 };
-export type GetBlockByHeightResult = {
-  block: Block;
-  height: number;
+export type SearchResult = {
+  transaction: string;
+  block: number;
+  name: string;
 };
-export type GetMempoolTxsParams = {
+export type GetTransactionByTxidParams = {
+  txid: Bytes;
+};
+export type GetTransactionByTxidResult = {
+  txid: Bytes;
+  block_height: number | null;
+  witnessTx: Bytes;
+  fee: number;
+  rate: number;
+  version: number;
+  locktime: number;
+  size: number;
+  height: number;
+  inputs: Array<TxInput>;
+  outputs: Array<TxOutput>;
+};
+export type GetBlocksParams = {
   limit: number;
   offset: number;
 };
-export type GetMempoolTxsResult = {
+export type GetBlocksResult = {
+  blocks: Array<Block>;
+  count: number;
+};
+export type GetTransactionsByBlockHeightParams = {
+  height: number;
+  limit: number;
+  offset: number;
+};
+export type GetTransactionsByBlockHeightResult = {
   txs: Array<Transaction>;
 };
 export type GetNameParams = {
@@ -129,62 +166,14 @@ export type GetNameBidsResult = {
   bids: Array<NameBid>;
 };
 export type NameBid = {
-  txid: Bytes;
+  bid_txid: Bytes;
   height: number | null;
+  reveal_txid: Bytes;
   lockup: number;
   reveal: number | null;
 };
-export type GetNameRecordsParams = {
-  name: string;
-  limit: number;
-  offset: number;
-};
-export type GetNameRecordsResult = {
-  records: Array<NameRecord>;
-};
-export type NameRecord = {
-  txid: Bytes;
-  height: number | null;
-  data: Bytes;
-};
-export type SearchParams = {
-  query: string;
-};
-export type SearchResult = {
-  transaction: string;
-  block: number;
-  name: string;
-};
-export type GetTransactionByTxidParams = {
-  txid: Bytes;
-};
-export type GetTransactionByTxidResult = {
-  txid: Bytes;
-  block_height: number | null;
-  witnessTx: Bytes;
-  fee: number;
-  rate: number;
-  version: number;
-  locktime: number;
-  size: number;
-  height: number;
-  inputs: Array<TxInput>;
-  outputs: Array<TxOutput>;
-};
 export type API = {
-  "/blocks": {
-    params: GetBlocksParams;
-    result: GetBlocksResult;
-  };
-  "/block/txs": {
-    params: GetTransactionsByBlockHeightParams;
-    result: GetTransactionsByBlockHeightResult;
-  };
-  "/name/actions": {
-    params: GetNameActionsParams;
-    result: GetNameActionsResult;
-  };
-  "/block/height/": {
+  "/block": {
     params: GetBlockByHeightParams;
     result: GetBlockByHeightResult;
   };
@@ -192,9 +181,29 @@ export type API = {
     params: GetMempoolTxsParams;
     result: GetMempoolTxsResult;
   };
-  "/block": {
-    params: GetBlockByHeightParams;
-    result: GetBlockByHeightResult;
+  "/name/records": {
+    params: GetNameRecordsParams;
+    result: GetNameRecordsResult;
+  };
+  "/name/actions": {
+    params: GetNameActionsParams;
+    result: GetNameActionsResult;
+  };
+  "/search": {
+    params: SearchParams;
+    result: SearchResult;
+  };
+  "/tx": {
+    params: GetTransactionByTxidParams;
+    result: GetTransactionByTxidResult;
+  };
+  "/blocks": {
+    params: GetBlocksParams;
+    result: GetBlocksResult;
+  };
+  "/block/txs": {
+    params: GetTransactionsByBlockHeightParams;
+    result: GetTransactionsByBlockHeightResult;
   };
   "/name": {
     params: GetNameParams;
@@ -204,16 +213,8 @@ export type API = {
     params: GetNameBidsParams;
     result: GetNameBidsResult;
   };
-  "/name/records": {
-    params: GetNameRecordsParams;
-    result: GetNameRecordsResult;
-  };
-  "/search": {
-    params: SearchParams;
-    result: SearchResult;
-  };
-  "/tx": {
-    params: GetTransactionByTxidParams;
-    result: GetTransactionByTxidResult;
+  "/block/height/": {
+    params: GetBlockByHeightParams;
+    result: GetBlockByHeightResult;
   };
 };

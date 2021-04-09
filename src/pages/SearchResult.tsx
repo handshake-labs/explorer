@@ -1,4 +1,5 @@
 import { useAPI } from "hooks/api";
+import { useTitle } from "hooks/title";
 
 import Spinner from "components/Spinner";
 import NotFound from "components/NotFound";

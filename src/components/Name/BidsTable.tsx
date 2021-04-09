@@ -17,13 +17,13 @@ const Table: FC<Props> = ({ bids }: Props) => (
       <BaseTable.TH id="lockup" />
       <BaseTable.TH id="reveal" />
     </BaseTable.TR>
-    {bids.map(({ height, txid, lockup, reveal }) => (
+    {bids.map(({ height, bid_txid, lockup, reveal }) => (
       <BaseTable.TR>
         <BaseTable.TD>
           {height === null ? "Mempool" : <BlockLink height={height} />}
         </BaseTable.TD>
         <BaseTable.TD>
-          <TransactionLink txid={txid} />
+          <TransactionLink txid={bid_txid} />
         </BaseTable.TD>
         <BaseTable.TD>
           {" "}
