@@ -3,7 +3,12 @@ import { Resource } from "record/resource";
 import { toHexString } from "helpers";
 
 const parseRecord = (data: any) => {
-  const hexResource = Buffer.from(data, "hex");
+  var hexResource;
+  if (data == "") {
+    return { records: [] };
+  } else {
+    hexResource = Buffer.from(data, "hex");
+  }
   return Resource.decode(hexResource);
 };
 
