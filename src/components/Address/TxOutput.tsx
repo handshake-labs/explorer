@@ -18,7 +18,7 @@ const TxOutput: FC<Props> = ({ output, detailed }: Props) => {
   return (
     <div>
       <div> 
-        <BlockLink height={output.height} />
+          {output.height === null ? "Mempool" : <BlockLink height={output.height} />}
       </div>
       <div> 
           <TransactionLink txid={output.txid}>
