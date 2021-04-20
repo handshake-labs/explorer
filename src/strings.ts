@@ -46,6 +46,7 @@ const strings = {
   address: "Address",
   balance: "Balance",
   bidBlock: "Bid block",
+  explorerVersion: "0.2.0",
 } as const;
 
 export default strings;

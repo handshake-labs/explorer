@@ -1,5 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
 import { listen, getRoute, replaceRoute } from "history";
+import strings from "strings";
 
 import Blocks from "pages/Blocks";
 import Block from "pages/Block";
@@ -107,7 +108,7 @@ const App: FC = () => {
             <div styleName="contactUs">
               <a href="https://t.me/hnsnetwork">Contact us</a>{" "}
             </div>
-            <div styleName="version">Version 0.1.1</div>
+            <div styleName="version">Version {strings.explorerVersion}</div>
           </div>
         </div>
       </footer>
