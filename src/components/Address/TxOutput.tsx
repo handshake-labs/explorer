@@ -1,4 +1,4 @@
-import { TxOutput as TxOutputModel } from "api";
+import { AddressTxOutput } from "api";
 
 import Hash from "components/Hash";
 import BlockLink from "components/Block/Link";
@@ -10,7 +10,7 @@ import AddressLink from "components/Address/Link";
 import "./TxOutput.css";
 
 interface Props {
-  output: TxOutputModel;
+  output: AddressTxOutput;
   detailed?: boolean;
 }
 

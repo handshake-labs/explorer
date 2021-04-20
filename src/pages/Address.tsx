@@ -27,17 +27,16 @@ const Address: FC<Props> = ({
   if (info === undefined) return <Spinner />;
   if (history === undefined) return <Spinner />;
 
-
   return (
     <>
       <h2 className="separator">
         <span className="address">Address {address} </span>
       </h2>
-      <Card info={address, info}/>
+      <Card info={info}/>
       <h2 className="separator">
         <span className="address">Outputs</span>
       </h2>
-      <Table history={history} />
+      <Table history={history.history} />
       <Pagination count={info.TxOutputsTotal} limit={limit} page={page} route={(page: number) => ({ id: "address", params: { address, page }, })} />
     </>
   );

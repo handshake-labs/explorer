@@ -1,7 +1,7 @@
 import BaseLink from "components/Link";
 
 interface Props {
-  height: number;
+  address: string;
   children?: Children;
 }
 

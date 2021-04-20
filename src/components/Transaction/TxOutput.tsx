@@ -3,18 +3,22 @@ import { TxOutput as TxOutputModel } from "api";
 import Hash from "components/Hash";
 import Money from "components/Money";
 import NameLink from "components/Name/Link";
+import AddressLink from "components/Address/Link";
 
 import "./TxOutput.css";
 
 interface Props {
   output: TxOutputModel;
+  id: number;
   detailed?: boolean;
 }
 
-const TxOutput: FC<Props> = ({ output, detailed }: Props) => {
+const TxOutput: FC<Props> = ({ output, id, detailed }: Props) => {
   return (
-    <div>
-      <div>{detailed ? output.address : <Hash hash={output.address} />}</div>
+    <div id={"output-"+id}>
+      <div>
+        <AddressLink address={output.address} />
+      </div>
       <div>
         <Money value={output.value} />
       </div>

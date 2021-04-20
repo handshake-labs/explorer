@@ -1,17 +1,17 @@
-import { TxInput as TxInputModel } from "api";
+import { AddressTxInput } from "api";
 import strings from "strings";
 
 import TransactionLink from "components/Transaction/Link";
 import BlockLink from "components/Block/Link";
 
 interface Props {
-  input: TxInputModel;
+  input: AddressTxInput;
   detailed?: boolean;
 }
 
 const TxInput: FC<Props> = ({ input, detailed }: Props) => (
   <div>
-    {input.hashPrevout ===
+    {input.txid ===
     "0000000000000000000000000000000000000000000000000000000000000000" ? (
       "Coinbase input"
     ) : (
@@ -29,9 +29,6 @@ const TxInput: FC<Props> = ({ input, detailed }: Props) => (
           <>
             <div>
               <b>Output Index</b>&nbsp;{input.index}
-            </div>
-            <div>
-              <b>Sequence</b>&nbsp;{input.sequence}
             </div>
           </>
         )}

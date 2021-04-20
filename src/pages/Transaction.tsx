@@ -44,7 +44,9 @@ const Transaction: FC<Props> = ({ txid }) => {
       </h2>
       <div styleName="list">
         {tx.outputs.map((output, i) => (
-          <TxOutput output={output} key={i} detailed={true} />
+          <>
+          <TxOutput output={output} id={i} detailed={true} />
+          </>
         ))}
       </div>
     </>

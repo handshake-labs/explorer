@@ -1,0 +1,16 @@
+.tr winner{
+  background-color: yellow;
+  color: red;
+}
+
+.winner{
+  & > * {
+    background-color: yellow;
+    color: red;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  max-width: 100%;
+}

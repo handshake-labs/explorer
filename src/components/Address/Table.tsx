@@ -16,7 +16,7 @@ const Table: FC<Props> = ({ history }: Props) => (
       <BaseTable.TH id="received" />
       <BaseTable.TH id="spent" />
     </BaseTable.TR>
-    {history.history.map((entry) => (
+    {history.map((entry) => (
       <BaseTable.TR>
       <BaseTable.TD> <TxOutput output={entry.tx_output} /> </BaseTable.TD>
         <BaseTable.TD> {entry.tx_input.txid === null ? 'Not spent' : <TxInput input={entry.tx_input} />   }</BaseTable.TD>

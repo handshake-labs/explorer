@@ -14,7 +14,7 @@ const Link: FC<Props> = ({ name, children }: Props) => (
       params: { name, bids_page: 0, records_page: 0, actions_page: 0 },
     }}
   >
-    {children ? children : <span className="name">{toUnicode(name)}</span>}
+    {children ? children : <span className="name"> {toUnicode(name)}</span>}
   </BaseLink>
 );
 export default Link;
