@@ -16,7 +16,6 @@ const Table: FC<Props> = ({ bids }: Props) => (
       <div>
     <BaseTable.TR>
       <BaseTable.TH id="bidBlock" />
-      <BaseTable.TH id="transaction" />
       <BaseTable.TH id="lockup" />
       <BaseTable.TH id="reveal" />
     </BaseTable.TR>
@@ -28,10 +27,7 @@ const Table: FC<Props> = ({ bids }: Props) => (
           {height === null ? "Mempool" : <BlockLink height={height} />}
         </BaseTable.TD>
         <BaseTable.TD>
-          <TransactionLink txid={bid_txid} />
-        </BaseTable.TD>
-        <BaseTable.TD>
-          <Money value={lockup} />
+          {lockup === null ?  "None" : <> <div> <TransactionLink txid={bid_txid} children={<Money value={lockup} />} /> </div> </> }
         </BaseTable.TD>
         <BaseTable.TD>
           {reveal === null ?  "None" : <> <div> <TransactionLink txid={reveal_txid} children={<Money value={reveal} />} /> </div> </> }
