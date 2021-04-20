@@ -6,6 +6,7 @@ import Block from "pages/Block";
 import Transaction from "pages/Transaction";
 import Name from "pages/Name";
 import Mempool from "pages/Mempool";
+import Address from "pages/Address";
 import SearchResult from "pages/SearchResult";
 
 import NotFound from "components/NotFound";
@@ -93,7 +94,8 @@ const App: FC = () => {
             (route.id === "transaction" && <Transaction {...route.params} />) ||
             (route.id === "name" && <Name {...route.params} />) ||
             (route.id === "search" && <SearchResult {...route.params} />) ||
-            (route.id === "mempool" && <Mempool {...route.params} />)
+            (route.id === "mempool" && <Mempool {...route.params} />) ||
+            (route.id === "address" && <Address {...route.params} />)
           )}
         </div>
       </main>

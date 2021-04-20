@@ -11,6 +11,8 @@ const routes = {
     { bids_page: UintParam, records_page: UintParam, actions_page: UintParam }
   ),
   search: new R("/search", {}, { query: StrParam }),
+  address: new R("/address/:address", { address: StrParam}, {page: UintParam}),
+  info: new R("/address/info", {}, { address: StrParam}),
   mempool: new R("/mempool", {}, { page: UintParam }),
 } as const;
 

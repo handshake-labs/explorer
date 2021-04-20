@@ -37,6 +37,15 @@ const strings = {
   claimAmount: "Claim Amount",
   originName: "Origin Name",
   action: "Action",
+  valueTotal: "Total received",
+  valueUsed: "Total spent",
+  countTotal: "Total outputs",
+  countUsedUsed: "Outputs spent",
+  received: "Received",
+  spent: "Spent",
+  address: "Address",
+  balance: "Balance",
+  bidBlock: "Bid block",
 } as const;
 
 export default strings;

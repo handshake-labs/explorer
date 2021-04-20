@@ -7,6 +7,7 @@ import NotFound from "components/NotFound";
 import NameLink from "components/Name/Link";
 import TransactionLink from "components/Transaction/Link";
 import BlockLink from "components/Block/Link";
+import AddressLink from "components/Address/Link";
 
 import "./SearchResult.css";
 
@@ -19,9 +20,9 @@ const SearchResult: FC<Props> = ({ query }) => {
   const search = useAPI("/search", { query });
 
   if (!search) return <Spinner />;
-  const { transaction, block, name } = search;
+  const { transaction, block, name, address } = search;
 
-  if (!transaction && !block && !name) return <NotFound />;
+  if (!transaction && !block && !name && !address) return <NotFound />;
 
   return (
     <>
@@ -34,6 +35,11 @@ const SearchResult: FC<Props> = ({ query }) => {
       {block ? (
         <div styleName="result">
           Block <BlockLink height={block} />
+        </div>
+      ) : null}
+      {address ? (
+        <div styleName="result">
+          Address <AddressLink address={address} />
         </div>
       ) : null}
       {name ? (
