@@ -80,16 +80,10 @@ const Name: FC<Props> = ({
     bidsTable = (
       <>
         <h2 className="separator">
-          {" "}
           <span>Auction history</span>{" "}
         </h2>
         {bids ? <BidsTable bids={bids.bids} /> : <Spinner />}
-        <Pagination
-          count={data.bids_count}
-          limit={limit}
-          page={bids_page}
-          route={(bids_page: number) => ({
-            id: "name",
+        <Pagination count={data.bids_count} limit={limit} page={bids_page} route={(bids_page: number) => ({ id: "name",
             params: { name, bids_page, records_page, actions_page },
           })}
         />
@@ -132,15 +126,11 @@ const Name: FC<Props> = ({
         </span>
       </h2>
       <NameCard data={data} />
-      {data.reserved ? (
-        <div></div>
-      ) : (
         <>
           {recordsTable}
           {actionsTable}
           {bidsTable}
         </>
-      )}
     </>
   );
 };
