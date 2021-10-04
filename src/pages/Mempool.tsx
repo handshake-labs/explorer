@@ -21,14 +21,16 @@ const Mempool: FC<Props> = ({ page }: Props) => {
     offset: page * limit,
   });
 
+  console.log(transactions)
+
   if (!transactions) return <Spinner />;
   return (
     <>
       <h2 className="separator">Mempool</h2>
-      {transactions.txs ? (
+      {transactions.txs.length > 0 ? (
         <Transactions transactions={transactions.txs} />
       ) : (
-        "Mempool is empty."
+      <h3 >Mempool is empty</h3>
       )}
     </>
   );

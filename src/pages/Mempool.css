@@ -1,0 +1,19 @@
+h3 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #d6d6d6;
+  }
+  &::before {
+    margin-right: 10px;
+  }
+  &::after {
+    margin-left: 10px;
+  }
+}

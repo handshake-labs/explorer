@@ -10,6 +10,7 @@ import Mempool from "pages/Mempool";
 import Address from "pages/Address";
 import SearchResult from "pages/SearchResult";
 
+
 import NotFound from "components/NotFound";
 import Link from "components/Link";
 
@@ -78,7 +79,7 @@ const App: FC = () => {
                 e.preventDefault();
               }}
             >
-              <input name="search" />
+              <input name="search" autofocus/>
               <button role="submit">Search</button>
             </form>
           </nav>

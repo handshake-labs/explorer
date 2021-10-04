@@ -3,6 +3,7 @@ import { GetNameResult } from "api";
 import BaseCard from "components/Card";
 import BlockLink from "components/Block/Link";
 import Money from "components/Money";
+import Link from "components/Link";
 
 interface Props {
   data: GetNameResult;
@@ -29,7 +30,11 @@ const Card: FC<Props> = ({ data }: Props) => (
           {data.state.open_height && (
             <>
               <BaseCard.Prop id="openHeight">
-                <BlockLink height={data.state.open_height} />
+                {data.state.open_height == -1 ?
+                  <Link route={{ id: "mempool", params: { page: 0 } }}>Mempool</Link>
+                  : <BlockLink height={data.state.open_height} />}
+
+
               </BaseCard.Prop>
               <BaseCard.Prop id="bidHeightStart">
                 <BlockLink height={data.state.open_height + 36 + 1} />

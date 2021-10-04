@@ -4,6 +4,7 @@ import Money from "components/Money";
 import BaseTable from "components/Table";
 import BlockLink from "components/Block/Link";
 import TransactionLink from "components/Transaction/Link";
+import Link from "components/Link";
 
 interface Props {
   actions: NameAction[];
@@ -19,7 +20,7 @@ const Table: FC<Props> = ({ actions }: Props) => (
     {actions.map(({ height, txid, covenantAction }) => (
       <BaseTable.TR>
         <BaseTable.TD>
-          {height === null ? "Mempool" : <BlockLink height={height} />}
+          {height === null ? <Link route={{ id: "mempool", params: { page: 0 } }}>Mempool</Link> : <BlockLink height={height} />}
         </BaseTable.TD>
         <BaseTable.TD>
           <TransactionLink txid={txid} />
