@@ -2,7 +2,11 @@
 
 This is the frontend for the `hnsnetwork` block explorer. 
 
-Usage:
+### Instal
+
+`npm install` 
+
+### Run
 
 `npm start`
 
