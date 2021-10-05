@@ -1,6 +1,6 @@
 ## Overview
 
-This is the frontend for the hnsnetwork.com block explorer. 
+This is the frontend for the [hnsnetwork](hnsnetwork.com) block explorer. 
 
 ### Install
 
