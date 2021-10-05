@@ -1,8 +1,8 @@
 ## Overview
 
-This is the frontend for the `hnsnetwork` block explorer. 
+This is the frontend for the hnsnetwork.com block explorer. 
 
-### Instal
+### Install
 
 `npm install` 
 
