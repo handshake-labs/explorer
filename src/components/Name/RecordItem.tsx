@@ -2,7 +2,7 @@
 import { Resource } from "record/resource";
 import { toHexString } from "helpers";
 
-import styles from "./RecordItem.css";
+import "./RecordItem.css";
 
 const parseRecord = (data: any) => {
   var hexResource;
@@ -53,7 +53,7 @@ const renderRecord = (record: any) => {
       resource = <div>IPV6 address: {record.address}</div>;
       break;
     case "TXT":
-      resource = <div>TXT: <pre className={styles.txt}>{record.txt}</pre></div>;
+      resource = <div>TXT: <pre styleName="txt">{record.txt}</pre></div>;
       break;
     default:
       resource = <div>"Unknown record"</div>;
