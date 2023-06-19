@@ -25,105 +25,15 @@ export type Block = {
 "txsCount": number
 }
 export type Bytes = string
-export type GetAddressHistoryParams = {
-"address": string
-"limit": number
-"offset": number
-}
-export type GetAddressHistoryResult = {
-"history": Array<HistoryEntry>
-}
-export type HistoryEntry = {
-"tx_output": AddressTxOutput
-"tx_input": AddressTxInput
-}
-export type AddressTxOutput = {
-"txid": Bytes
-"index": number
-"value": number
-"address": string
-"covenantAction": CovenantAction
-"covenantNameHash"?: Bytes
-"covenantHeight"?: Bytes
-"covenantName"?: Bytes
-"covenantBidHash"?: Bytes
-"covenantNonce"?: Bytes
-"covenantRecordData"?: Bytes
-"covenantBlockHash"?: Bytes
-"covenantVersion"?: Bytes
-"covenantAddress"?: Bytes
-"covenantClaimHeight"?: Bytes
-"covenantRenewalCount"?: Bytes
-"name"?: string
+export type GetTransactionsByBlockHeightParams = {
 "height": number
-}
-export type CovenantAction = string
-export type AddressTxInput = {
-"txid": string
-"index": number | null
-"height": number | null
-}
-export type GetAddressInfoParams = {
-"address": string
-}
-export type GetAddressInfoRow = {
-"ValueTotal": number
-"ValueUsed": number
-"TxOutputsTotal": number
-"TxOutputsUsed": number
-}
-export type GetBlocksParams = {
 "limit": number
 "offset": number
 }
-export type GetBlocksResult = {
-"blocks": Array<Block>
-"count": number
+export type GetTransactionsByBlockHeightResult = {
+"txs": Array<Transaction>
 }
-export type GetNameBidsParams = {
-"name": string
-"limit": number
-"offset": number
-}
-export type GetNameBidsResult = {
-"bids": Array<NameBid>
-}
-export type NameBid = {
-"bid_txid": Bytes
-"height": number | null
-"reveal_txid": Bytes
-"winner"?: true
-"reveal_height": number | null
-"reveal_index": number | null
-"lockup": number
-"reveal": number | null
-}
-export type GetNameRecordsParams = {
-"name": string
-"limit": number
-"offset": number
-}
-export type GetNameRecordsResult = {
-"records": Array<NameRecord>
-}
-export type NameRecord = {
-"txid": Bytes
-"height": number | null
-"data": Bytes
-}
-export type SearchParams = {
-"query": string
-}
-export type SearchResult = {
-"transaction": string
-"block": number
-"name": string
-"address": string
-}
-export type GetTransactionByTxidParams = {
-"txid": Bytes
-}
-export type GetTransactionByTxidResult = {
+export type Transaction = {
 "txid": Bytes
 "block_height": number | null
 "witnessTx": Bytes
@@ -158,27 +68,7 @@ export type TxOutput = {
 "covenantRenewalCount"?: Bytes
 "name"?: string
 }
-export type GetTransactionsByBlockHeightParams = {
-"height": number
-"limit": number
-"offset": number
-}
-export type GetTransactionsByBlockHeightResult = {
-"txs": Array<Transaction>
-}
-export type Transaction = {
-"txid": Bytes
-"block_height": number | null
-"witnessTx": Bytes
-"fee": number
-"rate": number
-"version": number
-"locktime": number
-"size": number
-"height": number
-"inputs": Array<TxInput>
-"outputs": Array<TxOutput>
-}
+export type CovenantAction = string
 export type GetNameParams = {
 "name": string
 }
@@ -202,6 +92,37 @@ export type State = {
 "auction_completed": boolean
 }
 export type AuctionState = string
+export type GetNameBidsParams = {
+"name": string
+"limit": number
+"offset": number
+}
+export type GetNameBidsResult = {
+"bids": Array<NameBid>
+}
+export type NameBid = {
+"bid_txid": Bytes
+"height": number | null
+"reveal_txid": Bytes
+"winner"?: true
+"reveal_height": number | null
+"reveal_index": number | null
+"lockup": number
+"reveal": number | null
+}
+export type GetNameRecordsParams = {
+"name": string
+"limit": number
+"offset": number
+}
+export type GetNameRecordsResult = {
+"records": Array<NameRecord>
+}
+export type NameRecord = {
+"txid": Bytes
+"height": number | null
+"data": Bytes
+}
 export type GetNameActionsParams = {
 "name": string
 "limit": number
@@ -215,6 +136,67 @@ export type NameAction = {
 "height": number | null
 "covenantAction": CovenantAction
 }
+export type GetTransactionByTxidParams = {
+"txid": Bytes
+}
+export type GetTransactionByTxidResult = {
+"txid": Bytes
+"block_height": number | null
+"witnessTx": Bytes
+"fee": number
+"rate": number
+"version": number
+"locktime": number
+"size": number
+"height": number
+"inputs": Array<TxInput>
+"outputs": Array<TxOutput>
+}
+export type GetBlocksParams = {
+"limit": number
+"offset": number
+}
+export type GetBlocksResult = {
+"blocks": Array<Block>
+"count": number
+}
+export type GetAddressHistoryParams = {
+"address": string
+"limit": number
+"offset": number
+}
+export type GetAddressHistoryResult = {
+"history": Array<HistoryEntry>
+}
+export type HistoryEntry = {
+"tx_output": AddressTxOutput
+"tx_input": AddressTxInput
+}
+export type AddressTxOutput = {
+"txid": Bytes
+"index": number
+"value": number
+"address": string
+"covenantAction": CovenantAction
+"covenantNameHash"?: Bytes
+"covenantHeight"?: Bytes
+"covenantName"?: Bytes
+"covenantBidHash"?: Bytes
+"covenantNonce"?: Bytes
+"covenantRecordData"?: Bytes
+"covenantBlockHash"?: Bytes
+"covenantVersion"?: Bytes
+"covenantAddress"?: Bytes
+"covenantClaimHeight"?: Bytes
+"covenantRenewalCount"?: Bytes
+"name"?: string
+"height": number | null
+}
+export type AddressTxInput = {
+"txid": string
+"index": number | null
+"height": number | null
+}
 export type GetMempoolTxsParams = {
 "limit": number
 "offset": number
@@ -222,39 +204,25 @@ export type GetMempoolTxsParams = {
 export type GetMempoolTxsResult = {
 "txs": Array<Transaction>
 }
+export type GetAddressInfoParams = {
+"address": string
+}
+export type GetAddressInfoRow = {
+"ValueTotal": number
+"ValueUsed": number
+"TxOutputsTotal": number
+"TxOutputsUsed": number
+}
+export type SearchParams = {
+"query": string
+}
+export type SearchResult = {
+"transaction": string
+"block": number
+"name": string
+"address": string
+}
 export type API = {
-"/block/height/": {
-"params": GetBlockByHeightParams
-"result": GetBlockByHeightResult
-}
-"/address": {
-"params": GetAddressHistoryParams
-"result": GetAddressHistoryResult
-}
-"/address/info": {
-"params": GetAddressInfoParams
-"result": GetAddressInfoRow
-}
-"/blocks": {
-"params": GetBlocksParams
-"result": GetBlocksResult
-}
-"/name/bids": {
-"params": GetNameBidsParams
-"result": GetNameBidsResult
-}
-"/name/records": {
-"params": GetNameRecordsParams
-"result": GetNameRecordsResult
-}
-"/search": {
-"params": SearchParams
-"result": SearchResult
-}
-"/tx": {
-"params": GetTransactionByTxidParams
-"result": GetTransactionByTxidResult
-}
 "/block": {
 "params": GetBlockByHeightParams
 "result": GetBlockByHeightResult
@@ -267,12 +235,44 @@ export type API = {
 "params": GetNameParams
 "result": GetNameResult
 }
+"/name/bids": {
+"params": GetNameBidsParams
+"result": GetNameBidsResult
+}
+"/name/records": {
+"params": GetNameRecordsParams
+"result": GetNameRecordsResult
+}
 "/name/actions": {
 "params": GetNameActionsParams
 "result": GetNameActionsResult
 }
+"/tx": {
+"params": GetTransactionByTxidParams
+"result": GetTransactionByTxidResult
+}
+"/blocks": {
+"params": GetBlocksParams
+"result": GetBlocksResult
+}
+"/address": {
+"params": GetAddressHistoryParams
+"result": GetAddressHistoryResult
+}
 "/mempool": {
 "params": GetMempoolTxsParams
 "result": GetMempoolTxsResult
+}
+"/block/height/": {
+"params": GetBlockByHeightParams
+"result": GetBlockByHeightResult
+}
+"/address/info": {
+"params": GetAddressInfoParams
+"result": GetAddressInfoRow
+}
+"/search": {
+"params": SearchParams
+"result": SearchResult
 }
 }

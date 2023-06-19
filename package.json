@@ -2,8 +2,8 @@
   "name": "explorer",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "NODE_ENV=production webpack",
+    "start": "webpack-dev-server --openssl-legacy-provider",
+    "build": "NODE_ENV=production webpack NODE_OPTIONS=--openssl-legacy-provider",
     "lint": "tsc --noEmit && prettier --write ."
   },
   "devDependencies": {
