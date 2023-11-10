@@ -4,20 +4,19 @@
 */
 
 .spinner {
-  position: relative;
-  flex: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 .sk-fold {
-  position: absolute;
-  left: 50%;
-  top: 50%;
   width: 40px;
   height: 40px;
-  margin-top: -28px;
-  margin-left: -28px;
   transform: rotateZ(45deg);
 }
+
 .sk-fold-cube {
   float: left;
   width: 50%;
