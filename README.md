@@ -11,10 +11,12 @@ This is the frontend for the [hnsnetwork](https://hnsnetwork.com) block explorer
 
 `npm run build`
 
-You may run into issues depending on your version of nodejs, for example [this one](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported).
+The build runs on Node 18.12 or newer. The bundle analyzer starts a report server after a production build, so stop it with Ctrl+C once the build has finished.
 
 ### Run
 
 `npm start`
+
+The dev server (webpack-dev-server 6) needs Node 22.15 or newer.
 
 You need to have types ported from the [backend](https://github.com/handshake-labs/blockexplorer). 

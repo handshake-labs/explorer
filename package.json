@@ -12,35 +12,40 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "autoprefixer": "^9.8.6",
-    "babel-loader": "^8.1.0",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^10.0.0",
     "babel-plugin-react-css-modules": "^5.2.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^4.2.1",
-    "cssnano": "^4.1.10",
-    "html-webpack-plugin": "^4.3.0",
-    "mini-css-extract-plugin": "^0.10.0",
-    "postcss": "^8.0.8",
-    "postcss-inline-svg": "^4.1.0",
-    "postcss-loader": "^4.0.2",
-    "postcss-nested": "^4.2.3",
+    "css-loader": "^7.1.0",
+    "cssnano": "^7.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.0",
+    "postcss": "^8.5.32",
+    "postcss-inline-svg": "^6.0.0",
+    "postcss-loader": "^8.1.0",
+    "postcss-nested": "^7.0.0",
     "prettier": "^2.0.5",
-    "style-loader": "^1.2.1",
-    "terser-webpack-plugin": "^4.1.0",
-    "typescript": "^4.0.0",
-    "webpack": "^4.44.1",
-    "webpack-bundle-analyzer": "^3.9.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "style-loader": "^4.0.0",
+    "typescript": "^5.9.3",
+    "webpack": "^5.101.0",
+    "webpack-bundle-analyzer": "^4.10.0",
+    "webpack-cli": "^6.0.0",
+    "webpack-dev-server": "^6.1.0"
   },
   "dependencies": {
+    "assert": "^2.1.0",
     "bns": "^0.13.0",
     "bsert": "0.0.10",
+    "buffer": "^6.0.3",
     "normalize.css": "^8.0.1",
+    "path-browserify": "^1.0.1",
     "preact": "^10.5.4",
+    "process": "^0.11.10",
     "punycode": "^2.1.1"
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "overrides": {
+    "postcss": "$postcss"
+  }
 }

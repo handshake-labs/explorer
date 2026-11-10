@@ -71,7 +71,9 @@ export const Table: FC<TableProps> = ({ children }: TableProps) => {
 
   return (
     <div styleName="wrapper">
-      <div styleName="table" ref={(e) => (ref.current = e)}>
+      <div styleName="table" ref={(e) => {
+          ref.current = e;
+        }}>
         {children}
       </div>
     </div>

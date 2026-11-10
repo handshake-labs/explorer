@@ -80,7 +80,7 @@ const App: FC = () => {
               }}
             >
               <input name="search" autofocus/>
-              <button role="submit">Search</button>
+              <button type="submit">Search</button>
             </form>
           </nav>
         </div>

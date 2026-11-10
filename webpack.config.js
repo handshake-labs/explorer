@@ -2,8 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const PROD_MODE = process.env.NODE_ENV === "production";
@@ -17,6 +15,16 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     modules: [path.join(__dirname, "node_modules"), SRC_DIR],
+    // webpack 5 no longer polyfills node core modules automatically.
+    // bns/bcrypto/binet need these in the browser: buffer, assert (which also
+    // needs `process`, see ProvidePlugin below) and path (bns parses zone
+    // records at load time). `os` is only used behind a feature check.
+    fallback: {
+      buffer: require.resolve("buffer/"),
+      assert: require.resolve("assert/"),
+      os: false,
+      path: require.resolve("path-browserify"),
+    },
   },
   module: {
     rules: [
@@ -64,6 +72,7 @@ const config = {
     filename: PROD_MODE ? "[name].[contenthash].js" : "[name].js",
     path: DIST_DIR,
     publicPath: "/",
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -78,11 +87,13 @@ const config = {
     new webpack.ProvidePlugin({
       _prh: ["preact", "h"],
       _prf: ["preact", "Fragment"],
+      Buffer: ["buffer", "Buffer"],
+      process: "process/browser",
     }),
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
   devServer: {
-    contentBase: DIST_DIR,
+    static: DIST_DIR,
     historyApiFallback: true,
     port: 9000,
     compress: true,
@@ -92,13 +103,8 @@ const config = {
 
 if (PROD_MODE) {
   config.plugins.unshift(
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })
   );
-  config.optimization = {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  };
 }
 
 module.exports = config;
